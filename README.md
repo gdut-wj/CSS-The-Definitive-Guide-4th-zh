@@ -2,6 +2,8 @@
 
 CSS 权威指南第四版 中文翻译
 
+<img src="./cover.png" width=40%>
+
 ## 目录
 
 - [第 1 章 CSS 和 Documents](book/ch1.md)
