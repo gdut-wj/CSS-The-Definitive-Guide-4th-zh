@@ -1,6 +1,6 @@
 # 第 4 章 值和单位 Values and Units
 
-## Keywords, Strings, and Other Text Values
+## 4.1 Keywords, Strings, and Other Text Values
 
 ### Keywords
 
@@ -12,7 +12,7 @@
 
 ### Identifiers
 
-## Numbers and Percentages
+## 4.2 Numbers and Percentages
 
 ### Integers
 
@@ -22,7 +22,7 @@
 
 ### Fractions
 
-## Distances
+## 4.3 Distances
 
 ### Absolute Length Units
 
@@ -30,11 +30,11 @@
 
 ### Relative Length Units
 
-## Calculation values
+## 4.4 Calculation values
 
-## Attribute Values
+## 4.5 Attribute Values
 
-## Color
+## 4.6 Color
 
 ### Named Colors
 
@@ -44,10 +44,10 @@
 
 ### Color Keywords
 
-## Angles
+## 4.7 Angles
 
-## Time and Frequency
+## 4.8 Time and Frequency
 
-## Position
+## 4.9 Position
 
-## Custom Values
+## 4.10 Custom Values

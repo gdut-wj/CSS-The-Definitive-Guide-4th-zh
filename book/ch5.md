@@ -1,12 +1,12 @@
 # 第 5 章 字体 Fonts
 
-## Font Families
+## 5.1 Font Families
 
 ### Using Generic Font Families
 
 ### Specifying a Font Family
 
-## Using @font-face
+## 5.2 Using @font-face
 
 ### Required Descriptors
 
@@ -14,7 +14,7 @@
 
 ### Combining Descriptors
 
-## Font Weights
+## 5.3 Font Weights
 
 ### How Weights Work
 
@@ -24,7 +24,7 @@
 
 ### The font-weight descriptor
 
-## Font Size
+## 5.4 Font Size
 
 ### Absolute Sizes
 
@@ -38,7 +38,7 @@
 
 ### Automatically Adjusting Size
 
-## Font Style
+## 5.5 Font Style
 
 ### The font-style Descriptor
 
@@ -46,19 +46,19 @@
 
 ### The font-stretch Descriptor
 
-## Font Kerning
+## 5.5 Font Kerning
 
-## Font Variants
+## 5.6 Font Variants
 
 ### Level 3 Values
 
-## Font Features
+## 5.7 Font Features
 
 ### The font-feature-settings Descriptor
 
-## Font Synthesis
+## 5.8 Font Synthesis
 
-## The font Property
+## 5.9 The font Property
 
 ### Adding the Line Height
 
@@ -66,6 +66,6 @@
 
 ### Using System Fonts
 
-## Font Matching
+## 5.10 Font Matching
 
-## Summary
+## 5.11 Summary

@@ -1,6 +1,6 @@
 # 第 3 章 特异性和级联 Specificity and the Cascade
 
-## Specificity
+## 3.1 Specificity
 
 ### Declarations and Specificity
 
@@ -12,9 +12,9 @@
 
 ### Importance
 
-## Inheritance
+## 3.2 Inheritance
 
-## The Cascade
+## 3.3 The Cascade
 
 ### Sorting by Weight and Origin
 
@@ -24,4 +24,4 @@
 
 ### Non-CSS Presentational Hints
 
-## Summary
+## 3.4 Summary
