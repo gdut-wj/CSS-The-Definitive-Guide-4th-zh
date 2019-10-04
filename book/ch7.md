@@ -2,59 +2,93 @@
 
 This chapter is all about the theoretical side of visual rendering in CSS. Why is that necessary? The answer is that with a model as open and powerful as that contained within CSS, no book could hope to cover every possible way of combining properties and effects. You will undoubtedly go on to discover new ways of using CSS. In exploring CSS, you may encounter seemingly strange behaviors in user agents. With a thorough grasp of how the visual rendering model works, you’ll be better able to determine whether a behavior is a correct (if unexpected) consequence of the rendering engine CSS defines.
 
+本章是关于 CSS 中可视化渲染的理论部分。为什么有这个必要?答案是，有了像 CSS 中所包含的那样开放和强大的模型，没有一本书能够涵盖所有可能的组合属性和效果的方法。毫无疑问，您将继续探索使用 CSS 的新方法。在研究 CSS 时，您可能会在用户代理中遇到一些看似奇怪的行为。通过对可视化呈现模型如何工作的深入了解，您将能够更好地确定一个行为是否是呈现引擎 CSS 定义的正确(如果未预料到)结果。
+
 ## 7.1 Basic Boxes
 
-At its core, CSS assumes that every element generates one or more rectangular boxes, called element boxes. (Future versions of the specification may allow for nonrectangular boxes, and indeed there have been proposals to change this, but for now everything is rectangular.) Each element box has a content area at its center. This content area is surrounded by optional amounts of padding, borders, outlines, and margins. These areas are considered optional because they could all be set to a width of zero, effectively removing them from the element box. An example content area is shown in Figure 7-1, along with the surrounding regions of padding, borders, and margins.
+At its core, CSS assumes that every element generates one or more rectangular boxes, called element boxes. (Future versions of the specification may allow for nonrectangular boxes, and indeed there have been proposals to change this, but for now everything is rectangular.) Each element box has a `content area` at its center. This content area is surrounded by optional amounts of padding, borders, outlines, and margins. These areas are considered optional because they could all be set to a width of zero, effectively removing them from the element box. An example content area is shown in Figure 7-1, along with the surrounding regions of padding, borders, and margins.
 
-Each of the margins, borders, and the padding can be set using various side-specific properties, such as margin-left or border-bottom, as well as shorthand properties such as padding. The outline, if any, does not have side-specific properties. The content’s background—a color or tiled image, for example—is applied within the padding by default. The margins are always transparent, allowing the background(s) of any parent element(s) to be visible. Padding cannot have a negative length, but margins can. We’ll explore the effects of negative margins later on.
+在其核心，CSS 假设每个元素生成一个或多个矩形框，称为元素框。(规范的未来版本可能允许使用非矩形框，确实有人建议对此进行更改，但目前所有内容都是矩形的。)每个元素框的中心都有一个内容区域。这个内容区域被可选的填充、边框、轮廓和边距包围。这些区域被认为是可选的，因为它们都可以设置为宽度为 0，从而有效地将它们从元素框中移除。图 7-1 显示了一个示例内容区域，以及周围的填充、边框和边距区域。
+
+Each of the margins, borders, and the padding can be set using various side-specific properties, such as `margin-left` or `border-bottom`, as well as shorthand properties such as `padding`. The outline, if any, does not have side-specific properties. The content’s background—a color or tiled image, for example—is applied within the padding by default. The margins are always transparent, allowing the background(s) of any parent element(s) to be visible. Padding cannot have a negative length, but margins can. We’ll explore the effects of negative margins later on.
+
+每个边距、边框和内边距都可以使用各种特定于边的属性进行设置，如左边框或边框-底部，以及内边距等简写属性。大纲(如果有的话)没有特定于边的属性。内容的背景(例如，颜色或平铺图像)默认应用于填充内。页边距总是透明的，允许任何父元素的背景都是可见的。填充不能有负长度，但是空白可以。稍后我们将探讨负边距的影响。
 
 // 7-1
 
-Borders are generated using defined styles, such as solid or inset, and their colors are set using the border-color property. If no color is set, then the border takes on the foreground color of the element’s content. For example, if the text of a paragraph is white, then any borders around that paragraph will be white, unless the author explicitly declares a different border color. If a border style has gaps of some type, then the element’s background is visible through those gaps by default. Finally, the width of a border can never be negative.
+Borders are generated using defined styles, such as `solid` or `inset`, and their colors are set using the `border-color` property. If no color is set, then the border takes on the foreground color of the element’s content. For example, if the text of a paragraph is white, then any borders around that paragraph will be white, `unless` the author explicitly declares a different border color. If a border style has gaps of some type, then the element’s background is visible through those gaps by default. Finally, the width of a border can never be negative.
 
-The various components of an element box can be affected via a number of proper‐ ties, such as width or border-right. Many of these properties will be used in this book, even though they aren’t defined here.
+边框是使用已定义的样式生成的，如实体或 inset，它们的颜色是使用 border-color 属性设置的。如果没有设置颜色，则边框采用元素内容的前景色。例如，如果一个段落的文本是白色的，那么该段落周围的任何边框都是白色的，除非作者明确声明了不同的边框颜色。如果边框样式有某种类型的空白，则默认情况下元素的背景可以通过这些空白显示。最后，边框的宽度不能为负。
+
+The various components of an element box can be affected via a number of proper‐ ties, such as `width` or `border-right`. Many of these properties will be used in this book, even though they aren’t defined here.
+
+一个元件盒的各个部件可以通过一些合适的参数受到影响，如宽度或边界右侧。这些属性中有许多将在本书中使用，尽管它们在这里没有定义。
 
 ### 7.1.1 A Quick Refresher
 
 Let’s quickly review the kinds of boxes we’ll be discussing, as well as some important terms that are needed to follow the explanations to come:
 
-Normal flow
+让我们快速回顾一下我们将要讨论的方框的类型，以及接下来的解释中需要用到的一些重要术语:
+
+`Normal flow`
 
 This is the left-to-right, top-to-bottom rendering of text in Western languages and the familiar text layout of traditional HTML documents. Note that the flow direction may be changed in non-Western languages. Most elements are in the normal flow, and the only way for an element to leave the normal flow is to be floated, positioned, or made into a flexible box or grid layout element. Remember, the discussions in this chapter cover only elements in the normal flow.
 
-Nonreplaced element
+这是西方语言中从左到右、从上到下的文本呈现，是传统 HTML 文档中常见的文本布局。注意，在非西方语言中，流的方向可能会改变。大多数元素都在常规流中，元素离开常规流的惟一方法是浮动、定位或做成一个灵活的盒子或网格布局元素。请记住，本章的讨论只涉及正常流程中的元素。
 
-This is an element whose content is contained within the document. For example, a paragraph (p) is a nonreplaced element because its textual content is found within the element itself.
+`Nonreplaced element`
 
-Replaced element
+This is an element whose content is contained within the document. For example, a paragraph (`p`) is a nonreplaced element because its textual content is found within the element itself.
 
-This is an element that serves as a placeholder for something else. The classic example of a replaced element is the img element, which simply points to an image file that is inserted into the document’s flow at the point where the img element itself is found. Most form elements are also replaced (e.g., `<input type="radio">`).
+这个元素的内容包含在文档中。例如，段落(p)是不可替换的元素，因为它的文本内容是在元素本身中找到的。
 
-Root element
+`Replaced element`
 
-This is the element at the top of the document tree. In HTML documents, this is the element html. In XML documents, it can be whatever the language permits; for example, the root element of RSS files is rss.
+This is an element that serves as a placeholder for something else. The classic example of a replaced element is the `img` element, which simply points to an image file that is inserted into the document’s flow at the point where the `img` element itself is found. Most form elements are also replaced (e.g., `<input type="radio">`).
 
-Block box
+这是一个元素，用作其他内容的占位符。被替换元素的典型示例是 img 元素，它简单地指向一个图像文件，该文件被插入到文档流中找到 img 元素本身的地方。大多数表单元素也被替换（例如 `<input type="radio">`）
 
-This is a box that an element such as a paragraph, heading, or div generates. These boxes generate “new lines” both before and after their boxes when in the normal flow so that block boxes in the normal flow stack vertically, one after another. Any element can be made to generate a block box by declaring `display: block`.
+`Root element`
 
-Inline box
+This is the element at the top of the document tree. In HTML documents, this is the element `html`. In XML documents, it can be whatever the language permits; for example, the root element of RSS files is `rss`.
 
-This is a box that an element such as strong or span generates. These boxes do not generate “line breaks” before or after themselves. Any element can be made to generate an inline box by declaring `display: inline`.
+这是文档树顶部的元素。在 HTML 文档中，这是元素 HTML。在 XML 文档中，它可以是语言允许的任何内容;例如，RSS 文件的根元素是 RSS。
 
-Inline-block box
+`Block box`
 
-This is a box that is like a block box internally, but acts like an inline box externally. It acts similar to, but not quite the same as, a replaced element. Imagine picking up a div and sticking it into a line of text as if it were an inline image, and you’ve got the idea.
+This is a box that an element such as a paragraph, heading, or `div` generates. These boxes generate “new lines” both before and after their boxes when in the normal flow so that block boxes in the normal flow stack vertically, one after another. Any element can be made to generate a block box by declaring `display: block`.
+
+这是一个由段落、标题或 div 等元素生成的框。在正常流中，这些框会在它们的框之前和之后生成“新行”，以便垂直地一个接一个地阻塞正常流堆栈中的框。任何元素都可以通过声明 `display: block` 来生成一个块框。
+
+`Inline box`
+
+This is a box that an element such as `strong` or `span` generates. These boxes do not generate “line breaks” before or after themselves. Any element can be made to generate an inline box by declaring `display: inline`.
+
+这是一个由诸如 strong 或 span 之类的元素生成的方框。这些框不会在它们自己之前或之后生成“换行符”。任何元素都可以通过声明 `display: inline` 来生成内联框。
+
+`Inline-block box`
+
+This is a box that is like a block box internally, but acts like an inline box externally. It acts similar to, but not quite the same as, a replaced element. Imagine picking up a `div` and sticking it into a line of text as if it were an inline image, and you’ve got the idea.
+
+这是一个内部类似于块盒，但在外部充当内联盒的盒子。它的作用与被替换的元素类似，但又不完全相同。想象一下，拿起一个 div，把它插入到一行文本中，就好像它是一个内联图像一样，你就明白了。
 
 There are several other types of boxes, such as table-cell boxes, but they won’t be covered in this book for a variety of reasons—not the least of which is that their complexity demands a book of its own, and very few authors will actually wrestle with them on a regular basis.
+
+有几种其他类型的盒子,例如表格单元框,但他们不会为各种各样的理由不覆盖在这本书中最小的就是它们的复杂性要求自己的一本书,和很少有作者会定期与他们搏斗。
 
 ### 7.1.2 The Containing Block
 
 There is one more kind of box that we need to examine in detail, and in this case enough detail that it merits its own section: the containing block.
 
+还有一种类型的 box 需要我们详细地研究，在这种情况下，它有足够的细节值得自己的部分:包含块。
+
 Every element’s box is laid out with respect to its containing block; in a very real way, the containing block is the “layout context” for a box. CSS defines a series of rules for determining a box’s containing block. We’ll cover only those rules that pertain to the concepts covered in this book in order to keep our focus.
 
+每个元素的盒相对于其包含块进行布局;以一种非常真实的方式，包含块是一个框的“布局上下文”。CSS 定义了一系列规则来确定一个框的包含块。我们将只讨论那些与本书所涵盖的概念相关的规则，以保持我们的重点。
+
 For an element in the normal, Western-style flow of text, the containing block forms from the content edge of the nearest ancestor that generated a list item or block box which includes all table-related boxes (e.g., those generated by table cells). Consider the following markup:
+
+对于正常的西式文本流中的元素，包含的块形成于最近的祖先的内容边缘，它生成一个列表项或块框，其中包括所有与表相关的框(例如，由表单元格生成的框)。考虑以下标记:
 
 ```html
 <body>
@@ -64,21 +98,31 @@ For an element in the normal, Western-style flow of text, the containing block f
 </body>
 ```
 
-In this very simple markup, the containing block for the p element’s block box is the div element’s block box, as that is the closest ancestor element box that is a block or a list item (in this case, it’s a block box). Similarly, the div’s containing block is the body’s box. Thus, the layout of the p is dependent on the layout of the div, which is in turn dependent on the layout of the body element.
+In this very simple markup, the containing block for the `p` element’s block box is the `div` element’s block box, as that is the closest ancestor element box that is a block or a list item (in this case, it’s a block box). Similarly, the `div`’s containing block is the body’s box. Thus, the layout of the `p` is dependent on the layout of the `div`, which is in turn dependent on the layout of the body element.
 
-And above that, the layout of the body element is dependent on the layout of the html element, whose box creates what is called the initial containing block. It’s unique in that the viewport—the browser window in screen media, or the printable area of the page in print media—determines its dimensions, not the size of the content of the root element. It’s a subtle distinction, and usually not a very important one, but it does exist.
+在这个非常简单的标记中，p 元素的块框的包含块是 div 元素的块框，因为它是块或列表项最接近的祖先元素框(在本例中，它是块框)。类似地，div 的包含块是主体的框。因此，p 的布局依赖于 div 的布局，而 div 又依赖于 body 元素的布局。
+
+And above that, the layout of the `body` element is dependent on the layout of the `html` element, whose box creates what is called the `initial containing block`. It’s unique in that the viewport—the browser window in screen media, or the printable area of the page in print media—determines its dimensions, not the size of the content of the root element. It’s a subtle distinction, and usually not a very important one, but it does exist.
+
+在此之上，body 元素的布局依赖于 html 元素的布局，html 元素的框创建了所谓的初始包含块。它的独特之处在于视图——屏幕媒体中的浏览器窗口，或打印媒体中页面的可打印区域——决定了它的维数，而不是根元素内容的大小。这是一个微妙的区别，通常不是很重要，但它确实存在。
 
 ## 7.2 Altering Element Display
 
-You can affect the way a user agent displays by setting a value for the property display. Now that we’ve taken a close look at visual formatting, let’s consider the display property and discuss two more of its values using concepts from earlier in the book.
+You can affect the way a user agent displays by setting a value for the property `display`. Now that we’ve taken a close look at visual formatting, let’s consider the `display` property and discuss two more of its values using concepts from earlier in the book.
+
+可以通过设置属性显示的值来影响用户代理的显示方式。现在我们已经仔细研究了可视化格式化，让我们考虑 display 属性，并使用本书前面的概念讨论它的另外两个值。
 
 //
 
 We’ll ignore the ruby- and table-related values, since they’re far too complex for this chapter, and we’ll also ignore the value `list-item`, since it’s very similar to block boxes. We’ve spent quite some time discussing block and inline boxes, but let’s spend a moment talking about how altering an element’s display role can alter layout before we look at `inline-block`.
 
+我们将忽略与 ruby 和表相关的值，因为它们对于本章来说太复杂了，我们还将忽略值' list-item '，因为它与块框非常相似。我们已经花了相当多的时间来讨论块和内联框，但是让我们花一点时间来讨论在查看“内联块”之前如何改变元素的显示角色来改变布局。
+
 ### 7.2.1 Changing Roles
 
-When it comes to styling a document, it’s handy to be able to change the type of box an element generates. For example, suppose we have a series of links in a nav that we’d like to lay out as a vertical sidebar:
+When it comes to styling a document, it’s handy to be able to change the type of box an element generates. For example, suppose we have a series of links in a `nav` that we’d like to lay out as a vertical sidebar:
+
+在设计文档样式时，可以方便地更改元素生成的框的类型。例如，假设我们在一个导航中有一系列的链接，我们想把它们作为一个垂直的边栏:
 
 ```html
 <nav>
@@ -92,7 +136,9 @@ When it comes to styling a document, it’s handy to be able to change the type 
 </nav>
 ```
 
-We could put all the links into table cells, or wrap each one in its own nav—or we could just make them all block-level elements, like this:
+We could put all the links into table cells, or wrap each one in its own `nav`—or we could just make them all block-level elements, like this:
+
+我们可以把所有的链接放到表格单元格中，或者把每个链接都包装在它自己的导航中，或者我们可以让它们都是块级元素，就像这样:
 
 ```css
 nav a {
@@ -100,13 +146,19 @@ nav a {
 }
 ```
 
-This will make every a element within the navigation nav a block-level element. If we add on a few more styles, we could have a result like that shown in Figure 7-2.
+This will make every a element within the navigation `nav` a block-level element. If we add on a few more styles, we could have a result like that shown in Figure 7-2.
+
+这将使导航导航中的每个元素成为块级元素。如果我们再添加一些样式，就会得到如图 7-2 所示的结果。
 
 // 7-2
 
-Changing display roles can be useful in cases where you want non-CSS browsers to get the navigation links as inline elements but to lay out the same links as block-level elements. With the links as blocks, you can style them as you would div or p elements, with the advantage that the entire element box becomes part of the link. Thus, if a user’s mouse pointer hovers anywhere in the element box, she can then click the link.
+Changing display roles can be useful in cases where you want non-CSS browsers to get the navigation links as inline elements but to lay out the same links as block-level elements. With the links as blocks, you can style them as you would `div` or `p` elements, with the advantage that the entire element box becomes part of the link. Thus, if a user’s mouse pointer hovers anywhere in the element box, she can then click the link.
+
+当您希望非 css 浏览器将导航链接作为内联元素，而将相同的链接作为块级元素时，更改显示角色非常有用。将链接作为块，您可以像 div 或 p 元素那样对它们进行样式设置，其优点是整个元素框成为链接的一部分。因此，如果用户的鼠标指针停留在元素框中的任何位置，则可以单击链接。
 
 You may also want to take elements and make them inline. Suppose we have an unordered list of names:
+
+您可能还希望获取元素并使它们内联。假设我们有一个无序的名字列表:
 
 ```html
 <ul id="rollcall">
@@ -123,6 +175,8 @@ You may also want to take elements and make them inline. Suppose we have an unor
 
 Given this markup, say we want to make the names into a series of inline names with vertical bars between them (and on each end of the list). The only way to do so is to change their display role. The following rules will have the effect shown in Figure 7-3:
 
+对于这个标记，假设我们想要将这些名称变成一系列内联名称，它们之间有竖线(以及列表的两端)。这样做的唯一方法是改变它们的显示角色。以下规则的效果如图 7-3 所示:
+
 ```css
 #rollcall li {
   display: inline;
@@ -138,7 +192,11 @@ Given this markup, say we want to make the names into a series of inline names w
 
 There are plenty of other ways to use display to your advantage in design. Be creative and see what you can invent!
 
-Be careful to note, however, that you are changing the display role of elements—not changing their inherent nature. In other words, causing a paragraph to generate an inline box does not turn that paragraph into an inline element. In HTML, for example, some elements are block while others are inline. (Still others are “flow” elements, but we’re ignoring them right now.) An inline element can be a descendant of a block element, but the reverse is generally not true. While a span can be placed inside a paragraph, a span cannot be wrapped around a paragraph. This will hold true no matter how you style the elements in question. Consider the following markup:
+还有很多其他的方法可以让你在设计中充分利用显示器。要有创意，看看你能发明什么!
+
+Be careful to note, however, that you are changing the display role of elements—not changing their inherent nature. In other words, causing a paragraph to generate an inline box does `not` turn that paragraph into an inline element. In HTML, for example, some elements are block while others are inline. (Still others are “flow” elements, but we’re ignoring them right now.) An inline element can be a descendant of a block element, but the reverse is generally not true. While a `span` can be placed inside a paragraph, a `span` cannot be wrapped around a paragraph. This will hold true no matter how you style the elements in question. Consider the following markup:
+
+但是要注意，您正在更改元素的显示角色—而不是更改它们的固有性质。换句话说，使一个段落生成内联框并不会将该段落转换为内联元素。例如，在 HTML 中，一些元素是块，而另一些元素是内联的。(还有一些是“流”元素，但是我们现在忽略了它们。)内联元素可以是块元素的后代，但通常不是。虽然 span 可以放在段落中，但 span 不能包裹在段落中。这将适用于无论您如何样式的元素的问题。考虑以下标记:
 
 ```html
 <span style="display: block;">
@@ -146,33 +204,49 @@ Be careful to note, however, that you are changing the display role of elements�
 </span>
 ```
 
-The markup will not validate because the block element (p) is nested inside an inline element (span). The changing of display roles does nothing to change this. display has its name because it affects how the element is displayed, not because it changes what kind of element it is.
+The markup will not validate because the block element (`p`) is nested inside an inline element (`span`). The changing of display roles does nothing to change this. `display` has its name because it affects how the element is displayed, not because it changes what kind of element it is.
+
+由于块元素(`p`)嵌套在内联元素(`span`)中，所以标记将不会生效。改变显示角色并不能改变这一点。`display` 之所以有它的名字，是因为它影响元素的显示方式，而不是因为它改变了元素的类型。
 
 With that said, let’s get into the details of different kinds of boxes: block boxes, inline boxes, inline-block boxes, and list-item boxes
+
+说到这里，让我们来看看不同类型的框的详细信息:块框、内联框、内联块框和列表项框
 
 ### 7.2.2 Block Boxes
 
 Block boxes can behave in sometimes predictable, sometimes surprising ways. The handling of box placement along the horizontal and vertical axes can differ, for example. In order to fully understand how block boxes are handled, you must clearly understand a number of boundaries and areas. They are shown in detail in Figure 7-4.
 
-By default, the width of a block box is defined to be the distance from the left inner edge to the right inner edge, and the height is the distance from the inner top to the inner bottom. Both of these properties can be applied to an element generating a block box.
+块盒的行为有时是可预测的，有时是令人惊讶的。例如，沿水平轴和垂直轴放置框的处理可能不同。为了完全理解如何处理块盒，您必须清楚地理解许多边界和区域。它们在图 7-4 中详细显示。
+
+By default, the `width` of a block box is defined to be the distance from the left inner edge to the right inner edge, and the `height` is the distance from the inner top to the inner bottom. Both of these properties can be applied to an element generating a block box.
+
+默认情况下，块框的宽度定义为从左内边到右内边的距离，高度定义为从内顶到内底的距离。这两个属性都可以应用于生成块框的元素。
 
 // 7-4
 
-It’s also the case that we can alter how these properties are treated using the property box-sizing.
+It’s also the case that we can alter how these properties are treated using the property `box-sizing`.
+
+也可以使用属性 `box-sizing` 属性改变这些属性的处理方式。
 
 //
 
-This property is how you change what the width and height values actually do. If you declare width: 400px and don’t declare a value for box-sizing, then the element’s content box will be 400 pixels wide; any padding, borders, and so on will be added to it. If, on the other hand, you declare box-sizing: border-box, then the element box will be 400 pixels from the left outer border edge to the right outer border edge; any border or padding will be placed within that distance, thus shrinking the width of the content area. This is illustrated in Figure 7-5.
+This property is how you change what the `width` and `height` values actually do. If you declare `width: 400px` and don’t declare a value for `box-sizing`, then the element’s content box will be 400 pixels wide; any padding, borders, and so on will be added to it. If, on the other hand, you declare `box-sizing: border-box`, then the element box will be 400 pixels from the left outer border edge to the right outer border edge; any border or padding will be placed within that distance, thus shrinking the width of the content area. This is illustrated in Figure 7-5.
+
+此属性用于更改宽度和高度值的实际作用。如果您声明 `width: 400px`，而没有声明 `box-sizing` 值，那么元素的内容框将是 400 像素宽;任何内边距、边框等都将被添加到其中。另一方面，如果您声明 `box-sizing: border-box`，则元素框将从左外边框边缘到右外边框边缘的距离为 400 像素;任何边框或填充将被放置在该距离内，从而缩小内容区域的宽度。如图 7-5 所示。
 
 // 7-5
 
-We’re talking about the box-sizing property here because, as stated, it applies to “all elements that accept width or height values.” That’s most often elements generating block boxes, though it also applies to replaced inline elements like images, as well as inline-block boxes.
+We’re talking about the `box-sizing` property here because, as stated, it applies to “all elements that accept `width` or `height` values.” That’s most often elements generating block boxes, though it also applies to replaced inline elements like images, as well as inline-block boxes.
+
+我们在这里讨论 `box-sizing` 属性，因为如前所述，它适用于“接受宽度或高度值的所有元素”。这是最常见的生成块框的元素，尽管它也适用于像图像这样的被替换的内联元素，以及内联块框。
 
 The various widths, heights, padding, and margins all combine to determine how a document is laid out. In most cases, the height and width of the document are automatically determined by the browser and are based on the available display region, plus other factors. With CSS, you can assert more direct control over the way elements are sized and displayed.
 
+不同的宽度、高度、填充和边距组合在一起决定了文档的布局方式。在大多数情况下，文档的高度和宽度由浏览器自动决定，并基于可用的显示区域和其他因素。使用 CSS，您可以对元素的大小和显示方式进行更直接的控制。
+
 ### 7.2.3 Horizontal Formatting
 
-Horizontal formatting is often more complex than you’d think. Part of the complexity has to do with the default behavior of box-sizing. With the default value of contentbox, the value given for width affects the width of the content area, not the entire visible element box. Consider the following example:
+Horizontal formatting is often more complex than you’d think. Part of the complexity has to do with the default behavior of `box-sizing`. With the default value of `content-box`, the value given for width affects the `width` of the content area, `not` the entire visible element box. Consider the following example:
 
 ```html
 <p style="width: 200px;">wideness?</p>
