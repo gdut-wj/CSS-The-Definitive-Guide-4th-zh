@@ -1,14 +1,16 @@
-# 第 8 章 Padding, Borders, Outlines 和 Margins Padding, Borders, Outlines, and Margins
+# 第 8 章 Padding, Borders, Outlines 和 Margins
 
-## 8.1 Basic Element Boxes
+In the previous chapter, we talked about the basics of element display. In this chapter, we’ll look at the CSS properties and values you can use to change the specific appearance of elements that are displayed. These include the padding, borders, and margins around an element, as well as any outlines that may be added.
 
-### Width and Height
+## 8.1 基本元素框 Basic Element Boxes
+
+### 宽度和高度 Width and Height
 
 ## 8.2 Padding
 
-### Replicating Values
+### 复制值 Replicating Values
 
-### Single-Side Padding
+### 单边 Padding Single-Side Padding
 
 ### Percentage Values and Padding
 
