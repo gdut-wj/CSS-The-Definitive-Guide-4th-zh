@@ -1216,7 +1216,6 @@ a[href^='mailto:'] {
 
 Another use case is when you want to style all images in an article that are also figures, as in the figures you see throughout this text. Assuming that the alt text of each figure begins with text in the pattern “Figure 5”—which is an entirely reasonable assumption in this case—then you can select only those images as follows:
 
-
 另一个使用场景是为文档中所有内容是说明的图片添加样式——假定所有的说明图的`alt`属性的文字都以“Figure 5”这样的模式开头——则可以使用这种方式选择这些图片：
 
 ```css
@@ -1237,8 +1236,7 @@ Another use case is selecting all of the calendar events that occur on Mondays. 
 
 #### 匹配属性值结尾的字串 Matching a substring at the end of an attribute value
 
-The mirror image of beginning-substring matching is ending-substring matching, which is accomplished using the `[att$="val"] `pattern. A very common use for this capability is to style links based on the kind of resource they target, such as separate styles for PDF documents, as illustrated in Figure 2-14.
-
+The mirror image of beginning-substring matching is ending-substring matching, which is accomplished using the `[att$="val"]`pattern. A very common use for this capability is to style links based on the kind of resource they target, such as separate styles for PDF documents, as illustrated in Figure 2-14.
 
 与开头子串匹配相对应的是结尾子串匹配，使用选择器模式`[att$="val"]`。最常见的使用场景是基于链接的资源类型添加样式，例如图 2-14 所示，为指向 PDF 文档的链接添加特定样式。
 
@@ -1254,7 +1252,6 @@ a[href$='.pdf'] {
 <p align="center">图 2-14：基于属性结尾的子串选择元素</p>
 
 Similarly, you could (for whatever reason) select images based on their image format:
-
 
 类似地，可以（无论因何）基于格式选择图片：
 
@@ -1371,21 +1368,34 @@ To understand the relationship between selectors and documents, we need to once 
 </html>
 ```
 
+Much of the power of CSS is based on the parent-child relationship of elements. HTML documents (actually, most structured documents of any kind) are based on a hierarchy of elements, which is visible in the “tree” view of the document (see Figure 2-15). In this hierarchy, each element fits somewhere into the overall structure of the document. Every element in the document is either the parent or the child of another element, and it’s often both.
+
 CSS 的能力很大程度基于于元素的**父-子关系**。HTML 文档（事实上绝大部分结构化文档）基于元素层级结构，构成文档的“树状”视图（见图 1-15）。在这种层级结构中，每个元素都处在整个文档结构中的某个适当位置上，每个元素都是其他元素的**父**或者**子**，常常既是父又是子。
 
-![图1-15：文档树结构](figure1-15.png)
+<div style="margin: 0 auto; width: 50%;">
+    <img src='./figure2-15.png' style=""/>
+</div>
+<p align="center">图 2-15：文档树结构</p>
 
-_图 1-15：文档树结构_
+An element is said to be the parent of another element if it appears directly above that element in the document hierarchy. For example, in Figure 2-15, the first `p` element is parent to the `em` and `strong` elements, while `strong` is parent to an anchor (`a`) element, which is itself parent to another `em` element. Conversely, an element is the child of another element if it is directly beneath the other element. Thus, the anchor element in Figure 2-15 is a child of the strong element, which is in turn child to the p element, which is itself child to the `body`, and so on.
 
-在文档层级结构中，如果一个元素在另一个元素的紧邻的上方，就被称作那个元素的父元素。例如，在图 1-15 中，第一个`p`元素是`em`和`strong`元素的父元素，同时`strong`是一个锚点（`a`）元素的父元素，这个`a`元素又是另一个`em`元素的父元素。反过来，如果在文档层级中，一个元素在另一个元素的紧邻的下方，就被称作那个元素的子元素。因此，图 1-15 中的锚点元素是`strong`元素的子元素，`strong`元素又是`p`元素的子元素，等等。
+在文档层级结构中，如果一个元素在另一个元素的紧邻的上方，就被称作那个元素的父元素。例如，在图 2-15 中，第一个`p`元素是`em`和`strong`元素的父元素，同时`strong`是一个锚点（`a`）元素的父元素，这个`a`元素又是另一个`em`元素的父元素。反过来，如果在文档层级中，一个元素在另一个元素的紧邻的下方，就被称作那个元素的子元素。因此，图 1-15 中的锚点元素是`strong`元素的子元素，`strong`元素又是`p`元素的子元素，等等。
+
+The terms “parent” and “child” are specific applications of the terms ancestor and descendant. There is a difference between them: in the tree view, if an element is exactly one level above or below another, then they have a parent-child relationship. If the path from one element to another is traced through two or more levels, the elements have an ancestor-descendant relationship, but not a parent-child relationship. (A child is also a descendant, and a parent is also an ancestor.) In Figure 2-15, the first ul element is parent to two li elements, but the first ul is also the ancestor of every element descended from its li element, all the way down to the most deeply nested li elements.
 
 “父”和“子”是**祖先**和**后代**的特例。它们的区别是：在树状视图中，如果一个元素在另一个元素上面一级，那么它们是父-子关系。如果一个元素到另一个元素的路径有两级或者更多，那么它们是祖先-后代关系，但不是父-子关系。（当然，子也是后代，同时父也是祖先。）在图 1-15 中，第一个`ul`元素是两个`li`元素的父元素，同时也是它的`li`元素所有后代元素的祖先元素，直到嵌套路径最深的`li`元素。
 
-同时，在图 1-15 中，存在一个锚点元素既是`strong`元素的子元素，又是`p`、`body`和`html`元素的后代元素。`body`元素是浏览器默认显示的所有元素的祖先元素，`html`是整个文档中所有其他元素的祖先元素。因此在 HTML 或 XHTML 文档中，`html`元素也被叫做**根元素**。
+Also, in Figure 2-15, there is an anchor that is a child of strong, but also a descendant of p, body, and html elements. The body element is an ancestor of everything that the browser will display by default, and the html element is ancestor to the entire document. For this reason, in an HTML or XHTML document, the html element is also called the root element.
 
-### 后代选择器 Descendant Selectors
+同时，在图 2-15 中，存在一个锚点元素既是`strong`元素的子元素，又是`p`、`body`和`html`元素的后代元素。`body`元素是浏览器默认显示的所有元素的祖先元素，`html`是整个文档中所有其他元素的祖先元素。因此在 HTML 或 XHTML 文档中，`html`元素也被叫做**根元素**。
+
+### 2.5.2 后代选择器 Descendant Selectors
+
+The first benefit of understanding this model is the ability to define descendant selectors (also known as contextual selectors). Defining descendant selectors is the act of creating rules that operate in certain structural circumstances but not others. As an example, let’s say you want to style only those em elements that are descended from h1 elements. You could put a class attribute on every em element found within an h1, but that’s almost as time-consuming as using the font tag. It’s far more efficient to declare rules that match only em elements that are found inside h1 elements.
 
 理解文档模型的第一个用处是可以定义**后代选择器**（也叫做**上下文选择器**）。定义后代选择器可以创建只作用于特定结构的规则。例如，如果想要只为那些是`h1`元素的后代的`em`元素设置样式。你可以为`h1`中的`em`元素添加一个`class`属性，但这样做会跟使用`font`标签一样耗费时间。很明显，声明一个只匹配`h1`元素中的`em`元素的规则更加方便。
+
+To do so, write the following:
 
 实现这个规则，可以这样写：
 
@@ -1395,13 +1405,20 @@ h1 em {
 }
 ```
 
+This rule will make gray any text in an em element that is the descendant of an h1 element. Other em text, such as that found in a paragraph or a block quote, will not be selected by this rule. Figure 2-16 makes this clear.
+
 这条规则会把所有是`h1`元素后代的`em`元素中的文本设置为灰色。其他的`em`文本，例如在段落（`p`）或引用（`blackquote`）中的`em`元素，不会被这条规则选择。见图 1-16。
 
-![图1-16：基于上下文选择元素](figure1-16.png)
+<div style="margin: 0 auto; width: 50%;">
+    <img src='./figure2-16.png' style=""/>
+</div>
+<p align="center">图 2-16：基于上下文选择元素</p>
 
-_图 1-16：基于上下文选择元素_
+In a descendant selector, the selector side of a rule is composed of two or more spaceseparated selectors. The space between the selectors is an example of a combinator. Each space combinator can be translated as “found within,” “which is part of,” or “that is a descendant of,” but only if you read the selector right to left. Thus, h1 em can be translated as, “Any em element that is a descendant of an h1 element.” (To read the selector left to right, you might phrase it something like, “Any h1 that contains an em will have the following styles applied to the em.”)
 
 在后代选择器中，选择器由两个或更多空白分隔的选择器组成。选择器之间的空格是一个**组合器**的例子。每个空格组合器都可以被译作“在……中”、“是……的一部分”或“是……的后代”，前提是选择器从右向左读。因此，`h1 em`可以被译作“把样式作用于任何`em`元素，如果它是`h1`元素的后代”。（如果选择器从左向右读，则是：“选择任何`h1`，如果它包含一个`em`元素，规则将会作用于它包含的`em`”）。
+
+You aren’t limited to two selectors. For example:
 
 可以使用不止两个选择器，例如：
 
@@ -1411,13 +1428,20 @@ ul ol ul em {
 }
 ```
 
-在这种情况下，任何`em`文本，如果这个`em`在一个`ul`中，同时`ul`在一个`ol`中，而`ol`又在另一个`ul`中，这个`em`会被设置为灰色,如 1-17 所示。这是一条非常具体的选择规则。
+In this case, as Figure 2-17 shows, any emphasized text that is part of an unordered list that is part of an ordered list that is itself part of an unordered list (yes, this is correct) will be gray. This is obviously a very specific selection criterion.
 
-![图1-17：一个非常具体的后代选择器](figure1-17.png)
+在这种情况下，任何`em`文本，如果这个`em`在一个`ul`中，同时`ul`在一个`ol`中，而`ol`又在另一个`ul`中，这个`em`会被设置为灰色,如 2-17 所示。这是一条非常具体的选择规则。
 
-_图 1-17：一个非常具体的后代选择器_
+<div style="margin: 0 auto; width: 50%;">
+    <img src='./figure2-17.png' style=""/>
+</div>
+<p align="center">图 2-17：一个非常具体的后代选择器</p>
+
+Descendant selectors can be extremely powerful. They make possible what could never be done in HTML—at least not without oodles of font tags. Let’s consider a common example. Assume you have a document with a sidebar and a main area. The sidebar has a blue background, the main area has a white background, and both areas include lists of links. You can’t set all links to be blue because they’d be impossible to read in the sidebar.
 
 后代选择器非常有用，它使得 HTML 中（至少是不使用怪异的`font`标签时）办不到的事情变成可能。一个常见的场景是：如果文档中有一个侧边栏和一个主区域，侧边栏的背景是蓝色，而主区域的背景是白色，它们都包含链接。不能把链接设置为蓝色，因为如果这样的话，侧边栏中的链接就看不到了。
+
+The solution: descendant selectors. In this case, you give the element that contains your sidebar a class of sidebar and enclose the main area in a main element. Then, you write styles like this:
 
 解决方法是：后代选择器。在这种情况下，给包含侧边栏的元素（一般是一个`div`）添加一个`class`值`sidebar`，把主区域的`class`命名为`main`，然后使用如下样式：
 
@@ -1436,13 +1460,20 @@ _图 1-17：一个非常具体的后代选择器_
 }
 ```
 
-图 1-18 显示了样式的结果。
+Figure 2-18 shows the result.
 
-![图1-18：使用后代选择器为同一类型的元素添加不同的样式](figure1-18.png)
+图 2-18 显示了样式的结果。
 
-_图 1-18：使用后代选择器为同一类型的元素添加不同的样式_
+<div style="margin: 0 auto; width: 50%;">
+    <img src='./figure2-18.png' style=""/>
+</div>
+<p align="center">图 2-18：使用后代选择器为同一类型的元素添加不同的样式</p>
+
+:link refers to links to resources that haven’t been visited. We’ll talk about it in detail in “Hyperlink pseudo-classes” on page 77.
 
 _**`:link`选择那些尚未被访问过的资源链接，我们将在“超链接伪类”中详细讨论。**_
+
+Here’s another example: let’s say that you want gray to be the text color of any b (boldface) element that is part of a blockquote and for any bold text that is found in a normal paragraph:
 
 另一个例子是：如果要把所有在`blockquote`和`p`中的`b`元素文本设置为灰色：
 
@@ -1453,7 +1484,11 @@ p b {
 }
 ```
 
+The result is that the text within b elements that are descended from paragraphs or block quotes will be gray
+
 这条样式的结果是在段落或引用段落中的`b`元素中的文本显示为灰色。
+
+One overlooked aspect of descendant selectors is that the degree of separation between two elements can be practically infinite. For example, if you write `ul` `em`, that syntax will select any `em` element descended from a ul element, no matter how deeply nested the `em` may be. Thus, `ul` `em` would select the `em` element in the following markup:
 
 后代选择器的一个容易被忽略的地方是，元素和后代元素之间可以间隔无限代其他元素。例如，如果使用规则`ul em`，将会选择`ul`元素后代中的任何`em`元素，无论`em`元素嵌套多么深。因此，对下面的代码，`ul em`会匹配到其中的`em`元素。
 
@@ -1478,7 +1513,11 @@ p b {
 </ul>
 ```
 
+A more subtle aspect of descendant selectors is that they have no notion of element proximity. In other words, the closeness of two elements within the document tree has no bearing on whether a rule applies or not. This is important when it comes to specificity (which we’ll cover later on) and when considering rules that might appear to cancel each other out.
+
 后代选择器的另一个更微妙的地方是，它没有接近程度的概念。换句话说，文档树中两个元素的紧密程度与是否应用规则无关。这将会在考虑特异性（特度，在后面讨论）和元素规则之间的相互抵消时产生影响。
+
+For example, consider the following (which contains a selector type we’ll discuss in the upcoming section, “The Negation Pseudo-Class” on page 89):
 
 例如，考虑下面的代码（包含我们将会在本章“否定伪类”中讨论的选择器）：
 
@@ -1490,11 +1529,17 @@ div:not(.help) span {color: gray;} div.help span {color: red;}
 </div>
 ```
 
+What the CSS says, in effect, is “any span inside a div that doesn’t have a class containing the word help should be gray” in the first rule, and “any span inside a div whose class contains the word help” in the second rule. In the given markup fragment, both rules apply to the span shown.
+
 第一条规则表示“任何`class`中不包含单词`help`的`div`元素中的`span`元素被设置为灰色”，第二条规则表示“任何`class`中包含单词`help`的`div`元素中的`span`元素被设置为红色”。对示例中的 HTML 代码来说，两条规则都会被作用于`span`元素。
+
+Because the two rules have equal weight and the “red” rule is written last, it wins out and the span is red. The fact that the div class="aside" is “closer to” the span than the div class="help" is irrelevant. Again: descendant selectors have no notion of element proximity. Both rules match, only one color can be applied, and due to the way CSS works, red is the winner here. (We’ll discuss why in the next chapter.)
 
 因为两条规则有相同的权重，且“红色”规则被写在后面，`span`会被设置为红色。虽然`div class="aside"`比`div class="help"`相比，与`span`元素更“紧密”，但实际上这种紧密程度与规则的选择毫不相关。亦即：后代选择器没有紧密程度的概念。两条规则都匹配了元素，只有一种颜色可以生效，根据 CSS 的工作方式，红色“胜利”了。（下一章讨论）
 
-### 选择子元素 Selecting Children
+### 2.5.3 选择子元素 Selecting Children
+
+In some cases, you don’t want to select an arbitrarily descended element. Rather, you want to narrow your range to select an element that is a child of another element. You might, for example, want to select a strong element only if it is a child (as opposed to any level of descendant) of an h1 element. To do this, you use the child combinator, which is the greater-than symbol (>):
 
 有时，我们并不想选择全部的后代元素，而是把选择范围控制在元素的子级，例如选择一个是`h1`元素的子元素（而不是任意后代元素）的`strong`元素，这种情况下，可以使用子元素组合器，它是一个大于号（`>`）:
 
@@ -1503,6 +1548,8 @@ h1 > strong {
   color: red;
 }
 ```
+
+This rule will make red the strong element shown in the first h1, but not the second:
 
 这条规则将会把下面的第一个`h1`元素中的`strong`元素设置为红色，第二个`h1`元素中的`strong`元素则不会被设置为红色。
 
@@ -1513,21 +1560,35 @@ h1 > strong {
 </h1>
 ```
 
+Read right to left, the selector h1 > strong translates as, “Selects any strong element that is a direct child of an h1 element.” The child combinator can be optionally surrounded by whitespace. Thus, h1 > strong, h1> strong, and h1>strong are all equivalent. You can use or omit whitespace as you wish.
+
 从右往左读，选择器`h1 > strong`可以译作“选择任何`strong`元素，如果它是一个`h1`元素的子元素”。子元素组合器两边可以添加空格, 你可以根据自己的爱好添加或省略空格，`h1 > strong`、`h1> strong`和`h1>strong`是完全等价的。
+
+When viewing the document as a tree structure, it’s easy to see that a child selector restricts its matches to elements that are directly connected in the tree. Figure 2-19 shows part of a document tree.
 
 观察文档的树状结构视图，子元素选择器把匹配限制在直接连接的元素上。图 1-19 显示了部分文档树。
 
-![图1-19：一个文档树片段](figure1-19.png)
+<div style="margin: 0 auto; width: 50%;">
+    <img src='./figure2-19.png' style=""/>
+</div>
+<p align="center">图 2-19：一个文档树片段</p>
 
-_图 1-19：一个文档树片段_
+In this tree fragment, you can pick out parent-child relationships. For example, the a element is parent to the strong, but it is child to the p element. You could match elements in this fragment with the selectors p > a and a > strong, but not p > strong, since the strong is a descendant of the p but not its child.
 
 在这文档树片段中，可以很清楚的观察到父-子关系。例如，`a`元素是`strong`元素的父元素，同时是`p`元素的子元素。在这个片段中，可以使用`p > a`和`a > strong`选择元素，但无法使用`p > strong`选择元素，因为`strong`是`p`的后代元素但不是子元素。
 
+You can also combine descendant and child combinations in the same selector. Thus, table.summary td > p will select any p element that is a child of a td element that is itself descended from a table element that has a class attribute containing the word summary.
+
 在同一个选择器中可以结合使用后代选择器和子元素原则器。`table.summary td > p`选择是`td`元素子元素的`p`元素，同时这个`td`元素需要是一个`class`属性值包含`summary`的`table`元素的后代元素。
 
-### 选择相邻兄弟元素 Selecting Adjacent Sibling Elements
+### 2.5.4 选择相邻兄弟元素 Selecting Adjacent Sibling Elements
+
+Let’s say you want to style the paragraph immediately after a heading, or give a special margin to a list that immediately follows a paragraph. To select an element that immediately follows another element with the same parent, you use the adjacentsibling combinator, represented as a plus symbol (+). As with the child combinator, the symbol can be surrounded by whitespace, or not, at the author’s discretion.
 
 假如想要为一个紧跟着标题的段落设置样式，或者给一个紧跟着段落的列表添加一个边距，可以使用**相邻兄弟组合器**来选择在同一个父级元素下紧跟着另一个元素的元素，组合器使用加号（`+`）。就像子级选择器一样，这个符号也可以在两边添加或省略空格。
+
+To remove the top margin from a paragraph immediately following an `h1` element,
+write:
 
 移除一个紧跟`h1`元素的段落的上边距：
 
@@ -1537,25 +1598,39 @@ h1 + p {
 }
 ```
 
+The selector is read as, “Selects any p element that immediately follows an h1 element that shares a parent with the p element.”
+
 选择器读作：“选择任何紧跟在`h1`元素后面的`p`元素”。
 
-看图 1-20 的文档树片段，更清晰地观察这个选择器是如何生效的：
+To visualize how this selector works, it is easiest to once again consider a fragment of a document tree, shown in Figure 2-20.
 
-![图1-20：一个文档树片段](figure1-20.png)
+看图 2-20 的文档树片段，更清晰地观察这个选择器是如何生效的：
 
-_图 1-20：一个文档树片段_
+<div style="margin: 0 auto; width: 50%;">
+    <img src='./figure2-20.png' style=""/>
+</div>
+<p align="center">图 2-20：另一个文档树片段</p>
+
+In this fragment, a pair of lists descends from a div element, one ordered and the other not, each containing three list items. Each list is an adjacent sibling, and the list items themselves are also adjacent siblings. However, the list items from the first list are not siblings of the second, since the two sets of list items do not share the same parent element. (At best, they’re cousins, and CSS has no cousin selector.)
 
 在这个片段中有两个列表都是`div`元素的后代，一个是有序列表，另一个是无序列表，每个都包含三个列表项。两个列表互为相邻兄弟，每个列表中的列表项也互为相邻兄弟，但第一个列表中的项与第二个列表中的列**不是**相邻兄弟，因为它们没有共同的父元素。（它们最多是表兄弟元素，但 CSS 没有表兄弟元素选择器。）
 
-选择后面的两个相邻兄弟只需要一个组合器符号，如果写作`li + li {font-weight: bold;}`,只有每个列表中的第二项和第三项会被设置为粗体，样式不会对第一项生效。见图 1-21.
+Remember that you can select the second of two adjacent siblings only with a single combinator. Thus, if you write li + li {font-weight: bold;}, only the second and third items in each list will be boldfaced. The first list items will be unaffected, as illustrated in Figure 2-21.
 
-![图1-21：选择相邻兄弟元素](figure1-21.png)
+选择后面的两个相邻兄弟只需要一个组合器符号，如果写作`li + li {font-weight: bold;}`,只有每个列表中的第二项和第三项会被设置为粗体，样式不会对第一项生效。见图 2-21.
 
-_图 1-21：选择相邻兄弟元素_
+<div style="margin: 0 auto; width: 50%;">
+    <img src='./figure2-21.png' style=""/>
+</div>
+<p align="center">图 2-21：选择相邻兄弟元素</p>
+
+To work properly, CSS requires that the two elements appear in “source order.” In our example, an ol element is followed by a ul element. This allows us to select the second element with ol + ul, but we cannot select the first using the same syntax. For ul + ol to match, an ordered list must immediately follow an unordered list.
 
 CSS 的正确性依赖于两个元素的“代码顺序“。在上面的例子中，一个`ol`元素后面紧跟着一个`ul`元素，因此可以使用`ol + ul`选择第二个（`ul`）元素，但不能选择第一个（`ol`）元素。如果想使`ul + ol`匹配，需要一个`ol`元素紧跟在一个`ul`元素后面。
 
-需要记住，两个元素之间的文本内容**不会**影响相邻元素组合器。下面的代码片段，树视图与图 1-19 是一样的：
+Keep in mind that text content between two elements does not prevent the adjacentsibling combinator from working. Consider this markup fragment, whose tree view would be the same as that shown in Figure 2-19:
+
+需要记住，两个元素之间的文本内容**不会**影响相邻元素组合器。下面的代码片段，树视图与图 2-19 是一样的：
 
 ```html
 <div>
@@ -1573,7 +1648,11 @@ CSS 的正确性依赖于两个元素的“代码顺序“。在上面的例子�
 </div>
 ```
 
+Even though there is text between the two lists, we can still match the second list with the selector ol + ul. That’s because the intervening text is not contained with a sibling element, but is instead part of the parent div. If we wrapped that text in a paragraph element, it would then prevent ol + ul from matching the second list. Instead, we might have to write something like ol + p + ul.
+
 尽管两个列表之间有文本内容，选择器`ol + ul`依然会匹配第二个列表。因为文本并不包含一个兄弟元素，而是属于父元素`div`的一部分。如果把文本内容用一个段落元素（`p`）包起来，`ol + ul`匹配第二个列表的行为将会被终止。要匹配第二个列表，需要用`ol + p + ul`这样的选择器。
+
+As the following example illustrates, the adjacent-sibling combinator can be used in conjunction with other combinators:
 
 相邻兄弟组合器可以与其他组合器连接使用，例如：
 
@@ -1583,15 +1662,23 @@ html > body table + ul {
 }
 ```
 
+The selector translates as, “Selects any ul element that immediately follows a sibling table element that is descended from a body element that is itself a child of an html element.”
+
 这个选择器是指：“选择任何紧跟`table`元素的兄弟`ul`元素，同时这个`table`元素是一个`body`元素的后代，而`body`元素是一个`html`的子元素。”
+
+As with all combinators, you can place the adjacent-sibling combinator in a more complex setting, such as div#content h1 + div ol. That selector is read as, “Selects any ol element that is descended from a div when the div is the adjacent sibling of an h1 which is itself descended from a div whose id attribute has a value of content.”
 
 和所有组合器一样，相邻兄弟选择器可以用于很复杂的选择器中，如`div#content h1 + div ol`。这个选择器是：“选择任何是`div`元素后代的`ol`元素，同时这个`div`元素是一个`h1`元素的紧邻兄弟元素，而这个`h1`元素是一个`id`属性值为`content`的`div`元素的子元素。”
 
-### 选择跟随兄弟元素 Selecting Following Siblings
+### 2.5.5 选择跟随兄弟元素 Selecting Following Siblings
+
+Selectors Level 3 introduced a new sibling combinator called the general sibling combinator. This lets you select any element that follows another element when both elements share the same parent, represented using the tilde (~) combinator.
 
 Selectors Level 3 引入了一个新的兄弟组合器叫做**一般兄弟选择器**。这个组合器允许选择同一个父元素下，跟随（不一定是紧跟随）在某个元素后面的所有元素，使用波浪线符号（`~`）。
 
-如下例，为同一个父元素下跟随在一个`h2`元素后面的任何`ol`元素设置斜体，可以写作`h2 ~ ol {font-style: italic;}`。两个`ol`元素不必都是紧邻兄弟，尽管是紧邻兄弟的话也会被这条规则匹配。效果见图 1-22.
+As an example, to italicize any ol that follows an h2 and also shares a parent with the h2, you’d write h2 ~ol {font-style: italic;}. The two elements do not have to be adjacent siblings, although they can be adjacent and still match this rule. The result of applying this rule to the following markup is shown in Figure 2-22:
+
+如下例，为同一个父元素下跟随在一个`h2`元素后面的任何`ol`元素设置斜体，可以写作`h2 ~ ol {font-style: italic;}`。两个`ol`元素不必都是紧邻兄弟，尽管是紧邻兄弟的话也会被这条规则匹配。效果见图 2-22.
 
 ```html
 <div>
@@ -1613,19 +1700,28 @@ Selectors Level 3 引入了一个新的兄弟组合器叫做**一般兄弟选择
 </div>
 ```
 
-![图1-22：选择跟随兄弟元素](figure1-22.png)
+<div style="margin: 0 auto; width: 50%;">
+    <img src='./figure2-22.png' style=""/>
+</div>
+<p align="center">图 2-22：选择跟随兄弟元素</p>
 
-_图 1-22：选择跟随兄弟元素_
+As you can see, both ordered lists are italicized. That’s because both of them are ol elements that follow an h2 with which they share a parent (the div).
 
 如图所示，两个有序列表都是斜体，因为两个`ol`元素都在`h2`元素后面，且它们（三个）共有一个父元素（`div`）。
 
 ## 2.6 伪类选择器 Pseudo-Class Selectors
 
+Things get really interesting with pseudo-class selectors. These selectors let you assign styles to what are, in effect, phantom classes that are inferred by the state of certain elements, or markup patterns within the document, or even by the state of the document itself.
+
 **伪类选择器**非常有趣，它们是一些根据元素状态变化而产生作用的幽灵类。伪类选择器可以根据某些确定元素的状态、文档中的标记模式甚至文档本身的状态选择元素并添加样式。
+
+The phrase “phantom classes” might seem a little odd, but it really is the best way to think of how pseudo-classes work. For example, suppose you wanted to highlight every other row of a data table. You could do that by marking up every other row something like `class="even"` and then writing CSS to highlight rows with that class —or (as we’ll soon see) you could use a pseudo-class selector to achieve the same effect, and through very similar means.
 
 “幽灵类”的说法可能看起来有点怪，但这个词非常贴切地体现了伪类的工作方式。例如，假如你想要把一个数据表格每隔一行设置为高亮，你可以每隔一行在行元素上加一个`class="even"`，然后写一段 CSS 把`class`值有`even`的行设置为高亮。但是你也可以使用伪类选择器更简便地实现相同的效果，后面会很快看到它的用法。
 
-### 组合伪类 Combining Pseudo-Classes
+### 2.6.1 组合伪类 Combining Pseudo-Classes
+
+Before we start, a word about chaining. CSS makes it possible to combine (“chain”) pseudo-classes together. For example, you can make unvisited links red when they’re hovered and visited links maroon when they’re hovered:
 
 在开始之前，先提一下“链式”。CSS 允许（链式）组合伪类选择器，例如，当鼠标停留在（`hover`）一个未访问过的链接（`<a>`）上时，将其设置为红色，当鼠标停留在已经访问过的链接上时,将其设置为栗色：
 
@@ -1638,6 +1734,8 @@ a:visited:hover {
 }
 ```
 
+The order you specify doesn’t actually matter; you could also write a:hover:link to the same effect as a:link:hover. It’s also possible to assign separate hover styles to unvisited and visited links that are in another language—for example, German:
+
 （伪类的）顺序无关紧要，`a:hover:link`和`a:link:hover`的效果是一样的。同样的，可以为特定语言的不同状态的链接设置不同的样式，例如德语：
 
 ```css
@@ -1649,9 +1747,11 @@ a:visited:hover:lang(de) {
 }
 ```
 
+Be careful not to combine mutually exclusive pseudo-classes. For example, a link cannot be both visited and unvisited, so a:link:visited doesn’t make any sense and will never match anything.
+
 注意不要组合互斥的伪类，例如，一个链接不可能既是访问过的又是没访问过的，所以`a:link:visited`没有任何意义，它并不会匹配任何东西。
 
-### 结构性伪类 Structural Pseudo-Classes
+### 2.6.2 结构性伪类 Structural Pseudo-Classes
 
 大部分伪类都是结构性的，既它们是与文档的标记结构相关的。大部分伪类由标签内的结构决定，例如某个伪类选择器选择（某个文档片段中的）第三个段落（`p`）。其他一些选择器允许你处理特定类型的元素。所有的伪类都以一个冒号（`:`）开头，没有例外，而且它们可以出现在选择器的任何位置。
 
@@ -1660,6 +1760,8 @@ a:visited:hover:lang(de) {
 为了进一步说明这点，我想分享一则我个人的轶事。2003 年，我的大女儿，也是我的第一个孩子，出生了。我在网上公布了这个消息（就像你们会做的一样^\_^）。许多人回复我表示祝贺，并讲了一些 CSS 的小幽默，许多人用了选择器`#ericmeyer:first-child.`。问题是这个选择器选择的是我，而且只有当我是我父母的第一个孩子的时候才会选择我（巧了，我还真是）。如果要选择我的第一个孩子，选择器应该是`#ericmeyer > :first-child`。
 
 这种混淆是可以理解的，这就是为何我会在这里提到它，后面的章节我们会经常想起它。只要记住，伪类的作用是给它们绑定的元素添加一些“影子类”，就不容易犯（前面的）错误了。
+
+
 
 ### 选择根元素 Dynamic Pseudo-Classes
 
