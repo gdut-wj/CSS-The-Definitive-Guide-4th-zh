@@ -248,13 +248,13 @@ If you’re a designer or developer of a certain vintage, you may remember the d
 
 There is a cousin to this problem, which is the Flash of Un-Fonted Text, or FOUFT. This happens when a browser has loaded the page and the CSS and displays the laidout page before it’s done loading custom fonts. This causes text to appear in the default font, or a fallback font, before being replaced by text using the custom-loaded font.
 
-Since the replacement of text with the custom-loaded font face can change its layout size, authors should take care in selecting fallback fonts. If there is a significant height difference between the font used to initially display the text and the custom font eventually loaded and used, significant page reflows are likely to occur. There’s no automated way to enforce this, though font-size-adjust (covered later) can help in supporting user agents. You have to look at your intended font and find other faces that have a similar height.
+Since the replacement of text with the custom-loaded font face can change its layout size, authors should take care in selecting fallback fonts. If there is a significant height difference between the font used to initially display the text and the custom font eventually loaded and used, significant page reflows are likely to occur. There’s no automated way to enforce this, though `font-size-adjust` (covered later) can help in supporting user agents. You have to look at your intended font and find other faces that have a similar height.
 
 The core reason for the “flash” behavior is pretty much the same now as it was then: the browser is ready to show something before it has all the resources on hand, so it goes ahead and does so, replacing it with the prettier version once it can. The FOUC was eventually solved, and it’s likely that some day we’ll look back at the FOUFT the same way we do at the FOUC now. Until then, we’ll have to take comfort in the fact that the FOUFT isn’t usually as jarring as was the FOUC.
 
 // T5-1
 
-In addition to the combination of url() and format(), you can also supply a font family name (or several names) in case the font is already locally available on the user’s machine, using the aptly-named local():
+In addition to the combination of `url()` and `format()`, you can also supply a font family name (or several names) in case the font is already locally available on the user’s machine, using the aptly-named `local()`:
 
 ```css
 @font-face {
@@ -264,7 +264,7 @@ In addition to the combination of url() and format(), you can also supply a font
 }
 ```
 
-In this example, the user agent looks to see if it already has a font family named “Switzera-Regular” or “SwitzeraADF-Regular” available. If so, it will use the name SwitzeraADF to refer to that locally installed font. If not, it will use the url() value to try downloading the remote font.
+In this example, the user agent looks to see if it already has a font family named “Switzera-Regular” or “SwitzeraADF-Regular” available. If so, it will use the name `SwitzeraADF` to refer to that locally installed font. If not, it will use the `url()` value to try downloading the remote font.
 
 Note that this capability allows an author to create custom names for locally installed fonts. For example, you could set up a shorter name for Helvetica (or, failing that, Helvetica Neue) like so:
 
@@ -284,7 +284,7 @@ As long as the user has Helvetica installed on their machine, then those rules w
 
 #### On being bulletproof
 
-The tricky part with @font-face is that different browsers of different eras supported different font formats. (To the insider, Table 5-1 reads as a capsule history of downloadable font support.) In order to cover the widest possible landscape, you should turn to what is known as the “Bulletproof @font-face Syntax.” Initially developed by Paul Irish and refined by the folks at FontSpring, it looks like this:
+The tricky part with `@font-face` is that different browsers of different eras supported different font formats. (To the insider, Table 5-1 reads as a capsule history of downloadable font support.) In order to cover the widest possible landscape, you should turn to what is known as the “Bulletproof `@font-face` Syntax.” Initially developed by Paul Irish and refined by the folks at FontSpring, it looks like this:
 
 ```css
 @font-face {
@@ -295,14 +295,14 @@ The tricky part with @font-face is that different browsers of different eras sup
 }
 ```
 
-Let’s break it down piece by piece. The first bit, assigning the font-family name, is straightforward enough. After that, we see:
+Let’s break it down piece by piece. The first bit, assigning the `font-family` name, is straightforward enough. After that, we see:
 
 ```css
 src: url('SwitzeraADF-Regular.eot');
 src: url('SwitzeraADF-Regular.eot?#iefix') format('embedded-opentype');
 ```
 
-This supplies an EOT (Embedded OpenType) to browsers that understand only EOTs —IE6 through IE9. The first line is for IE9 when it’s in “Compatibility Mode,” and the second line hands the same file to IE6-IE8. The ?#iefix bit in that line exploits a parsing bug in those browsers to step around another parsing bug that causes them to 404 any @font-face with multiple formats listed. IE9 fixed its bugs without expanding its font formats, so the first line is what lets it join the party:
+This supplies an EOT (Embedded OpenType) to browsers that understand only EOTs —IE6 through IE9. The first line is for IE9 when it’s in “Compatibility Mode,” and the second line hands the same file to IE6-IE8. The `?#iefix` bit in that line exploits a parsing bug in those browsers to step around another parsing bug that causes them to 404 any `@font-face` with multiple formats listed. IE9 fixed its bugs without expanding its font formats, so the first line is what lets it join the party:
 
 ```css
 url("SwitzeraADF-Regular.woff") format("woff"),
@@ -322,11 +322,11 @@ url("SwitzeraADF-Regular.svg#switzera_adf_regular") format("svg");
 
 Here, at the end, we supply the only font format understood by old iOS devices. This covers almost all of your remaining handheld users.
 
-This gets a bit unwieldy if you’re specifying more than a couple of faces, and typing it in even once is kind of a pain in the wrists. Fortunately, there are services available that will accept your font faces and generate all the @font-face rules you need, convert those faces to all the formats required, and hand it all back to you as a single package. One of the best is Font Squirrel’s @Font-Face Kit Generator. Just make sure you’re legally able to convert and use the font faces you’re running through the generator (see the next sidebar, “Custom Font Considerations” on page 161, for more information).
+This gets a bit unwieldy if you’re specifying more than a couple of faces, and typing it in even once is kind of a pain in the wrists. Fortunately, there are services available that will accept your font faces and generate all the `@font-face` rules you need, convert those faces to all the formats required, and hand it all back to you as a single package. One of the best is Font Squirrel’s @Font-Face Kit Generator. Just make sure you’re legally able to convert and use the font faces you’re running through the generator (see the next sidebar, “Custom Font Considerations” on page 161, for more information).
 
 ### 5.2.2 Other Font Descriptors
 
-In addition to the required font-family and src descriptors, there are a number of optional descriptors that can be used to associate font faces with specific font property values. Just as with font-family, these descriptors (summarized in Table 5-2) correspond directly to CSS properties (explained in detail later in this chapter) and affect how user agents respond to the values supplied for those properties.
+In addition to the required `font-family` and `src` descriptors, there are a number of optional descriptors that can be used to associate font faces with specific font property values. Just as with `font-family`, these descriptors (summarized in Table 5-2) correspond directly to CSS properties (explained in detail later in this chapter) and affect how user agents respond to the values supplied for those properties.
 
 #### Custom Font Considerations
 
@@ -336,15 +336,15 @@ Much like stock photography, font families come with licenses that govern their 
 
 In addition, the more font faces you call upon, the more resources the web server has to hand over and the higher the overall page weight will become. Most faces are not overly large—usually 50K to 100K—but they add up quickly if you decide to get fancy with your type, and truly complicated faces can be larger. As you might imagine, the same problems exist for images. As always, you will have to balance appearance against performance, leaning one way or the other depending on the circumstances.
 
-Furthermore, just as there are image optimization tools available, there are also font optimization tools. Typically these are subsetting tools, which construct fonts using only the symbols actually needed for display. If you’re using a service like Typekit or Fonts.com, they probably have subsetting tools available, or else do it dynamically when the font is requested.
+Furthermore, just as there are image optimization tools available, there are also font optimization tools. Typically these are `subsetting` tools, which construct fonts using only the symbols actually needed for display. If you’re using a service like Typekit or `Fonts.com`, they probably have subsetting tools available, or else do it dynamically when the font is requested.
 
 // T5-2
 
-Because these font descriptors are optional, they may not be listed in a @font-face rule, but CSS does not allow descriptors to go without default values any more than it does for properties. If an optional descriptor is omitted, then it is set to the default value. Thus, if font-weight is not listed, the default value of normal is assumed.
+Because these font descriptors are optional, they may not be listed in a `@font-face` rule, but CSS does not allow descriptors to go without default values any more than it does for properties. If an optional descriptor is omitted, then it is set to the default value. Thus, if `font-weight` is not listed, the default value of `normal` is assumed.
 
 #### Restricting character range
 
-There is one font descriptor, unicode-range, which (unlike the others in Table 5-2) has no corresponding CSS property. This descriptor allows authors to define the range of characters to which a custom font can be applied. This can be useful when using a symbol font, or to ensure that a font face is only applied to characters that are in a specific language.
+There is one font descriptor, `unicode-range`, which (unlike the others in Table 5-2) has no corresponding CSS property. This descriptor allows authors to define the range of characters to which a custom font can be applied. This can be useful when using a symbol font, or to ensure that a font face is only applied to characters that are in a specific language.
 
 //
 
@@ -366,9 +366,9 @@ unicode-range: U+590-5FF;
 }
 ```
 
-In the second case, a series of ranges are specified in a comma-separated list to cover all the Japanese characters. The interesting feature there is the U+30?? value, which is a special format permitted in unicode-range values. The question marks are wildcards meaning “any possible digit,” making U+30?? equivalent to U+3000-30FF. The question mark is the only “special” character pattern permitted in the value.
+In the second case, a series of ranges are specified in a comma-separated list to cover all the Japanese characters. The interesting feature there is the `U+30??` value, which is a special format permitted in `unicode-range` values. The question marks are wildcards meaning “any possible digit,” making `U+30??` equivalent to `U+3000-30FF`. The question mark is the only “special” character pattern permitted in the value.
 
-Ranges must always ascend. Any descending range (e.g., U+400-300) is treated as a parsing error and ignored. Besides ranges, you can also declare a single code point, which looks like U+221E. This is most often useful in conjunction with other code points and ranges, like so:
+Ranges must always ascend. Any descending range (e.g., `U+400-300`) is treated as a parsing error and ignored. Besides ranges, you can also declare a single code point, which looks like `U+221E`. This is most often useful in conjunction with other code points and ranges, like so:
 
 ```css
 unicode-range: U+4E00-9FFF, U+FF00-FF9F, U+30??, U+A5;
@@ -377,7 +377,7 @@ unicode-range: U+4E00-9FFF, U+FF00-FF9F, U+30??, U+A5;
 
 You could use a single code point to declare that a specific face only be used to render one, and only one, character. Whether or not that’s a good idea is left to you, your design, the size of the font file, and your users’ connection speeds.
 
-Because @font-face is designed to optimize lazy loading, it’s possible to use unicoderange to download only the font faces a page actually needs. Suppose that you have a website that uses a mixture of English, Russian, and basic mathematical operators, but you don’t know which will appear on any given page. There could be all English, a mixture of Russian and math, and so on. Furthermore, suppose you have special font faces for all three types of content. You can make sure a user agent only downloads the faces it actually needs with a properly-constructed series of @font-face rules:
+Because `@font-face` is designed to optimize lazy loading, it’s possible to use `unicode-range` to download only the font faces a page actually needs. Suppose that you have a website that uses a mixture of English, Russian, and basic mathematical operators, but you don’t know which will appear on any given page. There could be all English, a mixture of Russian and math, and so on. Furthermore, suppose you have special font faces for all three types of content. You can make sure a user agent only downloads the faces it actually needs with a properly-constructed series of `@font-face`rules:
 
 ```css
 @font-face {
@@ -396,7 +396,7 @@ Because @font-face is designed to optimize lazy loading, it’s possible to use 
 }
 ```
 
-Because the first rule doesn’t specify a Unicode range, it is always downloaded—unless a page happens to contain no characters at all (and maybe even then). The second rule causes myfont-cyrillic.otf to be downloaded only if the page contains characters in its declared Unicode range; the third rule does the same for basic mathematical operators.
+Because the first rule doesn’t specify a Unicode range, it is always downloaded—unless a page happens to contain no characters at all (and maybe even then). The second rule causes `myfont-cyrillic.otf` to be downloaded only if the page contains characters in its declared Unicode range; the third rule does the same for basic mathematical operators.
 
 ### 5.2.3 Combining Descriptors
 
@@ -428,7 +428,7 @@ This is actually implicit in the fact that any undeclared descriptor is assigned
 }
 ```
 
-Here, we’ve made the implicit explicit: any time a descriptor isn’t being altered, its default value is listed. This is exactly the same as a set of three rules in which we remove every descriptor that shows a value of normal:
+Here, we’ve made the implicit explicit: any time a descriptor isn’t being altered, its default value is listed. This is exactly the same as a set of three rules in which we remove every descriptor that shows a value of `normal`:
 
 ```css
 @font-face {
@@ -447,7 +447,7 @@ Here, we’ve made the implicit explicit: any time a descriptor isn’t being al
 }
 ```
 
-In all three rules, there is no font-stretching beyond the normal amount, and the values of font-weight and font-style vary by which face is being assigned. So what if we want to assign a specific face to unstretched text that’s both bold and italic?
+In all three rules, there is no font-stretching beyond the normal amount, and the values of `font-weight` and `font-style` vary by which face is being assigned. So what if we want to assign a specific face to unstretched text that’s both bold and italic?
 
 ```css
 @font-face {
@@ -483,7 +483,7 @@ How about normal-weight, italic, condensed text?
 }
 ```
 
-We could keep this up for quite a while, but let’s stop there. If we take all those rules and strip out anything with a normal value, we end up with this result, illustrated in Figure 5-5:
+We could keep this up for quite a while, but let’s stop there. If we take all those rules and strip out anything with a `normal` value, we end up with this result, illustrated in Figure 5-5:
 
 ```css
 @font-face {
@@ -529,17 +529,17 @@ We could keep this up for quite a while, but let’s stop there. If we take all 
 
 // 5-5
 
-As you can see, there are a lot of possible combinations just for those three descriptors—consider that there are 11 possible values for font-weight, and 10 for fontstretch—but you’ll likely never have to run through them all. In fact, most font families don’t have as many faces as SwitzeraADF offers (24 at last count), so there wouldn’t be much point in writing out all the possibilities. Nevertheless, the options are there, and in some cases you may find that you need to assign, say, a specific face for bold condensed text so that the user agent doesn’t try to compute them for you.
+As you can see, there are a lot of possible combinations just for those three descriptors—consider that there are 11 possible values for `font-weight`, and 10 for `font-stretch`—but you’ll likely never have to run through them all. In fact, most font families don’t have as many faces as SwitzeraADF offers (24 at last count), so there wouldn’t be much point in writing out all the possibilities. Nevertheless, the options are there, and in some cases you may find that you need to assign, say, a specific face for bold condensed text so that the user agent doesn’t try to compute them for you.
 
 ## 5.3 Font Weights
 
-Now that we’ve covered @font-face and its descriptors, let’s get back to properties. We’re all used to normal and bold text, at the very least, which are sort of the two most basic font weights available. CSS gives you a lot more control over font weights with the property font-weight.
+Now that we’ve covered `@font-face` and its descriptors, let’s get back to properties. We’re all used to normal and bold text, at the very least, which are sort of the two most basic font weights available. CSS gives you a lot more control over font weights with the property `font-weight`.
 
 //
 
 Generally speaking, the heavier a font weight becomes, the darker and “more bold” a font appears. There are a great many ways to label a heavy font face. For example, the font family known as SwitzeraADF has a number of variants, such as SwitzeraADF Bold, SwitzeraADF Extra Bold, SwitzeraADF Light, and SwitzeraADF Regular. All of these use the same basic font shapes, but each has a different weight.
 
-So let’s say that you want to use SwitzeraADF for a document, but you’d like to make use of all those different heaviness levels. You could refer to them directly through the font-family property, but you really shouldn’t have to do that. Besides, it’s no fun having to write a stylesheet like this:
+So let’s say that you want to use SwitzeraADF for a document, but you’d like to make use of all those different heaviness levels. You could refer to them directly through the `font-family` property, but you really shouldn’t have to do that. Besides, it’s no fun having to write a stylesheet like this:
 
 ```css
 h1 {
@@ -558,7 +558,7 @@ small {
 }
 ```
 
-That’s pretty tedious. It would make far more sense to specify a single font family for the whole document and then assign different weights to various elements. You can do this via @font-face and use the various values for the property font-weight. This is a fairly simple font-weight declaration:
+That’s pretty tedious. It would make far more sense to specify a single font family for the whole document and then assign different weights to various elements. You can do this via `@font-face` and use the various values for the property `font-weight`. This is a fairly simple `font-weight` declaration:
 
 ```css
 b {
@@ -566,39 +566,39 @@ b {
 }
 ```
 
-This declaration says the b element should be displayed using a bold font face; or, to put it another way, a font face that is heavier than the normal font face. This is probably expected behavior, since b does cause text to be bold.
+This declaration says the `b` element should be displayed using a bold font face; or, to put it another way, a font face that is heavier than the normal font face. This is probably expected behavior, since `b` does cause text to be bold.
 
-What’s really happening behind the scenes is that a heavier face of the font is used for displaying a b element. Thus, if you have a paragraph displayed using Times, and part of it is bold, then there are really two faces of the same font in use: Times and TimesBold. The regular text is displayed using Times, and the bold text is displayed using TimesBold.
+What’s really happening behind the scenes is that a heavier face of the font is used for displaying a `b` element. Thus, if you have a paragraph displayed using Times, and part of it is bold, then there are really two faces of the same font in use: Times and TimesBold. The regular text is displayed using Times, and the bold text is displayed using TimesBold.
 
 ### 5.3.1 How Weights Work
 
-To understand how a user agent determines the heaviness, or weight, of a given font variant (not to mention how weight is inherited), it’s easiest to start by talking about the keywords 100 through 900. These number keywords were defined to map to a relatively common feature of font design in which a font is given nine levels of weight. If a font family has faces for all nine weight levels available, then the numbers are mapped directly to the predefined levels, with 100 as the lightest variant of the font and 900 as the heaviest.
+To understand how a user agent determines the heaviness, or weight, of a given font variant (not to mention how weight is inherited), it’s easiest to start by talking about the keywords `100` through `900`. These number keywords were defined to map to a relatively common feature of font design in which a font is given nine levels of weight. If a font family has faces for all nine weight levels available, then the numbers are mapped directly to the predefined levels, with `100` as the lightest variant of the font and `900` as the heaviest.
 
-In fact, there is no intrinsic weight in these numbers. The CSS specification says only that each number corresponds to a weight at least as heavy as the number that precedes it. Thus, 100, 200, 300, and 400 might all map to the same relatively lightweight variant; 500 and 600 could correspond to the same heavier font variant; and 700, 800, and 900 could all produce the same very heavy font variant. As long as no keyword corresponds to a variant that is lighter than the variant assigned to the previous keyword, everything will be all right.
+In fact, there is no intrinsic weight in these numbers. The CSS specification says only that each number corresponds to a weight at least as heavy as the number that precedes it. Thus, `100`, `200`, `300`, and `400` might all map to the same relatively lightweight variant; 500 and 600 could correspond to the same heavier font variant; and `700`, `800`, and `900` could all produce the same very heavy font variant. As long as no keyword corresponds to a variant that is lighter than the variant assigned to the previous keyword, everything will be all right.
 
-As it happens, these numbers are defined to be equivalent to certain common variant names, not to mention other values for font-weight. 400 is defined to be equivalent to normal, and 700 corresponds to bold. The other numbers do not match up with any other values for font-weight, but they can correspond to common variant names. If there is a font variant labeled something such as “Normal,” “Regular,” “Roman,” or “Book,” then it is assigned to the number 400 and any variant with the label “Medium” is assigned to 500. However, if a variant labeled “Medium” is the only variant available, it is assigned to 400 instead of 500.
+As it happens, these numbers are defined to be equivalent to certain common variant names, not to mention other values for `font-weight`. `400` is defined to be equivalent to `normal`, and `700` corresponds to `bold`. The other numbers do not match up with any other values for `font-weight`, but they can correspond to common variant names. If there is a font variant labeled something such as “Normal,” “Regular,” “Roman,” or “Book,” then it is assigned to the number `400` and any variant with the label “Medium” is assigned to `500`. However, if a variant labeled “Medium” is the only variant available, it is assigned to `400` instead of `500`.
 
 A user agent has to do even more work if there are fewer than nine weights in a given font family. In this case, it must fill in the gaps in a predetermined way:
 
-- If the value 500 is unassigned, it is given the same font weight as that assigned to 400.
-- If 300 is unassigned, it is given the next variant lighter than 400. If no lighter variant is available, 300 is assigned the same variant as 400. In this case, it will usually be “Normal” or “Medium.” This method is also used for 200 and 100.
-- If 600 is unassigned, it is given the next variant darker than that assigned for 500. If no darker variant is available, 600 is assigned the same variant as 500. This method is also used for 700, 800, and 900.
+- If the value `500` is unassigned, it is given the same font weight as that assigned to `400`.
+- If 300 is unassigned, it is given the next variant lighter than `400`. If no lighter variant is available, `300` is assigned the same variant as `400`. In this case, it will usually be “Normal” or “Medium.” This method is also used for `200` and `100`.
+- If `600` is unassigned, it is given the next variant darker than that assigned for `500`. If no darker variant is available, `600` is assigned the same variant as `500`. This method is also used for `700`, `800`, and `900`.
 
-To illustrate this weighting scheme more clearly, let’s look at three examples of font weight assignment. In the first example, assume that the font family Karrank% is an OpenType font, so it has nine weights already defined. In this case, the numbers are assigned to each level, and the keywords normal and bold are assigned to the numbers 400 and 700, respectively. This is the most straightforward example, and therefore the one that almost never occurs in the real world. (It is quite rare for a font family to have nine weight levels, and those that do are usually very expensive.)
+To illustrate this weighting scheme more clearly, let’s look at three examples of font weight assignment. In the first example, assume that the font family Karrank% is an OpenType font, so it has nine weights already defined. In this case, the numbers are assigned to each level, and the keywords `normal` and `bold` are assigned to the numbers `400` and `700`, respectively. This is the most straightforward example, and therefore the one that almost never occurs in the real world. (It is quite rare for a font family to have nine weight levels, and those that do are usually very expensive.)
 
-In our second example, consider the font family SwitzeraADF, which was discussed near the beginning of this section. Hypothetically, its variants might be assigned numeric values for font-weight, as shown in Table 5-3.
+In our second example, consider the font family SwitzeraADF, which was discussed near the beginning of this section. Hypothetically, its variants might be assigned numeric values for `font-weight`, as shown in Table 5-3.
 
 // T5-3
 
-The first three number values are assigned to the lightest weight. The “Regular” face gets the keyword normal, as expected, and the number weight 400. Since there is a “Medium” font, it’s assigned to the number 500. There is nothing to assign to 600, so it’s mapped to the “Bold” font face, which is also the variant to which 700 and bold are assigned. Finally, 800 and 900 are assigned to the “Black” and “UltraBlack” variants, respectively. Note that this last assignment would happen only if those faces had the top two weight levels already assigned. Otherwise, the user agent might ignore them and assign 800 and 900 to the “Bold” face instead, or it might assign them both to one or the other of the “Black” variants.
+The first three number values are assigned to the lightest weight. The “Regular” face gets the keyword `normal`, as expected, and the number weight `400`. Since there is a “Medium” font, it’s assigned to the number `500`. There is nothing to assign to `600`, so it’s mapped to the “Bold” font face, which is also the variant to which `700` and bold are assigned. Finally, `800` and `900` are assigned to the “Black” and “UltraBlack” variants, respectively. Note that this last assignment would happen only if those faces had the top two weight levels already assigned. Otherwise, the user agent might ignore them and assign `800` and `900` to the “Bold” face instead, or it might assign them both to one or the other of the “Black” variants.
 
 For our third and final example, let’s consider a stripped-down version of Times. In Table 5-4, there are only two weight variants: “TimesRegular” and “TimesBold.”
 
 // T5-4
 
-The assignment of the keywords normal and bold is to the regular-weight and boldweight faces, as you might expect. As for the numbers, 100 through 300 are assigned to the “Regular” face because there isn’t a lighter face available. 400 is assigned to “Regular” as expected, but what about 500? It is assigned to the “Regular” (or normal) face because there isn’t a “Medium” face available; thus, it is assigned the same font face as 400. As for the rest, 700 goes with bold as always, while 800 and 900, lacking a heavier face, are assigned to the next-lighter face, which is the “Bold” font face. Finally, 600 is assigned to the next-heavier face, which is the “Bold” face.
+The assignment of the keywords `normal` and `bold` is to the regular-weight and boldweight faces, as you might expect. As for the numbers, `100` through `300` are assigned to the “Regular” face because there isn’t a lighter face available. `400` is assigned to “Regular” as expected, but what about `500`? It is assigned to the “Regular” (or `normal`) face because there isn’t a “Medium” face available; thus, it is assigned the same font face as `400`. As for the rest, `700` goes with `bold` as always, while `800` and `900`, lacking a heavier face, are assigned to the next-lighter face, which is the “Bold” font face. Finally, `600` is assigned to the next-heavier face, which is the “Bold” face.
 
-font-weight is inherited, so if you set a paragraph to be bold:
+`font-weight` is inherited, so if you set a paragraph to be `bold`:
 
 ```css
 p.one {
@@ -610,11 +610,11 @@ Then all of its children will inherit that boldness, as we see in Figure 5-6.
 
 // 5-6
 
-This isn’t unusual, but the situation gets interesting when you use the last two values we have to discuss: bolder and lighter. In general terms, these keywords have the effect you’d anticipate: they make text more or less bold compared to its parent’s font weight. First, let’s consider bolder.
+This isn’t unusual, but the situation gets interesting when you use the last two values we have to discuss: `bolder` and `lighter`. In general terms, these keywords have the effect you’d anticipate: they make text more or less bold compared to its parent’s font weight. First, let’s consider `bolder`.
 
 ### 5.3.2 Getting Bolder
 
-If you set an element to have a weight of bolder, then the user agent first must determine what font-weight value was inherited from the parent element. It then selects the lowest number which corresponds to a font weight darker than what was inherited. If none is available, then the user agent sets the element’s font weight to the next numerical value, unless the value is already 900, in which case the weight remains at 900. Thus, you might encounter the following situations, illustrated in Figure 5-7:
+If you set an element to have a weight of `bolder`, then the user agent first must determine what `font-weight` value was inherited from the parent element. It then selects the lowest number which corresponds to a font weight darker than what was inherited. If none is available, then the user agent sets the element’s font weight to the next numerical value, unless the value is already `900`, in which case the weight remains at `900`. Thus, you might encounter the following situations, illustrated in Figure 5-7:
 
 ```css
 p {
@@ -639,9 +639,9 @@ div strong {
 
 // 5-7
 
-In the first example, the user agent moves up the weight ladder from normal to bold; in numeric terms, it jumps from 400 to 700. In the second example, h1 text is already set to bold. If there is no bolder face available, then the user agent sets the weight of b text within an h1 to 800, since that is the next step up from 700 (the numeric equivalent of bold). Since 800 is assigned to the same font face as 700, there is no visible difference between normal h1 text and bold h1 text, but the weights are different nonetheless.
+In the first example, the user agent moves up the weight ladder from `normal` to `bold`; in numeric terms, it jumps from `400` to `700`. In the second example, `h1` text is already set to `bold`. If there is no bolder face available, then the user agent sets the weight of `b` text within an `h1` to `800`, since that is the next step up from `700` (the numeric equivalent of `bold`). Since `800` is assigned to the same font face as `700`, there is no visible difference between normal `h1` text and bold `h1` text, but the weights are different nonetheless.
 
-In the last example, paragraphs are set to be the lightest possible font weight, which we assume exists as a “Light” variant. Furthermore, the other faces in this font family are “Regular” and “Bold.” Any em text within a paragraph will evaluate to normal since that is the next-heaviest face within the font family. However, what if the only faces in the font are “Regular” and “Bold”? In that case, the declarations would evaluate like this:
+In the last example, paragraphs are set to be the lightest possible font weight, which we assume exists as a “Light” variant. Furthermore, the other faces in this font family are “Regular” and “Bold.” Any `em` text within a paragraph will evaluate to `normal` since that is the next-heaviest face within the font family. However, what if the only faces in the font are “Regular” and “Bold”? In that case, the declarations would evaluate like this:
 
 ```css
 /* assume only two faces for this example: 'Regular' and 'Bold' */
@@ -653,7 +653,7 @@ p span {
 } /* maps to '700' */
 ```
 
-As you can see, the weight 100 is assigned to the normal font face, but the value of font-weight is still 100. Thus, any span text that is descended from a p element will inherit the value of 100 and then evaluate to the next-heaviest face, which is the “Bold” face with a numerical weight of 700.
+As you can see, the weight `100` is assigned to the `normal` font face, but the value of `font-weight` is still `100`. Thus, any `span` text that is descended from a `p` element will inherit the value of `100` and then evaluate to the next-heaviest face, which is the “Bold” face with a numerical weight of `700`.
 
 Let’s take this one step further and add two more rules, plus some markup, to illustrate how all of this works (see Figure 5-8 for the results):
 
@@ -684,7 +684,7 @@ strong b {
 
 // 5-8
 
-In the last two nested elements, the computed value of font-weight is increased because of the liberal use of the keyword bolder. If you were to replace the text in the paragraph with numbers representing the font-weight of each element, you would get the results shown here:
+In the last two nested elements, the computed value of `font-weight` is increased because of the liberal use of the keyword `bolder`. If you were to replace the text in the paragraph with numbers representing the `font-weight` of each element, you would get the results shown here:
 
 ```html
 <p>
@@ -695,7 +695,7 @@ In the last two nested elements, the computed value of font-weight is increased 
 </p>
 ```
 
-The first two weight increases are large because they represent jumps from 100 to 400 and from 400 to bold (700). From 700, there is no heavier face, so the user agent moves the value of font-weight one notch up the numeric scale (800). Furthermore, if you were to insert a strong element into the b element, it would come out like this:
+The first two weight increases are large because they represent jumps from `100` to `400` and from `400` to bold (`700`). From `700`, there is no heavier face, so the user agent moves the value of `font-weight` one notch up the numeric scale (`800`). Furthermore, if you were to insert a `strong` element into the `b` element, it would come out like this:
 
 ```html
 <p>
@@ -709,7 +709,7 @@ The first two weight increases are large because they represent jumps from 100 t
 </p>
 ```
 
-If there were yet another b element inserted into the innermost strong element, its weight would also be 900, since font-weight can never be higher than 900. Assuming that there are only two font faces available, then the text would appear to be either regular or bold, as you can see in Figure 5-9:
+If there were yet another `b` element inserted into the innermost `strong` element, its weight would also be `900`, since font-weight can never be higher than `900`. Assuming that there are only two font faces available, then the text would appear to be either regular or bold, as you can see in Figure 5-9:
 
 ```html
 <p>
@@ -727,7 +727,7 @@ If there were yet another b element inserted into the innermost strong element, 
 
 ### 5.3.3 Lightening Weights
 
-As you might expect, lighter works in just the same way, except it causes the user agent to move down the weight scale instead of up. With a quick modification of the previous example, you can see this very clearly:
+As you might expect, `lighter` works in just the same way, except it causes the user agent to move down the weight scale instead of up. With a quick modification of the previous example, you can see this very clearly:
 
 ```css
 /* assume only two faces for this example: 'Regular' and 'Bold' */
@@ -767,13 +767,13 @@ b {
 </p>
 ```
 
-Ignoring the fact that this would be entirely counterintuitive, what you see in Figure 5-10 is that the main paragraph text has a weight of 900. When the strong text is set to be lighter, it evaluates to the next-lighter face, which is the regular face, or 400 (the same as normal) on the numeric scale. The next step down is to 300, which is the same as normal since no lighter faces exist. From there, the user agent can reduce the weight only one numeric step at a time until it reaches 100 (which it doesn’t do in the example). The second paragraph shows which text will be bold and which will be regular.
+Ignoring the fact that this would be entirely counterintuitive, what you see in Figure 5-10 is that the main paragraph text has a weight of `900`. When the `strong` text is set to be `lighter`, it evaluates to the next-lighter face, which is the regular face, or `400` (the same as `normal`) on the numeric scale. The next step down is to `300`, which is the same as `normal` since no lighter faces exist. From there, the user agent can reduce the weight only one numeric step at a time until it reaches `100` (which it doesn’t do in the example). The second paragraph shows which text will be bold and which will be regular.
 
 // 5-10
 
 ### 5.3.4 The font-weight descriptor
 
-With the font-weight descriptor, authors can assign faces of varying weights to the weighting levels permitted by the font-weight property. For example, the following rules explicitly assign five faces to six different font-weight values:
+With the `font-weight` descriptor, authors can assign faces of varying weights to the weighting levels permitted by the `font-weight` property. For example, the following rules explicitly assign five faces to six different `font-weight` values:
 
 ```css
 @font-face {
@@ -821,7 +821,7 @@ h4 {font-size: 125%; font-weight: 300;}
 
 // 5-11
 
-In any given situation, the user agent picks which face to use depending on the exact value of a font-weight property, using the resolution algorithm detailed in the earlier section, “How Weights Work” on page 167. Authors may use any value for the fontweight descriptor that is permitted for the font-weight property except the inherit keyword.
+In any given situation, the user agent picks which face to use depending on the exact value of a `font-weight` property, using the resolution algorithm detailed in the earlier section, “How Weights Work” on page 167. Authors may use any value for the `font-weight` descriptor that is permitted for the `font-weight` property `except` the `inherit keyword`.
 
 ## 5.4 Font Size
 
@@ -829,18 +829,18 @@ The methods for determining font size are both very familiar and very different.
 
 //
 
-In a fashion very similar to the font-weight keywords bolder and lighter, the property font-size has relative-size keywords called larger and smaller. Much like what we saw with relative font weights, these keywords cause the computed value of font-size to move up and down a scale of size values, which you’ll need to understand before you can explore larger and smaller. First, though, we need to examine how fonts are sized in the first place.
+In a fashion very similar to the `font-weight` keywords `bolder` and `lighter`, the property `font-size` has relative-size keywords called `larger` and `smaller`. Much like what we saw with relative font weights, these keywords cause the computed value of `font-size` to move up and down a scale of size values, which you’ll need to understand before you can explore `larger` and `smaller`. First, though, we need to examine how fonts are sized in the first place.
 
-In fact, the actual relation of the font-size property to what you see rendered is determined by the font’s designer. This relationship is set as an em square (some call it an em box) within the font itself. This em square (and thus the font size) doesn’t have to refer to any boundaries established by the characters in a font. Instead, it refers to the distance between baselines when the font is set without any extra leading (lineheight in CSS). It is quite possible for fonts to have characters that are taller than the default distance between baselines. For that matter, a font might be defined such that all of its characters are smaller than its em square, as many fonts do. Some hypotheti‐
+In fact, the actual relation of the `font-size` property to what you see rendered is determined by the font’s designer. This relationship is set as an em square (some call it an em box) within the font itself. This em square (and thus the font size) doesn’t have to refer to any boundaries established by the characters in a font. Instead, it refers to the distance between baselines when the font is set without any extra leading (`line-height` in CSS). It is quite possible for fonts to have characters that are taller than the default distance between baselines. For that matter, a font might be defined such that all of its characters are smaller than its em square, as many fonts do. Some hypotheti‐
 cal examples are shown in Figure 5-12.
 
 // 5-12
 
-Thus, the effect of font-size is to provide a size for the em box of a given font. This does not guarantee that any of the actual displayed characters will be this size.
+Thus, the effect of `font-size` is to provide a size for the em box of a given font. This does not guarantee that any of the actual displayed characters will be this size.
 
 ### 5.4.1 Absolute Sizes
 
-Having established all of that, we turn now to the absolute-size keywords. There are seven absolute-size values for font-size: xx-small, x-small, small, medium, large, x-large, and xx-large. These are not defined precisely, but are relative to each other, as Figure 5-13 demonstrates:
+Having established all of that, we turn now to the absolute-size keywords. There are seven absolute-size values for `font-size`: `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, and `xx-large`. These are not defined precisely, but are relative to each other, as Figure 5-13 demonstrates:
 
 ```css
 p.one {
@@ -866,17 +866,17 @@ p.seven {
 }
 ```
 
-According to the CSS1 specification, the difference (or scaling factor) between one absolute size and the next is about 1.5 going up the ladder, or 0.66 going down. Thus, if medium is the same as 10px, then large should be the same as 15px. This was later determined to be too large a scaling factor. In CSS2 it was suggested that it be somewhere between 1.0 and 1.2, and in CSS3 drafts a complicated series is provided (for example, small is listed as eight-ninths the size of medium, while xx-small is threefifths). In all case, the scaling factors are guidelines, as user agents are free to alter them for any reason.
+According to the CSS1 specification, the difference (or scaling factor) between one absolute size and the next is about 1.5 going up the ladder, or 0.66 going down. Thus, if `medium` is the same as `10px`, then `large` should be the same as `15px`. This was later determined to be too large a scaling factor. In CSS2 it was suggested that it be somewhere between 1.0 and 1.2, and in CSS3 drafts a complicated series is provided (for example, `small` is listed as eight-ninths the size of `medium`, while `xx-small` is threefifths). In all case, the scaling factors are guidelines, as user agents are free to alter them for any reason.
 
 // 5-13
 
-Working from the assumption that medium equals 16px, for different scaling factors, we get the absolute size equivalents shown in Table 5-5. (The values shown are rounded-off integers.)
+Working from the assumption that `medium` equals `16px`, for different scaling factors, we get the absolute size equivalents shown in Table 5-5. (The values shown are rounded-off integers.)
 
 // T5-5
 
 ### 5.4.2 Relative Sizes
 
-Comparatively speaking, the keywords larger and smaller are simple: they cause the size of an element to be shifted up or down the absolute-size scale, relative to their parent element, using the same scaling factor employed to calculate absolute sizes. In other words, if the browser used a scaling factor of 1.2 for absolute sizes, then it should use the same factor when applying relative-size keywords:
+Comparatively speaking, the keywords `larger` and `smaller` are simple: they cause the size of an element to be shifted up or down the absolute-size scale, relative to their parent element, using the same scaling factor employed to calculate absolute sizes. In other words, if the browser used a scaling factor of 1.2 for absolute sizes, then it should use the same factor when applying relative-size keywords:
 
 ```css
 p {
@@ -904,7 +904,7 @@ em {
 </p>
 ```
 
-Unlike the relative values for weight, the relative-size values are not necessarily constrained to the limits of the absolute-size range. Thus, a font’s size can be pushed beyond the sizes for xx-small and xx-large. For example:
+Unlike the relative values for weight, the relative-size values are not necessarily constrained to the limits of the absolute-size range. Thus, a font’s size can be pushed beyond the sizes for `xx-small` and `xx-large`. For example:
 
 ```css
 h1 {
@@ -920,7 +920,7 @@ em {
 <p>This paragraph has some <em>emphasis</em> as well.</p>
 ```
 
-As you can see in Figure 5-14, the emphasized text in the h1 element is slightly larger than xx-large. The amount of scaling is left up to the user agent, with the scaling factor of 1.2 being preferred but not required. The em text in the paragraph is shifted one slot up the absolute-size scale (large).
+As you can see in Figure 5-14, the emphasized text in the `h1` element is slightly larger than `xx-large`. The amount of scaling is left up to the user agent, with the scaling factor of 1.2 being preferred but not required. The `em` text in the paragraph is shifted one slot up the absolute-size scale (`large`).
 
 // 5-14
 
@@ -963,7 +963,9 @@ small,
 
 // 5-15
 
-In this example, the exact pixel size values are shown. These are the values calculated by the browser, regardless of the actual displayed size of the characters onscreen. Incidentally, CSS defines the length value em to be equivalent to percentage values, in the sense that 1em is the same as 100% when sizing fonts. Thus, the following would yield identical results, assuming that both paragraphs have the same parent element:
+In this example, the exact pixel size values are shown. These are the values calculated by the browser, regardless of the actual displayed size of the characters onscreen.
+
+Incidentally, CSS defines the length value `em` to be equivalent to percentage values, in the sense that `1em` is the same as `100%` when sizing fonts. Thus, the following would yield identical results, assuming that both paragraphs have the same parent element:
 
 ```css
 p.one {
@@ -974,11 +976,11 @@ p.two {
 }
 ```
 
-When using em measurements, the same principles apply as with percentages, such as the inheritance of computed sizes and so forth.
+When using `em` measurements, the same principles apply as with percentages, such as the inheritance of computed sizes and so forth.
 
 ### 5.4.4 Font Size and Inheritance
 
-Figure 5-12 also demonstrates that, although font-size is inherited in CSS, it is the computed values that are inherited, not percentages. Thus, the value inherited by the strong element is 12px, and this value is modified by the declared value 135% to arrive at 16.2px. For the “footnote” paragraph, the percentage is calculated in relation to the font-size value that’s inherited from the body element, which is 15px. Multiplying that value by 75% yields 11.25px.
+Figure 5-12 also demonstrates that, although `font-size` is inherited in CSS, it is the computed values that are inherited, not percentages. Thus, the value inherited by the `strong` element is `12px`, and this value is modified by the declared value `135%` to arrive at `16.2px`. For the “footnote” paragraph, the percentage is calculated in relation to the `font-size` value that’s inherited from the `body` element, which is `15px`. Multiplying that value by `75%` yields `11.25px`.
 
 As with the relative-size keywords, percentages are effectively cumulative. Thus, the following markup is displayed as shown in Figure 5-16:
 
@@ -1006,7 +1008,7 @@ strong {
 
 // 5-16
 
-The size value for the strong element shown in Figure 5-16 is computed as follows:
+The size value for the `strong` element shown in Figure 5-16 is computed as follows:
 
 12 px × 120% = 14.4 px
 
@@ -1020,19 +1022,19 @@ ul {
 }
 ```
 
-Assuming a four-level deep nesting, the most deeply nested unordered list would have a computed font-size value 40.96 percent the size of the parent of the top-level list. Every nested list would have a font size 80 percent as big as its parent list, causing each level to become harder and harder to read.
+Assuming a four-level deep nesting, the most deeply nested unordered list would have a computed `font-size` value 40.96 percent the size of the parent of the top-level list. Every nested list would have a font size 80 percent as big as its parent list, causing each level to become harder and harder to read.
 
 #### Rounding for display
 
-In most modern browsers, while fractional font-size values are maintained internally, they are not always used by rendering engines. For example, study the letterforms in Figure 5-17.
+In most modern browsers, while fractional `font-size` values are maintained internally, they are not always used by rendering engines. For example, study the letterforms in Figure 5-17.
 
-In all cases, the O characters increase by 0.1 pixels in size as you go from left to right. Thus, the leftmost O has a font-size of 10px, the one at the midpoint has a size of 10.5px, and the one on the right is 11px.
+In all cases, the `O` characters increase by 0.1 pixels in size as you go from left to right. Thus, the leftmost `O` has a `font-size` of `10px`, the one at the midpoint has a size of `10.5px`, and the one on the right is `11px`.
 
-As Figure 5-17 reveals, different browser/OS combinations yield different results. For example, Opera, Safari, and Chrome for macOS show an abrupt jump from 10 pixels to 11 pixels at the 10.5px position. Internet Explorer and Firefox for Windows (both 7 and 8) do the same. Firefox for macOS, on the other hand, looks like it has a smooth line of same-size text. In fact, the characters are all being drawn subtly differently, thanks to their subtly different font-size values. It’s hard to see without squinting (or a ruler), but the fact that it’s hard to tell there is an increase in size from one end of the line to the other is evidence enough.
+As Figure 5-17 reveals, different browser/OS combinations yield different results. For example, Opera, Safari, and Chrome for macOS show an abrupt jump from 10 pixels to 11 pixels at the `10.5px` position. Internet Explorer and Firefox for Windows (both 7 and 8) do the same. Firefox for macOS, on the other hand, looks like it has a smooth line of same-size text. In fact, the characters are all being drawn subtly differently, thanks to their subtly different font-size values. It’s hard to see without squinting (or a ruler), but the fact that it’s hard to tell there is an increase in size from one end of the line to the other is evidence enough.
 
 // 5-17
 
-Nevertheless, every browser will yield up the same subpixel font-size values if you use an inspector or query the value directly via DOM scripting. The third O from the right will show a computed value of 10.8px, regardless of the size of the character displayed onscreen.
+Nevertheless, every browser will yield up the same subpixel `font-size` values if you use an inspector or query the value directly via DOM scripting. The third `O` from the right will show a computed value of `10.8px`, regardless of the size of the character displayed onscreen.
 
 #### Keywords and monospace text
 
@@ -1054,13 +1056,13 @@ span {
 
 // 5-18
 
-The default value of medium is generally resolved to 16px, assuming the user hasn’t changed the browser preferences (where the default text sizes are set). Indeed, if you query the paragraph text outside the span, inspectors will tell you that the computed font-size of the text is 16px (again, assuming the user hasn’t changed the preferences).
+The default value of `medium` is generally resolved to `16px`, assuming the user hasn’t changed the browser preferences (where the default text sizes are set). Indeed, if you query the paragraph text outside the `span`, inspectors will tell you that the computed `font-size` of the text is `16px` (again, assuming the user hasn’t changed the preferences).
 
-So you might expect the monospaced span to also have 16-pixel text. That’s exactly the case in some browsers; but in others, it will be 13px.
+So you might expect the monospaced `span` to also have 16-pixel text. That’s exactly the case in some browsers; but in others, it will be `13px`.
 
-The reason for this is that while the computed font-size of the paragraph is 16px, the keyword medium is what’s passed down through inheritance. Thus, the span starts out with font-size: medium. As a result, it looks to the user’s preference settings to determine the proper size, and most browsers are set to a 13px default size for all monospace text. This causes them to display 13-pixel monospace text in a 16-pixel parent, even though the monospace text was explicitly set to font-size: 1em.
+The reason for this is that while the computed `font-size` of the paragraph is `16px`, the keyword `medium` is what’s passed down through inheritance. Thus, the span starts out with `font-size: medium`. As a result, it looks to the user’s preference settings to determine the proper size, and most browsers are set to a `13px` default size for all monospace text. This causes them to display 13-pixel monospace text in a 16-pixel parent, even though the monospace text was explicitly set to `font-size: 1em.`
 
-The effect carries through even with font sizes other than 1em (or 100%); in the following case, the monospace text will have a computed size of 26px instead of 32px (once more assuming the browser defaults have not changed):
+The effect carries through even with font sizes other than `1em` (or `100%`); in the following case, the monospace text will have a computed size of `26px` instead of `32px` (once more assuming the browser defaults have not changed):
 
 ```css
 p {
@@ -1076,7 +1078,7 @@ span {
 <p>This is a 'p' with a <span>'span'</span> inside.</p>
 ```
 
-Note that not all browsers actually do this: some override the medium sizing assumptions in favor of scaling off the computed font-size of the parent. This leads to inconsistent text display across browsers.
+Note that not all browsers actually do this: some override the `medium` sizing assumptions in favor of scaling off the computed `font-size` of the parent. This leads to inconsistent text display across browsers.
 
 As it happens, there is a way to work around this problem that works for all known browsers, at least as of late 2017. It goes like this:
 
@@ -1094,13 +1096,13 @@ span {
 <p>This is a 'p' with a <span>'span'</span> inside.</p>
 ```
 
-See the extra serif in the font-family there? That somehow triggers a switch that makes all browsers treat font-size: 1em as being 100 percent of the paragraph’s computed font-size, not a medium-derived value. This is cross-browser-consistent and illustrated in Figure 5-19.
+See the extra `serif` in the `font-family` there? That somehow triggers a switch that makes all browsers treat `font-size: 1em` as being 100 percent of the paragraph’s computed `font-size`, not a `medium`-derived value. This is cross-browser-consistent and illustrated in Figure 5-19.
 
 // 5-19
 
 ### 5.4.5 Using Length Units
 
-The font-size can be set using any length value. All of the following font-size declarations should be equivalent:
+The `font-size` can be set using any length value. All of the following `font-size` declarations should be equivalent:
 
 ```css
 p.one {
@@ -1120,29 +1122,27 @@ p.five {
 }
 ```
 
-The display in Figure 5-20 assumes that the user agent knows how many dots per inch are used in the display medium. Different user agents make different assumptions—some based on the operating system, some based on preferences settings, and some based on the assumptions of the programmer who wrote the user agent. Nevertheless, the five lines should always have the same font size. Thus, while the result may not exactly match reality (for example, the actual size of p.three may not be half an inch), the measurements should all be consistent with one another.
+The display in Figure 5-20 assumes that the user agent knows how many dots per inch are used in the display medium. Different user agents make different assumptions—some based on the operating system, some based on preferences settings, and some based on the assumptions of the programmer who wrote the user agent. Nevertheless, the five lines should always have the same font size. Thus, while the result may not exactly match reality (for example, the actual size of `p.three` may not be half an inch), the measurements should all be consistent with one another.
 
 // 5-20
 
-There is one more value that is potentially the same as those shown in Figure 5-20, and that’s 36px, which would be the same physical distance if the display medium is 72 pixels per inch (ppi). However, there are very few monitors with that setting anymore. Most desktop displays are much higher, in the range of 96 ppi to 120 ppi; and mobile devices go much higher, currently in the 300 ppi to 500 ppi range.
+There is one more value that is potentially the same as those shown in Figure 5-20, and that’s `36px`, which would be the same physical distance if the display medium is 72 pixels per inch (ppi). However, there are very few monitors with that setting anymore. Most desktop displays are much higher, in the range of 96 ppi to 120 ppi; and mobile devices go much higher, currently in the 300 ppi to 500 ppi range.
 
 Despite these variations between operating systems and devices, many authors choose to use pixel values for font sizes. This approach seems especially attractive when mixing text and raster images (GIF, JPG, PNG, etc.) on a web page, since text can (in theory) be set to the same height as graphic elements on the page by declaring `font-size: 11px;` or something similar, as illustrated by Figure 5-21.
 
 // 5-21
 
-Using pixel measurements for font-size is certainly one way to get “consistent” results with font-size (and, indeed, with any length at all), but there is a drawback.
-
-Not every browser makes it easy (or even possible) to resize text set in pixels, and there are situations where pixel-sized text can be badly sized in mobile devices that pretend to be full-screen devices (such as most versions of the iPhone). For these reasons alone, pixel-sizing text is generally not recommended.
+Using pixel measurements for `font-size` is certainly one way to get “consistent” results with `font-size` (and, indeed, with any length at all), but there is a drawback. Not every browser makes it easy (or even possible) to resize text set in pixels, and there are situations where pixel-sized text can be badly sized in mobile devices that pretend to be full-screen devices (such as most versions of the iPhone). For these reasons alone, pixel-sizing text is generally not recommended.
 
 ### 5.4.6 Automatically Adjusting Size
 
-Two of the main factors that influence a font’s legibility are its size and its x-height. The number that results from dividing the x-height by the font-size is referred to as the aspect value. Fonts with higher aspect values tend to be legible as the font’s size is reduced; conversely, fonts with low aspect values become illegible more quickly. CSS provides a way to deal with shifts in aspect values between font families with the property font-size-adjust.
+Two of the main factors that influence a font’s legibility are its size and its x-height. The number that results from dividing the x-height by the `font-size` is referred to as the aspect value. Fonts with higher aspect values tend to be legible as the font’s size is reduced; conversely, fonts with low aspect values become illegible more quickly. CSS provides a way to deal with shifts in aspect values between font families with the property `font-size-adjust`.
 
 //
 
 The goal of this property is to preserve legibility when the font used is not the author’s first choice. Because of the differences in font appearance, while one font may be legible at a certain size, another font at the same size is difficult or impossible to read.
 
-A good example is to compare the common fonts Verdana and Times. Consider Figure 5-22 and the following markup, which shows both fonts at a font-size of 10px:
+A good example is to compare the common fonts Verdana and Times. Consider Figure 5-22 and the following markup, which shows both fonts at a `font-size` of `10px`:
 
 ```css
 p {
@@ -1186,9 +1186,9 @@ p.cl2 {
 
 // 5-23
 
-The catch is that to allow a user agent to intelligently make size adjustments, it first has to know the aspect value of the fonts you specify. User agents that support @fontface will be able to pull that information directly from the font file, assuming the files contain the information—any professionally-produced font should, but there’s no guarantee. If a font file doesn’t contain the aspect value, a user agent may try to compute it; but again, there’s no guarantee that they will or even can.
+The catch is that to allow a user agent to intelligently make size adjustments, it first has to know the aspect value of the fonts you specify. User agents that support `@font-face` will be able to pull that information directly from the font file, assuming the files contain the information—any professionally-produced font should, but there’s no guarantee. If a font file doesn’t contain the aspect value, a user agent may try to compute it; but again, there’s no guarantee that they will or even can.
 
-Assuming that the user agent can find or figure out aspect values, the auto value for font-size-adjust is a way of getting the desired effect even if you don’t know the actual aspect value of your first-choice font. For example, given that the user agent can determine that the aspect value of Verdana is 0.58, then the following will have the same result as that shown in Figure 5-23:
+Assuming that the user agent can find or figure out aspect values, the `auto` value for `font-size-adjust` is a way of getting the desired effect even if you don’t know the actual aspect value of your first-choice font. For example, given that the user agent can determine that the aspect value of Verdana is 0.58, then the following will have the same result as that shown in Figure 5-23:
 
 ```css
 p {
@@ -1206,13 +1206,13 @@ As of late 2017, the only user agent line to support `font-size-adjust` was the 
 
 ## 5.5 Font Style
 
-font-style is very simple: it’s used to select between normal text, italic text, and oblique text. That’s it! The only complication is in recognizing the difference between italic and oblique text and in understanding why browsers don’t always give you a choice.
+`font-style` is very simple: it’s used to select between `normal` text, `italic` text, and oblique text. That’s it! The only complication is in recognizing the difference between `italic` and `oblique` text and in understanding why browsers don’t always give you a choice.
 
 //
 
-The default value of font-style is, as you can see, normal. This refers to upright text, which is probably best described as text that is not italic or otherwise slanted. The vast majority of text in this book is upright, for instance. That leaves only an explanation of the difference between italic and oblique text. For that, it’s easiest to refer to Figure 5-24, which illustrates the differences very clearly.
+The default value of `font-style` is, as you can see, `normal`. This refers to upright text, which is probably best described as text that is not italic or otherwise slanted. The vast majority of text in this book is upright, for instance. That leaves only an explanation of the difference between `italic` and `oblique` text. For that, it’s easiest to refer to Figure 5-24, which illustrates the differences very clearly.
 
-Basically, italic text is a separate font face, with small changes made to the structure of each letter to account for the altered appearance. This is especially true of serif fonts, where, in addition to the fact that the text characters “lean,” the serifs may be altered in an italic face. Oblique text, on the other hand, is just a slanted version of the normal, upright text. Font faces with labels like “Italic,” “Cursive,” and “Kursiv” are usually mapped to the italic keyword, while oblique is often assigned faces with labels such as “Oblique,” “Slanted,” and “Incline.”
+Basically, italic text is a separate font face, with small changes made to the structure of each letter to account for the altered appearance. This is especially true of serif fonts, where, in addition to the fact that the text characters “lean,” the serifs may be altered in an italic face. Oblique text, on the other hand, is just a slanted version of the normal, upright text. Font faces with labels like “Italic,” “Cursive,” and “Kursiv” are usually mapped to the `italic` keyword, while `oblique` is often assigned faces with labels such as “Oblique,” “Slanted,” and “Incline.”
 
 // 5-24
 
@@ -1228,7 +1228,7 @@ i {
 }
 ```
 
-These styles would make paragraphs use an upright font, as usual, and cause the em and i elements to use an italic font—again, as usual. On the other hand, you might decide that there should be a subtle difference between em and i:
+These styles would make paragraphs use an upright font, as usual, and cause the `em` and `i` elements to use an italic font—again, as usual. On the other hand, you might decide that there should be a subtle difference between `em` and `i`:
 
 ```css
 p {
@@ -1242,19 +1242,19 @@ i {
 }
 ```
 
-If you look closely at Figure 5-25, you’ll see there is no apparent difference between the em and i elements. In practice, not every font is so sophisticated as to have both an italic face and an oblique face, and even fewer web browsers are sophisticated enough to tell the difference when both faces do exist.
+If you look closely at Figure 5-25, you’ll see there is no apparent difference between the `em` and `i` elements. In practice, not every font is so sophisticated as to have both an italic face and an oblique face, and even fewer web browsers are sophisticated enough to tell the difference when both faces do exist.
 
 // 5-25
 
-If either of these is the case, then there are a few things that can happen. If there is no Italic face available, but there is an Oblique face, then the latter can be used for the former. If the situation is reversed—an Italic face exists, but there is no defined Oblique face—the user agent may not substitute the former for the latter, according to the specification. Finally, the user agent can simply generate the oblique face by computing a slanted version of the upright font. In fact, this is what most often happens in a digital world, where it’s fairly simple to slant a font using a simple computation.
+If either of these is the case, then there are a few things that can happen. If there is no Italic face available, but there is an Oblique face, then the latter can be used for the former. If the situation is reversed—an Italic face exists, but there is no defined Oblique face—the user agent may `not` substitute the former for the latter, according to the specification. Finally, the user agent can simply generate the oblique face by computing a slanted version of the upright font. In fact, this is what most often happens in a digital world, where it’s fairly simple to slant a font using a simple computation.
 
-Furthermore, you may find that in some operating systems, a given font that has been declared as italic may switch from italic to oblique depending on the actual size of the font. The display of Times on a Macintosh running the Classic OS (Mac OS 9), for example, is shown in Figure 5-26, where the only difference is a single pixel in font size.
+Furthermore, you may find that in some operating systems, a given font that has been declared as `italic` may switch from italic to oblique depending on the actual size of the font. The display of Times on a Macintosh running the Classic OS (Mac OS 9), for example, is shown in Figure 5-26, where the only difference is a single pixel in font size.
 
 // 5-26
 
-There isn’t much that can be done about this, unfortunately, except better font handling. Fortunately, modern operating systems such as macOS and Windows XP have very good font rendering technology, and @font-face allows authors to assign specific italic and oblique faces to the respective font-style properties, should they so choose.
+There isn’t much that can be done about this, unfortunately, except better font handling. Fortunately, modern operating systems such as macOS and Windows XP have very good font rendering technology, and `@font-face` allows authors to assign specific italic and oblique faces to the respective `font-style` properties, should they so choose.
 
-Even though italic and oblique text often use the same face, font-style can still be quite useful. For example, it is a common typographic convention that a block quote should be italicized, but that any specially emphasized text within the quote should be upright. To employ this effect, which is illustrated in Figure 5-27, you would use these styles:
+Even though italic and oblique text often use the same face, `font-style` can still be quite useful. For example, it is a common typographic convention that a block quote should be italicized, but that any specially emphasized text within the quote should be upright. To employ this effect, which is illustrated in Figure 5-27, you would use these styles:
 
 ```css
 blockquote {
@@ -1272,7 +1272,7 @@ A related property tells the user agent whether it’s allowed to synthesize its
 
 ### 5.5.1 The font-style Descriptor
 
-As a descriptor, font-style lets an author link specific faces to specific font-style values.
+As a descriptor, `font-style` lets an author link specific faces to specific font-style values.
 
 ```css
 @font-face {
@@ -1292,7 +1292,7 @@ As a descriptor, font-style lets an author link specific faces to specific font-
 }
 ```
 
-Given the above, the result of the following rules would be to render h2 and h3 elements using “SwitzeraADF-Italic” instead of “SwitzeraADF-Regular,” as illustrated in Figure 5-28:
+Given the above, the result of the following rules would be to render `h2` and `h3` elements using “SwitzeraADF-Italic” instead of “SwitzeraADF-Regular,” as illustrated in Figure 5-28:
 
 ```css
 h1,
@@ -1312,19 +1312,19 @@ h3 {
 
 // 5-28
 
-Ideally, if there were a SwitzeraADF face with an oblique typeface, the author could point to it instead of the italic variant. There isn’t such a face, though, so the author mapped the italic face to both the italic and oblique values. As with font-weight, the font-style descriptor can take all of the values of the font-style property except for inherit.
+Ideally, if there were a SwitzeraADF face with an oblique typeface, the author could point to it instead of the italic variant. There isn’t such a face, though, so the author mapped the italic face to both the `italic` and `oblique` values. As with `font-weight`, the `font-style` descriptor can take all of the values of the `font-style` property `except` for `inherit`.
 
 ## 5.6 Font Stretching
 
-In some font families, there are a number of variant faces that have wider or narrower letterforms. These often take names like “Condensed,” “Wide,” “Ultra Expanded,” and so on. The utility of such variants is that a designer can use a single font family while also having skinny and fat variants. CSS provides a property that allows an author to select among such variants, when they exist, without having to explicitly define them in font-family declarations. It does this via the somewhat misleadingly named fontstretch.
+In some font families, there are a number of variant faces that have wider or narrower letterforms. These often take names like “Condensed,” “Wide,” “Ultra Expanded,” and so on. The utility of such variants is that a designer can use a single font family while also having skinny and fat variants. CSS provides a property that allows an author to select among such variants, when they exist, without having to explicitly define them in `font-family` declarations. It does this via the somewhat misleadingly named `font-stretch`.
 
 //
 
-You might expect from the property name that this will stretch or squeeze a font like saltwater taffy, but that’s actually not the case at all. As the value names imply, this property instead behaves very much like the absolute-size keywords (e.g., xx-large) for the font-size property, with a range of absolute values that (in theory) let the author alter a font’s width. For example, an author might decide to stress the text in a strongly emphasized element by changing the font characters to a wider face than their parent element’s font characters.
+You might expect from the property name that this will stretch or squeeze a font like saltwater taffy, but that’s actually not the case at all. As the value names imply, this property instead behaves very much like the absolute-size keywords (e.g., `xx-large`) for the `font-size` property, with a range of absolute values that (in theory) let the author alter a font’s width. For example, an author might decide to stress the text in a strongly emphasized element by changing the font characters to a wider face than their parent element’s font characters.
 
-The catch is that this property only works if the font family in use has defined wider and narrower faces, which most do not (and those that do are usually very expensive). Thus this property is actually very different from font-size, which can change the size of any font face at any time. In contrast, declaring font-stretch: expanded will only have an effect if the font in use has an expanded face available. If it doesn’t, then nothing will happen: the font’s face will not change.
+The catch is that this property only works if the font family in use has defined wider and narrower faces, which most do not (and those that do are usually very expensive). Thus this property is actually very different from `font-size`, which can change the size of any font face at any time. In contrast, declaring font-stretch: expanded will only have an effect if the font in use has an expanded face available. If it doesn’t, then nothing will happen: the font’s face will not change.
 
-For example, consider the very common font Verdana, which has only one width face; this is equivalent to font-stretch: normal. Declaring the following will have no effect on the width of the displayed text:
+For example, consider the very common font Verdana, which has only one width face; this is equivalent to `font-stretch: normal`. Declaring the following will have no effect on the width of the displayed text:
 
 ```css
 body {
@@ -1354,11 +1354,11 @@ footer {
 
 // 5-29
 
-As of late 2017, Safari for both macOS and iOS did not support font-stretch, nor did Opera Mini.
+As of late 2017, Safari for both macOS and iOS did not support `font-stretch`, nor did Opera Mini.
 
 ### 5.6.1 The font-stretch Descriptor
 
-Much as with the font-weight descriptor, the font-stretch descriptor allows authors to explicitly assign faces of varying widths to the width values permitted in the fontstretch property. For example, the following rules explicitly assign three faces to the most directly analogous font-stretch values:
+Much as with the `font-weight` descriptor, the font-stretch descriptor allows authors to explicitly assign faces of varying widths to the width values permitted in the `font-stretch` property. For example, the following rules explicitly assign three faces to the most directly analogous `font-stretch` values:
 
 ```css
 @font-face {
@@ -1378,7 +1378,7 @@ Much as with the font-weight descriptor, the font-stretch descriptor allows auth
 }
 ```
 
-In a parallel to what we saw in previous sections, the author can call on these different width faces through the font-stretch property, as illustrated in Figure 5-30:
+In a parallel to what we saw in previous sections, the author can call on these different width faces through the `font-stretch` property, as illustrated in Figure 5-30:
 
 ```css
 h1,
@@ -1396,27 +1396,27 @@ h3 {
 }
 ```
 
-As before, the font-stretch descriptor can take all of the values of the font-stretch property except for inherit.
+As before, the `font-stretch` descriptor can take all of the values of the `font-stretch` property `except` for `inherit`.
 
 // 5-30
 
 ## 5.6 Font Kerning
 
-Some fonts contain data regarding how characters should be spaced relative to each other, known as kerning. This spacing can vary depending on how characters are combined; for example, the character pair oc may have a different spacing than the pair ox. Similarly, AB and AW may have different separation distances, to the point that in some fonts, the top-right tip of the W is actually placed to the left of the bottom-right tip of the A. This kerning data can be explicitly called for or suppressed using the property font-kerning.
+Some fonts contain data regarding how characters should be spaced relative to each other, known as `kerning`. This spacing can vary depending on how characters are combined; for example, the character pair `oc` may have a different spacing than the pair `ox`. Similarly, `AB` and `AW` may have different separation distances, to the point that in some fonts, the top-right tip of the `W` is actually placed to the left of the bottom-right tip of the `A`. This kerning data can be explicitly called for or suppressed using the property `font-kerning`.
 
 //
 
-The value none is pretty simple: it tells the user agent to ignore any kerning information in the font. normal tells the user agent to kern the text normally; that is, according to the kerning data contained in the font. auto tells the user agent to do whatever it thinks best, possibly depending on the type of font in use. The OpenType specification, for example, recommends (but does not require) that kerning be applied whenever the font supports it. If a font does not contain kerning data, font-kerning will have no effect.
+The value `none` is pretty simple: it tells the user agent to ignore any kerning information in the font. `normal` tells the user agent to kern the text normally; that is, according to the kerning data contained in the font. `auto` tells the user agent to do whatever it thinks best, possibly depending on the type of font in use. The OpenType specification, for example, recommends (but does not require) that kerning be applied whenever the font supports it. If a font does not contain kerning data, `font-kerning` will have no effect.
 
-Note that if the property letter-spacing is applied to kerned text, the kerning is done and then the letters’ spacing is adjusted according to the value of letter-spacing, not the other way around.
+Note that if the property `letter-spacing` is applied to kerned text, the kerning is done and `then` the letters’ spacing is adjusted according to the value of `letter-spacing`, not the other way around.
 
 ## 5.7 Font Variants
 
-Beyond font weights, font styles, and so forth, there are font variants. These are embedded within a font face and can cover things like various styles of historical ligatures, small-caps presentation, ways of presenting fractions, the spacing of numbers, whether zeroes get slashes through them, and much more. CSS lets authors invoke these variants, when they exist, through font-variant.
+Beyond font weights, font styles, and so forth, there are font variants. These are embedded within a font face and can cover things like various styles of historical ligatures, small-caps presentation, ways of presenting fractions, the spacing of numbers, whether zeroes get slashes through them, and much more. CSS lets authors invoke these variants, when they exist, through `font-variant`.
 
 //
 
-That’s quite a Values (Level 3) entry, isn’t it? Especially when the only values in CSS1 and CSS2 were the default of normal, which describes ordinary text, and small-caps, which calls for the use of small-caps text. Let’s concentrate just on those for a moment.
+That’s quite a Values (Level 3) entry, isn’t it? Especially when the only values in CSS1 and CSS2 were the default of `normal`, which describes ordinary text, and small-caps, which calls for the use of `small-caps` text. Let’s concentrate just on those for a moment.
 
 Instead of upper- and lowercase letters, a small-caps font employs uppercase letters of different sizes. Thus, you might see something like that shown in Figure 5-31:
 
@@ -1437,7 +1437,7 @@ p {
 
 // 5-31
 
-As you may notice, in the display of the h1 element, there is a larger uppercase letter wherever an uppercase letter appears in the source and a small uppercase letter wherever there is a lowercase letter in the source. This is very similar to `text-transform: uppercase`, with the only real difference being that, here, the uppercase letters are of different sizes. However, the reason that small-caps is declared using a font property is that some fonts have a specific small-caps face, which a font property is used to select.
+As you may notice, in the display of the `h1` element, there is a larger uppercase letter wherever an uppercase letter appears in the source and a small uppercase letter wherever there is a lowercase letter in the source. This is very similar to `text-transform: uppercase`, with the only real difference being that, here, the uppercase letters are of different sizes. However, the reason that `small-caps` is declared using a font property is that some fonts have a specific small-caps face, which a font property is used to select.
 
 What happens if no such face exists? There are two options provided in the specification. The first is for the user agent to create a small-caps face by scaling uppercase letters on its own. The second is to make all letters uppercase and the same size, exactly as if the declaration `text-transform: uppercase`; had been used instead. This is not an ideal solution, but it is permitted.
 
@@ -1451,7 +1451,7 @@ Now to examine that Values (Level 3) line. It is admittedly complicated, but the
 - font-variant-alternates
 - font-variant-east-asian
 
-As an example (to pick one of the simpler ones), <common-lig-values> comes from the property font-variant-ligatures, and can be either common-ligatures or nocommon-ligatures. <numeric-fraction-values> comes from font-variant-numeric and can be either diagonal-fractions or stacked-fractions. And so on.
+As an example (to pick one of the simpler ones), `<common-lig-values>` comes from the property `font-variant-ligatures`, and can be either `common-ligatures` or `no-common-ligatures`. `<numeric-fraction-values>` comes from `font-variant-numeric` and can be either `diagonal-fractions` or `stacked-fractions`. And so on.
 
 There are two barriers to the use of these admittedly much more powerful font variants: browser support and font support. The first is easy: as of late 2017, there isn’t widespread support for enabling font variants. Certainly you can use the CSS 2.1 variant values, but many of the Level 3 values are only supported by Gecko and WebKit.
 
@@ -1463,15 +1463,15 @@ The various `font-variant-*` properties are not covered in detail here because a
 
 #### The font-variant descriptor
 
-The font-variant descriptor lets you decide which of a font face’s variants can or cannot be used, specified as a space-separated list. For example, you can enable the common ligature, small caps, and slashed-zeroes variants like so:
+The `font-variant` descriptor lets you decide which of a font face’s variants can or cannot be used, specified as a space-separated list. For example, you can enable the common ligature, small caps, and slashed-zeroes variants like so:
 
 ```css
 font-variant: common-ligatures small-caps slashed-zero;
 ```
 
-You’ll no doubt have guessed by now that the font-variant descriptor can take all of the values of the font-variant property except for inherit.
+You’ll no doubt have guessed by now that the `font-variant` descriptor can take all of the values of the `font-variant` property `except` for `inherit`.
 
-Note that this descriptor is very different than the other descriptors we’ve seen so far. With the font-stretch descriptor, for example, you can assign a specific font face to a given font-stretch property value. The font-variant descriptor, by contrast, defines which variants are permitted for the font face being declared in the @fontface rule, which can easily negate font variant values called for in properties later on. For example, given the following, paragraphs will not be displayed using a diagonalfractions or small-caps variant, even if such variants exist in SwitzeraADF:
+Note that this descriptor is very different than the other descriptors we’ve seen so far. With the `font-stretch` descriptor, for example, you can assign a specific font face to a given `font-stretch` property value. The `font-variant` descriptor, by contrast, defines which variants are permitted for the font face being declared in the `@font-face` rule, which can easily negate font variant values called for in properties later on. For example, given the following, paragraphs will `not` be displayed using a diagonalfractions or `small-caps` variant, even if such variants exist in SwitzeraADF:
 
 ```css
 @font-face {
@@ -1488,7 +1488,7 @@ p {
 
 ## 5.8 Font Features
 
-In a manner similar to font-variant, the font-feature-settings descriptor allows authors to exercise low-level control over which OpenType font features are available for use (so don’t go using this descriptor on .woff files).
+In a manner similar to `font-variant`, the `font-feature-settings` descriptor allows authors to exercise low-level control over which OpenType font features are available for use (so don’t go using this descriptor on `.woff` files).
 
 //
 
@@ -1505,7 +1505,7 @@ The exact format of a `<feature-tag-value>` value is:
 <string> [ <integer> | on | off ]?
 ```
 
-For many features, the only permitted integer values are 0 and 1, which are equivalent to off and on (and vice versa). There are some features that allow a range of numbers, however, in which case values greater than 1 both enable the feature and define the feature’s selection index. If a feature is listed but no number is provided, 1 (on) is assumed. Thus, the following descriptors are all equivalent:
+For many features, the only permitted integer values are `0` and `1`, which are equivalent to `off` and `on` (and vice versa). There are some features that allow a range of numbers, however, in which case values greater than 1 both enable the feature and define the feature’s selection index. If a feature is listed but no number is provided, `1` (on) is assumed. Thus, the following descriptors are all equivalent:
 
 ```css
 font-feature-settings: 'liga'; /* 1 is assumed */
@@ -1513,7 +1513,7 @@ font-feature-settings: 'liga' 1; /* 1 is declared */
 font-feature-settings: 'liga' on; /* on = 1 */
 ```
 
-Remember that all <string> values must be quoted. Thus, the first of the following descriptors will be recognized, but the second will be ignored:
+Remember that all `<string>` values `must` be quoted. Thus, the first of the following descriptors will be recognized, but the second will be ignored:
 
 ```css
 font-feature-settings: 'liga', dlig;
@@ -1523,7 +1523,7 @@ font-feature-settings: 'liga', dlig;
 
 A further restriction is that OpenType requires that all feature tags be four ASCII characters long. Any feature name longer or shorter, or that uses non-ASCII characters, is invalid and will be ignored. (This isn’t something you personally need to worry about unless you’re using a font that has it own made-up feature names and the font’s creator didn’t follow the naming rules.)
 
-By default, OpenType fonts always have the following features enabled unless the author explicitly disables them via font-feature-settings or font-variant:
+By default, OpenType fonts `always` have the following features enabled unless the author explicitly disables them via `font-feature-settings` or `font-variant`:
 
 - `calt`
   Contextual alternates
@@ -1548,13 +1548,13 @@ A complete list of standard OpenType feature names can be found at microsoft.com
 
 ### 5.8.1 The font-feature-settings Descriptor
 
-The font-feature-settings descriptor lets you decide which of an OpenType font face’s settings can or cannot be used, specified as a space-separated list.
+The `font-feature-settings` descriptor lets you decide which of an OpenType font face’s settings can or cannot be used, specified as a space-separated list.
 
-Now, hold up a second—isn’t that almost exactly what we did with font-variant just a few paragraphs ago? As a matter of fact, yes, it is. The font-variant descriptor covers nearly everything font-feature-settings does, plus a little more besides. It just does so in a more CSS-like way, with value names instead of cryptic OpenType identifiers and Boolean toggles. Because of this, the CSS specification explicitly encourages authors to use font-variant instead of font-feature-settings, except in those cases where there’s a font feature that the value list of font-variant doesn’t include.
+Now, hold up a second—isn’t that almost exactly what we did with `font-variant` just a few paragraphs ago? As a matter of fact, yes, it is. The `font-variant` descriptor covers nearly everything `font-feature-settings` does, plus a little more besides. It just does so in a more CSS-like way, with value names instead of cryptic OpenType identifiers and Boolean toggles. Because of this, the CSS specification explicitly encourages authors to use `font-variant` instead of `font-feature-settings`, except in those cases where there’s a font feature that the value list of `font-variant` doesn’t include.
 
-Keep in mind that this descriptor merely makes features available for use (or suppresses their use). It does not actually turn them on for the display of text; for that, see the section on the font-feature-settings property.
+Keep in mind that this descriptor merely makes features available for use (or suppresses their use). It does not actually turn them on for the display of text; for that, see the section on the `font-feature-settings` property.
 
-Just as with the font-variant descriptor, the font-feature-settings descriptor defines which font features are permitted for the font face being declared in the @font-face rule. This can easily negate font feature values called for in properties later on. For example, given the following, paragraphs will not be displayed using alternative fractions nor small-caps, even if such features exist in SwitzeraADF:
+Just as with the `font-variant` descriptor, the `font-feature-settings` descriptor defines which font features are permitted for the font face being declared in the `@font-face` rule. This can easily negate font feature values called for in properties later on. For example, given the following, paragraphs will `not` be displayed using alternative fractions nor small-caps, even if such features exist in SwitzeraADF:
 
 ```css
 @font-face {
@@ -1569,11 +1569,11 @@ p {
 }
 ```
 
-As always, the font-feature-settings descriptor can take all of the values of the font-feature-settings property except for inherit.
+As always, the `font-feature-settings` descriptor can take all of the values of the `font-feature-settings` property `except` for `inherit`.
 
 ## 5.9 Font Synthesis
 
-It is sometimes the case that a given font family will lack alternate faces for things like bold or italic text. In such situations, the user agent may attempt to synthesize a face from the faces it has available, but this can lead to unattractive letterforms. To address this, CSS offers font-synthesis, which lets authors say how much synthesis they will or won’t permit in the rendering of a page.
+It is sometimes the case that a given font family will lack alternate faces for things like bold or italic text. In such situations, the user agent may attempt to synthesize a face from the faces it has available, but this can lead to unattractive letterforms. To address this, CSS offers `font-synthesis`, which lets authors say how much synthesis they will or won’t permit in the rendering of a page.
 
 //
 
@@ -1581,10 +1581,9 @@ In many user agents, a font family that has no bold face can have one computed f
 
 Similarly, a font family that lacks an italic face an have one synthesized by simply slanting the characters in the normal face. This tends to look even worse than synthesized bold faces, particularly when it comes to serif fonts. Compare the difference between a synthesized italic version of Georgia (which we’re calling “oblique” here) and the actual italic face included in Georgia, illustrated in Figure 5-32.
 
-In supporting user agents, declaring font-synthesis: none blocks the user agent from doing any such synthesis for the affected elements. You can block it for the whole document with html (font-synthesis: none;}, for example. The downside
-is that any attempts to bold or italicize text using a font that doesn’t offer the appropriate faces will stay unbolded or unitalicized. The upside is that you don’t have to worry about a user agent trying to synthesize those variants and doing a poor job of it.
+In supporting user agents, declaring font-synthesis: none blocks the user agent from doing any such synthesis for the affected elements. You can block it for the whole document with `html (font-synthesis: none;}`, for example. The downside is that any attempts to bold or italicize text using a font that doesn’t offer the appropriate faces will stay unbolded or unitalicized. The upside is that you don’t have to worry about a user agent trying to synthesize those variants and doing a poor job of it.
 
-As of late 2017, only Firefox supported font-synthesis.
+As of late 2017, only Firefox supported `font-synthesis`.
 
 // 5-32
 
@@ -1609,11 +1608,11 @@ h2 {
 }
 ```
 
-Some of this problem could be solved by grouping selectors, but wouldn’t it be easier to combine everything into a single property? Enter font, which is the shorthand property for all the other font properties (and a little more besides).
+Some of this problem could be solved by grouping selectors, but wouldn’t it be easier to combine everything into a single property? Enter `font`, which is the shorthand property for all the other font properties (and a little more besides).
 
 //
 
-Generally speaking, a font declaration can have any one value from each of the listed font properties, or else a system font value (described in “Using System Fonts” on page 202). Therefore, the preceding example could be shortened as follows (and have exactly the same effect, as illustrated by Figure 5-33):
+Generally speaking, a `font` declaration can have any one value from each of the listed font properties, or else a system font value (described in “Using System Fonts” on page 202). Therefore, the preceding example could be shortened as follows (and have exactly the same effect, as illustrated by Figure 5-33):
 
 ```css
 h1 {
@@ -1626,7 +1625,7 @@ h2 {
 
 // 5-33
 
-I say that the styles “could be” shortened in this way because there are a few other possibilities, thanks to the relatively loose way in which font can be written. If you look closely at the preceding example, you’ll see that the first three values don’t occur in the same order. In the h1 rule, the first three values are the values for font-style, font-weight, and font-variant, in that order. In the second, they’re ordered fontweight, font-variant, and font-style. There is nothing wrong here because these three can be written in any order. Furthermore, if any of them has a value of normal, that can be left out altogether. Therefore, the following rules are equivalent to the previous example:
+I say that the styles “could be” shortened in this way because there are a few other possibilities, thanks to the relatively loose way in which `font` can be written. If you look closely at the preceding example, you’ll see that the first three values don’t occur in the same order. In the `h1` rule, the first three values are the values for `font-style`, `font-weight`, and `font-variant`, in that order. In the second, they’re ordered `font-weight`, `font-variant`, and `font-style`. There is nothing wrong here because these three can be written in any order. Furthermore, if any of them has a value of `normal`, that can be left out altogether. Therefore, the following rules are equivalent to the previous example:
 
 ```css
 h1 {
@@ -1637,9 +1636,9 @@ h2 {
 }
 ```
 
-In this example, the value of normal was left out of the h2 rule, but the effect is exactly the same as in the preceding example.
+In this example, the value of `normal` was left out of the `h2` rule, but the effect is exactly the same as in the preceding example.
 
-It’s important to realize, however, that this free-for-all situation applies only to the first three values of font. The last two are much stricter in their behavior. Not only must font-size and font-family appear in that order as the last two values in the declaration, but both must always be present in a font declaration. Period, end of story. If either is left out, then the entire rule will be invalidated and very likely to be ignored completely by a user agent. Thus, the following rules will get you the result shown in Figure 5-34:
+It’s important to realize, however, that this free-for-all situation applies only to the first three values of `font`. The last two are much stricter in their behavior. Not only must `font-size` and `font-family` appear in that order as the last two values in the declaration, but both must always be present in a `font` declaration. Period, end of story. If either is left out, then the entire rule will be invalidated and very likely to be ignored completely by a user agent. Thus, the following rules will get you the result shown in Figure 5-34:
 
 ```css
 h1 {
@@ -1660,7 +1659,7 @@ h4 {
 
 ### 5.10.1 Adding the Line Height
 
-So far, we’ve treated font as though it has only five values, which isn’t quite true. It is also possible to set the value of the property line-height using font, despite that fact that line-height is a text property (not covered in this text), not a font property. It’s done as a sort of addition to the font-size value, separated from it by a forward slash (/):
+So far, we’ve treated `font` as though it has only five values, which isn’t quite true. It is also possible to set the value of the property `line-height` using `font`, despite that fact that `line-height` is a text property (not covered in this text), not a font property. It’s done as a sort of addition to the `font-size` value, separated from it by a forward slash (/):
 
 ```css
 body {
@@ -1671,17 +1670,17 @@ h2 {
 }
 ```
 
-These rules, demonstrated in Figure 5-35, set all h2 elements to be bold and italic (using face for one of the sans-serif font families), set the font-size to 24px (twice the body’s size), and set the line-height to 28.8px.
+These rules, demonstrated in Figure 5-35, set all `h2` elements to be bold and italic (using face for one of the sans-serif font families), set the `font-size` to `24px` (twice the `body`’s size), and set the `line-height` to `28.8px`.
 
 // 5-35
 
-This addition of a value for line-height is entirely optional, just as the first three font values are. If you do include a line-height, remember that the font-size always comes before line-height, never after, and the two are always separated by a slash.
+This addition of a value for `line-height` is entirely optional, just as the first three `font` values are. If you do include a `line-height`, remember that the `font-size` always comes before `line-height`, never after, and the two are always separated by a slash.
 
-This may seem repetitive, but it’s one of the most common errors made by CSS authors, so I can’t say it enough: the required values for font are font-size and font-family, in that order. Everything else is strictly optional.
+This may seem repetitive, but it’s one of the most common errors made by CSS authors, so I can’t say it enough: the required values for `font` are `font-size` and `font-family`, in that order. Everything else is strictly optional.
 
 ### 5.10.2 Using Shorthands Properly
 
-It is important to remember that font, being a shorthand property, can act in unexpected ways if you are careless with its use. Consider the following rules, which are illustrated in Figure 5-36:
+It is important to remember that `font`, being a shorthand property, can act in unexpected ways if you are careless with its use. Consider the following rules, which are illustrated in Figure 5-36:
 
 ```css
 h1,
@@ -1705,7 +1704,7 @@ h3 {
 
 // 5-36
 
-Did you notice that the h2 element is neither italicized nor small-capped, and that none of the elements are bold? This is the correct behavior. When the shorthand property font is used, any omitted values are reset to their defaults. Thus, the previous example could be written as follows and still be exactly equivalent:
+Did you notice that the `h2` element is neither italicized nor small-capped, and that none of the elements are bold? This is the correct behavior. When the shorthand property `font` is used, any omitted values are reset to their defaults. Thus, the previous example could be written as follows and still be exactly equivalent:
 
 ```css
 h1,
@@ -1721,24 +1720,24 @@ h3 {
 }
 ```
 
-This sets the h2 element’s font style and variant to normal, and the font-weight of all three elements to normal. This is the expected behavior of shorthand properties. The h3 does not suffer the same fate as the h2 because you used the property font-size, which is not a shorthand property and therefore affects only its own value.
+This sets the `h2` element’s font style and variant to `normal`, and the `font-weight` of all three elements to `normal`. This is the expected behavior of shorthand properties. The h3 does not suffer the same fate as the `h2` because you used the property `font-size`, which is not a shorthand property and therefore affects only its own value.
 
 ### 5.10.3 Using System Fonts
 
-In situations where you want to make a web page blend in with the user’s operating system, the system font values of font come in handy. These are used to take the font size, family, weight, style, and variant of elements of the operating system, and apply them to an element. The values are as follows:
+In situations where you want to make a web page blend in with the user’s operating system, the system font values of `font` come in handy. These are used to take the font size, family, weight, style, and variant of elements of the operating system, and apply them to an element. The values are as follows:
 
-caption
-Used for captioned controls, such as buttons
-icon
-Used to label icons
-menu
-Used in menus—that is, drop-down menus and menu lists
-message-box
-Used in dialog boxes
-small-caption
-Used for labeling small controls
-status-bar
-Used in window status bars
+- `caption`
+  Used for captioned controls, such as buttons
+- `icon`
+  Used to label icons
+- `menu`
+  Used in menus—that is, drop-down menus and menu lists
+- `message-box`
+  Used in dialog boxes
+- `small-caption`
+  Used for labeling small controls
+- `status-bar`
+  Used in window status bars
 
 For example, you might want to set the font of a button to be the same as that of the buttons found in the operating system. For example:
 
@@ -1759,7 +1758,7 @@ button {
 }
 ```
 
-If you call for a system font and no such font exists on the user’s machine, the user agent may try to find an approximation, such as reducing the size of the caption font to arrive at the small-caption font. If no such approximation is possible, then the user agent should use a default font of its own. If it can find a system font but can’t read all of its values, then it should use the default value. For example, a user agent may be able to find a status-bar font but not get any information about whether the font is small-caps. In that case, the user agent will use the value normal for the smallcaps property.
+If you call for a system font and no such font exists on the user’s machine, the user agent may try to find an approximation, such as reducing the size of the `caption` font to arrive at the `small-caption` font. If no such approximation is possible, then the user agent should use a default font of its own. If it can find a system font but can’t read all of its values, then it should use the default value. For example, a user agent may be able to find a `status-bar` font but not get any information about whether the font is small-caps. In that case, the user agent will use the value `normal` for the `small-caps` property.
 
 ## 5.11 Font Matching
 
@@ -1767,21 +1766,21 @@ As we’ve seen, CSS allows for the matching of font families, weights, and vari
 
 1. The user agent creates, or otherwise accesses, a database of font properties. This database lists the various CSS properties of all of the fonts to which the user agent has access. Typically, this will be all fonts installed on the machine, although there could be others (for example, the user agent could have its own built-in fonts). If the user agent encounters two identical fonts, it will just ignore one of them.
 2. The user agent takes apart an element to which font properties have been applied and constructs a list of font properties necessary for the display of that element. Based on that list, the user agent makes an initial choice of a font family to use in displaying the element. If there is a complete match, then the user agent can use that font. Otherwise, it needs to do a little more work.
-3. A font is first matched against the font-stretch property.
-4. A font is next matched against the font-style property. The keyword italic is matched by any font that is labeled as either “italic” or “oblique.” If neither is available, then the match fails.
-5. The next match is to font-weight, which can never fail thanks to the way fontweight is handled in CSS (explained in the earlier section, “How Weights Work” on page 167).
-6. Then, font-size is tackled. This must be matched within a certain tolerance, but that tolerance is defined by the user agent. Thus, one user agent might allow matching within a 20 percent margin of error, whereas another might allow only 10 percent differences between the size specified and the size that is actually used.
+3. A font is first matched against the `font-stretch` property.
+4. A font is next matched against the `font-style` property. The keyword `italic` is matched by any font that is labeled as either “italic” or “oblique.” If neither is available, then the match fails.
+5. The next match is to `font-weight`, which can never fail thanks to the way `font-weight` is handled in CSS (explained in the earlier section, “How Weights Work” on page 167).
+6. Then, `font-size` is tackled. This must be matched within a certain tolerance, but that tolerance is defined by the user agent. Thus, one user agent might allow matching within a 20 percent margin of error, whereas another might allow only 10 percent differences between the size specified and the size that is actually used.
 7. If there was no font match in Step 2, the user agent looks for alternate fonts within the same font family. If it finds any, then it repeats Step 2 for that font.
 8. Assuming a generic match has been found, but it doesn’t contain everything needed to display a given element—the font is missing the copyright symbol, for instance—then the user agent goes back to Step 3, which entails a search for another alternate font and another trip through Step 2.
 9. Finally, if no match has been made and all alternate fonts have been tried, then the user agent selects the default font for the given generic font family and does the best it can to display the element correctly
 
 Furthermore, the user agent does the following to resolve handling of font variants and features:
 
-1. First, check for font features enabled by default, including features required for a given script. The core set of default-enabled features is "calt", "ccmp", "clig", "liga", "locl", "mark", "mkmk", and "rlig".
-2. Then, if the font is defined via an @font-face rule, check for the features implied by the font-variant descriptor in the @font-face rule. Then check for the font features implied by the font-feature-settings descriptor in the @font-face rule.
-3. Then check feature settings determined by properties other than font-variant or font-feature-settings. (For example, setting a non-default value for the letter-spacing property will disable ligatures.)
-4. Then check for features implied by the value of the font-variant property, the related font-variant subproperties (e.g., font-variant-ligatures), and any other property that may call for the use of OpenType features (e.g., fontkerning).
-5. Finally, check for the features implied by the value of font-feature-settings property.
+1. First, check for font features enabled by default, including features required for a given script. The core set of default-enabled features is "`calt`", "`ccmp`", "`clig`", "`liga`", "`locl`", "`mark`", "`mkmk`", and "`rlig`".
+2. Then, if the font is defined via an `@font-face` rule, check for the features implied by the `font-variant` descriptor in the `@font-face` rule. Then check for the font features implied by the `font-feature-settings` descriptor in the `@font-face` rule.
+3. Then check feature settings determined by properties other than `font-variant` or `font-feature-settings`. (For example, setting a non-default value for the `letter-spacing` property will disable ligatures.)
+4. Then check for features implied by the value of the `font-variant` property, the related `font-variant` subproperties (e.g., `font-variant-ligatures`), and any other property that may call for the use of OpenType features (e.g., `font-kerning`).
+5. Finally, check for the features implied by the value of `font-feature-settings` property.
 
 The whole process is long and tedious, but it helps to understand how user agents pick the fonts they do. For example, you might specify the use of Times or any other serif font in a document:
 
