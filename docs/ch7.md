@@ -217,7 +217,7 @@ The markup will not validate because the block element (`p`) is nested inside an
 
 由于块元素(`p`)嵌套在内联元素(`span`)中，所以标记将不会生效。改变显示角色并不能改变这一点。`display` 之所以有它的名字，是因为它影响元素的显示方式，而不是因为它改变了元素的类型。
 
-With that said, let’s get into the details of different kinds of boxes: block boxes, inline boxes, inline-block boxes, and list-item boxes
+With that said, let’s get into the details of different kinds of boxes: `block boxes`, `inline boxes`, `inline-block boxes`, and `list-item boxes`
 
 说到这里，让我们来看看不同类型的框的详细信息:块框、内联框、内联块框和列表项框
 

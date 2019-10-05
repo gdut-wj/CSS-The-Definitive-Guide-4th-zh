@@ -8,6 +8,7 @@ module.exports = {
     // 侧边栏
     sidebar: {
       '/': [
+        '',
         'ch1.md',
         'ch2.md',
         'ch3.md',
