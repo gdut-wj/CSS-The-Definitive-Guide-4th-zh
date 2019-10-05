@@ -10,7 +10,7 @@ CSS 权威指南第四版 中文翻译
 
 英文正式版已于 2017 年 10 月正式出版。
 
-## 目录
+## Index
 
 - [第 1 章 CSS 和 Documents](book/ch1.md)
 - [第 2 章 选择器](book/ch2.md)
@@ -32,3 +32,16 @@ CSS 权威指南第四版 中文翻译
 - [第 18 章 动画](book/ch18.md)
 - [第 19 章 过滤器，混合，剪切和掩蔽](book/ch19.md)
 - [第 20 章 Media-Dependent 风格](book/ch20.md)
+
+## Contributors
+
+<table>
+  <tr>
+    <td align="center"><a href="https://gdut-yy.github.io/"><img src="https://avatars2.githubusercontent.com/u/33390928?s=460&v=4" width="100px;" /><br /><sub><b>gdut-yy</b></sub></a><br /></td>
+    <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/38821031?s=460&v=4" width="100px;" /><br /><sub><b>gdut-wj</b></sub></a><br /></td>
+  </tr>
+</table>
+
+## License
+
+[MIT](https://github.com/gdut-yy/CSS-The-Definitive-Guide-4th-zh/blob/master/LICENSE)
