@@ -252,7 +252,7 @@ Horizontal formatting is often more complex than you’d think. Part of the comp
 <p style="width: 200px;">wideness?</p>
 ```
 
-This will make the paragraph’s content 200 pixels wide. If we give the element a background, this will be quite obvious. However, any padding, borders, or margins you specify are added to the width value. Suppose we do this:
+This will make the paragraph’s content 200 pixels wide. If we give the element a background, this will be quite obvious. However, any padding, borders, or margins you specify are `added` to the width value. Suppose we do this:
 
 ```html
 <p style="width: 200px; padding: 10px; margin: 20px;">wideness?</p>
@@ -266,19 +266,19 @@ If we change the styles to use the border box for box-sizing, then the results w
 
 // 7-7
 
-In either case, there is a rule that says that the sum of the horizontal components of a block box in the normal flow always equals the width of the containing block. Let’s consider two paragraphs within a div whose margins have been set to be 1em, and whose box-sizing value is the default. The content width (the value of width) of each paragraph, plus its left and right padding, borders, and margins, always adds up to the width of the div’s content area.
+In either case, there is a rule that says that the sum of the horizontal components of a block box in the normal flow always equals the width of the containing block. Let’s consider two paragraphs within a `div` whose margins have been set to be `1em`, and whose `box-sizing` value is the default. The content width (the value of `width`) of each paragraph, plus its left and right padding, borders, and margins, always adds up to the width of the `div`’s content area.
 
-Let’s say the width of the div is 30em. That makes the sum total of the content width, padding, borders, and margins of each paragraph 30 em. In Figure 7-8, the “blank” space around the paragraphs is actually their margins. If the div had any padding, there would be even more blank space, but that isn’t the case here.
+Let’s say the width of the `div` is `30em`. That makes the sum total of the content width, padding, borders, and margins of each paragraph 30 em. In Figure 7-8, the “blank” space around the paragraphs is actually their margins. If the `div` had any padding, there would be even more blank space, but that isn’t the case here.
 
 // 7-8
 
 ### 7.2.4 Horizontal Properties
 
-The seven properties of horizontal formatting are margin-left, border-left, padding-left, width, padding-right, border-right, and margin-right. These properties relate to the horizontal layout of block boxes and are diagrammed in Figure 7-9.
+The seven properties of horizontal formatting are `margin-left`, `border-left`, `padding-left`, `width`, `padding-right`, `border-right`, and `margin-right`. These properties relate to the horizontal layout of block boxes and are diagrammed in Figure 7-9.
 
-The values of these seven properties must add up to the width of the element’s containing block, which is usually the value of width for a block element’s parent (since block-level elements nearly always have block-level elements for parents).
+The values of these seven properties must add up to the width of the element’s containing block, which is usually the value of `width` for a block element’s parent (since block-level elements nearly always have block-level elements for parents).
 
-Of these seven properties, only three may be set to auto: the width of the element’s content and the left and right margins. The remaining properties must be set either to specific values or default to a width of zero. Figure 7-10 shows which parts of the box can take a value of auto and which cannot.
+Of these seven properties, only three may be set to `auto`: the width of the element’s content and the left and right margins. The remaining properties must be set either to specific values or default to a width of zero. Figure 7-10 shows which parts of the box can take a value of auto and which cannot.
 
 // 7-9
 
@@ -288,7 +288,7 @@ Of these seven properties, only three may be set to auto: the width of the eleme
 
 ### 7.2.5 Using auto
 
-If you set width, margin-left, or margin-right to a value of auto, and give the remaining two properties specific values, then the property that is set to auto is set to the length required to make the element box’s width equal to the parent element’s width. In other words, let’s say the sum of the seven properties must equal 500 pixels, no padding or borders are set, the right margin and width are set to 100px, and the left margin is set to auto. The left margin will thus be 300 pixels wide:
+If you set `width`, `margin-left`, or `margin-right` to a value of `auto`, and give the remaining two properties specific values, then the property that is set to `auto` is set to the length required to make the element box’s width equal to the parent element’s width. In other words, let’s say the sum of the seven properties must equal 500 pixels, no padding or borders are set, the right margin and width are set to `100px`, and the left margin is set to `auto`. The left margin will thus be 300 pixels wide:
 
 ```css
 div {
@@ -301,9 +301,9 @@ p {
 } /* 'auto' left margin evaluates to 300px */
 ```
 
-In a sense, auto can be used to make up the difference between everything else and the required total. However, what if all three of these properties are set to 100px and none of them are set to auto?
+In a sense, `auto` can be used to make up the difference between everything else and the required total. However, what if all three of these properties are set to `100px` and `none` of them are set to `auto`?
 
-In the case where all three properties are set to something other than auto—or, in CSS terminology, when these formatting properties have been overconstrained—then margin-right is always forced to be auto. This means that if both margins and the width are set to 100px, then the user agent will reset the right margin to auto. The right margin’s width will then be set according to the rule that one auto value “fills in” the distance needed to make the element’s overall width equal that of its containing block. Figure 7-11 shows the result of the following markup:
+In the case where all three properties are set to something other than `auto`—or, in CSS terminology, when these formatting properties have been `overconstrained`—then `margin-right` is `always` forced to be `auto`. This means that if both margins and the width are set to `100px`, then the user agent will reset the right margin to `auto`. The right margin’s width will then be set according to the rule that one `auto` value “fills in” the distance needed to make the element’s overall width equal that of its containing block. Figure 7-11 shows the result of the following markup:
 
 ```css
 div {
@@ -318,7 +318,7 @@ p {
 
 // 7-11
 
-If both margins are set explicitly, and width is set to auto, then width will be whatever value is needed to reach the required total (which is the content width of the parent element). The results of the following markup are shown in Figure 7-12:
+If both margins are set explicitly, and `width` is set to `auto`, then `width` will be whatever value is needed to reach the required total (which is the content width of the parent element). The results of the following markup are shown in Figure 7-12:
 
 ```css
 p {
@@ -328,7 +328,7 @@ p {
 }
 ```
 
-The case shown in Figure 7-12 is the most common case, since it is equivalent to setting the margins and not declaring anything for the width. The result of the following markup is exactly the same as that shown in Figure 7-12:
+The case shown in Figure 7-12 is the most common case, since it is equivalent to setting the margins and not declaring anything for the `width`. The result of the following markup is exactly the same as that shown in Figure 7-12:
 
 ```css
 p {
@@ -339,11 +339,11 @@ p {
 
 // 7-12
 
-You might be wondering what happens if box-sizing is set to, say, padding-box. The discussion here tends to assume that the default of content-box is used, but all the same principles described here apply, which is why this section only talked about width and the side margins without introducing any padding or borders. The handling of width: auto in this section and the following sections is the same regardless of the value of box-sizing. The details of what gets placed where inside the oxsizing-defined box may vary, but the treatment of auto values does not, because box-sizing determines what width refers to, not how it behaves in relation to the margins.
+You might be wondering what happens if `box-sizing` is set to, say, `padding-box`. The discussion here tends to assume that the default of `content-box` is used, but all the same principles described here apply, which is why this section only talked about `width` and the side margins without introducing any padding or borders. The handling of `width: auto` in this section and the following sections is the same regardless of the value of box-sizing. The details of what gets placed where inside the `box-sizing`-defined box may vary, but the treatment of `auto` values does not, because `box-sizing` determines what `width` refers to, not how it behaves in relation to the margins.
 
 ### 7.2.6 More Than One auto
 
-Now let’s see what happens when two of the three properties (width, margin-left, and margin-right) are set to auto. If both margins are set to auto, as shown in the following code, then they are set to equal lengths, thus centering the element within its parent. This is illustrated in Figure 7-13.
+Now let’s see what happens when two of the three properties (`width`, `margin-left`, and `margin-right`) are set to `auto`. If both margins are set to `auto`, as shown in the following code, then they are set to equal lengths, thus centering the element within its parent. This is illustrated in Figure 7-13.
 
 ```css
 div {
@@ -361,7 +361,7 @@ p {
 
 Setting both margins to equal lengths is the correct way to center elements within block boxes in the normal flow. (There are other methods to be found with flexible box and grid layout, but they’re beyond the scope of this text.)
 
-Another way of sizing elements is to set one of the margins and the width to auto. The margin set to be auto is reduced to zero:
+Another way of sizing elements is to set one of the margins and the `width` to `auto`. The margin set to be `auto` is reduced to zero:
 
 ```css
 div {
@@ -374,11 +374,11 @@ p {
 } /* left margin evaluates to 0; width becomes 400px */
 ```
 
-The width is then set to the value necessary to make the element fill its containing block; in the preceding example, it would be 400 pixels, as shown in Figure 7-14.
+The `width` is then set to the value necessary to make the element fill its containing block; in the preceding example, it would be 400 pixels, as shown in Figure 7-14.
 
 // 7-14
 
-Finally, what happens when all three properties are set to auto? The answer: both margins are set to zero, and the width is made as wide as possible. This result is the same as the default situation, when no values are explicitly declared for margins or the width. In such a case, the margins default to zero and the width defaults to auto.
+Finally, what happens when all three properties are set to `auto`? The answer: both margins are set to zero, and the `width` is made as wide as possible. This result is the same as the default situation, when no values are explicitly declared for margins or the width. In such a case, the margins default to zero and the `width` defaults to `auto`.
 
 Note that since horizontal margins do not collapse, the padding, borders, and margins of a parent element can affect its children. The effect is indirect in that the margins (and so on) of an element can induce an offset for child elements. The results of the following markup are shown in Figure 7-15:
 
@@ -400,7 +400,7 @@ p {
 
 So far, this may all seem rather straightforward, and you may be wondering why I said things could be complicated. Well, there’s another side to margins: the negative side. That’s right, it’s possible to set negative values for margins. Setting negative margins can result in some interesting effects.
 
-Remember that the total of the seven horizontal properties always equals the width of the parent element. As long as all properties are zero or greater, an element can never be wider than its parent’s content area. However, consider the following markup, depicted in Figure 7-16:
+Remember that the total of the seven horizontal properties always equals the `width` of the parent element. As long as all properties are zero or greater, an element can never be wider than its parent’s content area. However, consider the following markup, depicted in Figure 7-16:
 
 ```css
 div {
@@ -422,7 +422,7 @@ Yes indeed, the child element is wider than its parent! This is mathematically c
 10px + 0 + 0 + 540px + 0 + 0 − 50px = 500px
 ```
 
-The 540px is the evaluation of width: auto, which is the number needed to balance out the rest of the values in the equation. Even though it leads to a child element sticking out of its parent, the specification hasn’t been violated because the values of the seven properties add up to the required total. It’s a semantic dodge, but it’s valid behavior.
+The `540px` is the evaluation of `width: auto`, which is the number needed to balance out the rest of the values in the equation. Even though it leads to a child element sticking out of its parent, the specification hasn’t been violated because the values of the seven properties add up to the required total. It’s a semantic dodge, but it’s valid behavior.
 
 Now, let’s add some borders to the mix:
 
@@ -439,15 +439,15 @@ p.wide {
 }
 ```
 
-The resulting change will be a reduction in the evaluated width of width:
+The resulting change will be a reduction in the evaluated width of `width`:
 
 ```css
 10px + 3px + 0 + 534px + 0 + 3px − 50px = 500px
 ```
 
-If we were to introduce padding, then the value of width would drop even more.
+If we were to introduce padding, then the value of `width` would drop even more.
 
-Conversely, it’s possible to have auto right margins evaluate to negative amounts. If the values of other properties force the right margin to be negative in order to satisfy the requirement that elements be no wider than their containing block, then that’s what will happen. Consider:
+Conversely, it’s possible to have `auto` right margins evaluate to negative amounts. If the values of other properties force the right margin to be negative in order to satisfy the requirement that elements be no wider than their containing block, then that’s what will happen. Consider:
 
 ```css
 div {
@@ -468,7 +468,7 @@ The equation will work out like this:
 10px + 3px + 0 + 600px + 0 + 3px − 116px = 500px
 ```
 
-The right margin will evaluate to -116px. Even if we’d given it a different explicit value, it would still be forced to -116px because of the rule stating that when an element’s dimensions are overconstrained, the right margin is reset to whatever is needed to make the numbers work out correctly. (Except in right-to-left languages, where the left margin would be overruled instead.)
+The right margin will evaluate to `-116px`. Even if we’d given it a different explicit value, it would still be forced to `-116px` because of the rule stating that when an element’s dimensions are overconstrained, the right margin is reset to whatever is needed to make the numbers work out correctly. (Except in right-to-left languages, where the left margin would be overruled instead.)
 
 Let’s consider another example, illustrated in Figure 7-17, where the left margin is set to be negative:
 
@@ -487,7 +487,7 @@ p.wide {
 
 // 7-17
 
-With a negative left margin, not only does the paragraph spill beyond the borders of the div, but it also spills beyond the edge of the browser window itself!
+With a negative left margin, not only does the paragraph spill beyond the borders of the `div`, but it also spills beyond the edge of the browser window itself!
 
 Remember that padding, borders, and content widths (and heights) can never be negative. Only margins can be less than zero.
 
@@ -543,13 +543,13 @@ And, just to make things more complex, borders cannot accept percentage values, 
 
 ### 7.2.9 Replaced Elements
 
-So far, we’ve been dealing with the horizontal formatting of nonreplaced block boxes in the normal flow of text. Block-level replaced elements are a bit simpler to manage. All of the rules given for nonreplaced blocks hold true, with one exception: if width is auto, then the width of the element is the content’s intrinsic width. The image in the following example will be 20 pixels wide because that’s the width of the original image:
+So far, we’ve been dealing with the horizontal formatting of nonreplaced block boxes in the normal flow of text. Block-level replaced elements are a bit simpler to manage. All of the rules given for nonreplaced blocks hold true, with one exception: if `width` is `auto`, then the `width` of the element is the content’s intrinsic width. The image in the following example will be 20 pixels wide because that’s the width of the original image:
 
 ```html
 <img src="smile.svg" style="display: block; width: auto; margin: 0;" />
 ```
 
-If the actual image were 100 pixels wide instead, then it would be laid out as 100 pixels wide. It’s possible to override this rule by assigning a specific value to width. Suppose wemodify the previous example to show the same image three times, each with a different width value:
+If the actual image were 100 pixels wide instead, then it would be laid out as 100 pixels wide. It’s possible to override this rule by assigning a specific value to `width`. Suppose wemodify the previous example to show the same image three times, each with a different width value:
 
 ```html
 <img src="smile.svg" style="display: block; width: 25px; margin: 0;" />
@@ -559,7 +559,7 @@ If the actual image were 100 pixels wide instead, then it would be laid out as 1
 
 This is illustrated in Figure 7-18.
 
-Note that the height of the elements also increases. When a replaced element’s width is changed from its intrinsic width, the value of height is scaled to match, unless height has been set to an explicit value of its own. The reverse is also true: if height is set, but width is left as auto, then the width is scaled proportionately to the change in height.
+Note that the height of the elements also increases. When a replaced element’s `width` is changed from its intrinsic width, the value of `height` is scaled to match, unless `height` has been set to an explicit value of its own. The reverse is also true: if `height` is set, but `width` is left as `auto`, then the width is scaled proportionately to the change in height.
 
 // 7-18
 
@@ -567,7 +567,7 @@ Now that you’re thinking about height, let’s move on to the vertical formatt
 
 ### 7.2.10 Vertical Formatting
 
-Like horizontal formatting, the vertical formatting of block boxes has its own set of interesting behaviors. An element’s content determines the default height of an element. The width of the content also affects height; the skinnier a paragraph becomes, for example, the taller it has to be in order to contain all of the inline content within it.
+Like horizontal formatting, the vertical formatting of block boxes has its own set of interesting behaviors. An element’s content determines the default height of an `element`. The width of the content also affects height; the skinnier a paragraph becomes, for example, the taller it has to be in order to contain all of the inline content within it.
 
 In CSS, it is possible to set an explicit height on any block-level element. If you do this, the resulting behavior depends on several other factors. Assume that the specified height is greater than that needed to display the content:
 
@@ -575,35 +575,35 @@ In CSS, it is possible to set an explicit height on any block-level element. If 
 <p style="height: 10em;"></p>
 ```
 
-In this case, the extra height has a visual effect somewhat like extra padding. But suppose the height is less than what is needed to display the content:
+In this case, the extra height has a visual effect somewhat like extra padding. But suppose the height is `less` than what is needed to display the content:
 
 ```html
 <p style="height: 3.33em;"></p>
 ```
 
-When that happens, the browser is supposed to provide a means of viewing all content without increasing the height of the element box. In a case where the content of an element is taller than the height of its box, the actual behavior of a user agent will depend on the value of the property overflow. Two alternatives are shown in Figure 7-19.
+When that happens, the browser is supposed to provide a means of viewing all content without increasing the height of the element box. In a case where the content of an element is taller than the height of its box, the actual behavior of a user agent will depend on the value of the property `overflow`. Two alternatives are shown in Figure 7-19.
 
-Under CSS1, user agents can ignore any value of height other than auto if an element is not a replaced element (such as an image). In CSS2 and later, the value of height cannot be ignored, except in one specific circumstance involving percentage values. We’ll talk about that in a moment.
+Under CSS1, user agents can ignore any value of `height` other than `auto` if an element is not a replaced element (such as an image). In CSS2 and later, the value of `height` cannot be ignored, except in one specific circumstance involving percentage values. We’ll talk about that in a moment.
 
-Just as with width, height defines the content area’s height by default, as opposed to the height of the visible element box. Any padding, borders, or margins on the top or bottom of the element box are added to the value for height, unless the value of boxsizing is different than content-box.
+Just as with `width`, `height` defines the content area’s height by default, as opposed to the height of the visible element box. Any padding, borders, or margins on the top or bottom of the element box are `added` to the value for height, unless the value of `box-sizing` is different than `content-box`.
 
 // 7-19
 
 ### 7.2.11 Vertical Properties
 
-As was the case with horizontal formatting, vertical formatting also has seven related properties: margin-top, border-top, padding-top, height, padding-bottom, border-bottom, and margin-bottom. These properties are diagrammed in Figure 7-20.
+As was the case with horizontal formatting, vertical formatting also has seven related properties: `margin-top`, `border-top`, `padding-top`, `height`, `padding-bottom`, `border-bottom`, and `margin-bottom`. These properties are diagrammed in Figure 7-20.
 
-The values of these seven properties must equal the height of the block box’s containing block. This is usually the value of height for a block box’s parent (since blocklevel elements nearly always have block-level elements for parents).
+The values of these seven properties must equal the height of the block box’s containing block. This is usually the value of `height` for a block box’s parent (since blocklevel elements nearly always have block-level elements for parents).
 
-Only three of these seven properties may be set to auto: the height of the element, and the top and bottom margins. The top and bottom padding and borders must be set to specific values or else they default to a width of zero (assuming no border-style is declared). If border-style has been set, then the thickness of the borders is set to be the vaguely defined value medium. Figure 7-21 provides an illustration for remembering which parts of the box may have a value of auto and which may not.
+Only three of these seven properties may be set to `auto`: the `height` of the element, and the top and bottom margins. The top and bottom padding and borders must be set to specific values or else they default to a width of zero (assuming no `border-style` is declared). If border-style has been set, then the thickness of the borders is set to be the vaguely defined value `medium`. Figure 7-21 provides an illustration for remembering which parts of the box may have a value of `auto` and which may not.
 
-Interestingly, if either margin-top or margin-bottom is set to auto for a block box in the normal flow, they both automatically evaluate to 0. A value of 0 unfortunately prevents easy vertical centering of normal-flow boxes in their containing blocks. It also means that if you set the top and bottom margins of an element to auto, they are effectively reset to 0 and removed from the element box.
+Interestingly, if either `margin-top` or `margin-bottom` is set to `auto` for a block box in the normal flow, they both automatically evaluate to `0`. A value of `0` unfortunately prevents easy vertical centering of normal-flow boxes in their containing blocks. It also means that if you set the top and bottom margins of an element to `auto`, they are effectively reset to `0` and removed from the element box.
 
-The handling of auto top and bottom margins is different for positioned elements, as well as flexible-box elements.
+The handling of `auto` top and bottom margins is different for positioned elements, as well as flexible-box elements.
 
 // 7-20
 
-height must be set to auto or to a nonnegative value of some type; it can never be less than zero.
+`height` must be set to `auto` or to a nonnegative value of some type; it can never be less than zero.
 
 ### 7.2.12 Percentage Heights
 
@@ -615,11 +615,11 @@ You already saw how length-value heights are handled, so let’s spend a moment 
 </div>
 ```
 
-Since setting the top and bottom margins to auto will give them zero height, the only way to vertically center the element in this particular case would be to set them both to 25%—and even then, the box would be centered, not the content within it.
+Since setting the top and bottom margins to `auto` will give them zero height, the only way to vertically center the element in this particular case would be to set them both to `25%`—and even then, the box would be centered, not the content within it.
 
 // 7-21
 
-However, in cases where the height of the containing block is not explicitly declared, percentage heights are reset to auto. If we changed the previous example so that the height of the div is auto, the paragraph will now be exactly as tall as the div itself:
+However, in cases where the height of the containing block is `not` explicitly declared, percentage heights are reset to `auto`. If we changed the previous example so that the `height` of the `div` is `auto`, the paragraph will now be exactly as tall as the `div` itself:
 
 ```html
 <div style="height: auto;">
@@ -627,15 +627,15 @@ However, in cases where the height of the containing block is not explicitly dec
 </div>
 ```
 
-These two possibilities are illustrated in Figure 7-22. (The spaces between the paragraph borders and the div borders are the top and bottom margins on the paragraphs.)
+These two possibilities are illustrated in Figure 7-22. (The spaces between the paragraph borders and the `div` borders are the top and bottom margins on the paragraphs.)
 
 // 7-22
 
-Before we move on, take a closer look at the first example in Figure 7-22, the half-astall paragraph. It may be half as tall, but it isn’t vertically centered. That’s because the containing div is 6 em tall, which means the half-as-tall paragraph is 3 em tall. It has top and bottom margins of 1 em, so its overall box height is 5 em. That means there is actually 2 em of space between the bottom of the paragraph’s visible box and the div’s bottom border, not 1 em. It might seem a bit odd at first glance, but it makes sense once you work through the details.
+Before we move on, take a closer look at the first example in Figure 7-22, the half-astall paragraph. It may be half as tall, but it isn’t vertically centered. That’s because the containing `div` is 6 em tall, which means the half-as-tall paragraph is 3 em tall. It has top and bottom margins of 1 em, so its overall box height is 5 em. That means there is actually 2 em of space between the bottom of the paragraph’s visible box and the `div`’s bottom border, not 1 em. It might seem a bit odd at first glance, but it makes sense once you work through the details.
 
 ### 7.2.13 Auto Heights
 
-In the simplest case, a normal-flow block box with height: auto is rendered just high enough to enclose the line boxes of its inline content (including text). If an autoheight, normal-flow block box has only block-level children, then its default height will be the distance from the top of the topmost block-level child’s outer border edge to the bottom of the bottommost block-level child’s outer bottom border edge. Therefore, the margins of the child elements will “stick out” of the element that contains them. (This behavior is explained in the next section.)
+In the simplest case, a normal-flow block box with `height: auto` is rendered just high enough to enclose the line boxes of its inline content (including text). If an autoheight, normal-flow block box has only block-level children, then its default height will be the distance from the top of the topmost block-level child’s outer border edge to the bottom of the bottommost block-level child’s outer bottom border edge. Therefore, the margins of the child elements will “stick out” of the element that contains them. (This behavior is explained in the next section.)
 
 However, if the block-level element has either top or bottom padding, or top or bottom borders, then its height will be the distance from the top of the outer-top margin edge of its topmost child to the outer-bottom margin edge of its bottommost child:
 
@@ -656,13 +656,13 @@ However, if the block-level element has either top or bottom padding, or top or 
 
 Both of these behaviors are demonstrated in Figure 7-23.
 
-If we changed the borders in the previous example to padding, the effect on the height of the div would be the same: it would still enclose the paragraph’s margins within it.
+If we changed the borders in the previous example to padding, the effect on the height of the `div` would be the same: it would still enclose the paragraph’s margins within it.
 
 // 7-23
 
 ### 7.2.14 Collapsing Vertical Margins
 
-One other important aspect of vertical formatting is the collapsing of vertically adjacent margins. Collapsing behavior applies only to margins. Padding and borders,
+One other important aspect of vertical formatting is the `collapsing` of vertically adjacent margins. Collapsing behavior applies only to margins. Padding and borders,
 where they exist, never collapse with anything.
 
 An unordered list, where list items follow one another, is a perfect example of margin collapsing. Assume that the following is declared for a list that contains five items:
@@ -680,7 +680,7 @@ Correctly implemented user agents collapse vertically adjacent margins, as shown
 
 Another word to use, if you don’t like “collapse,” is “overlap.” Although the margins are not really overlapping, you can visualize what’s happening using the following analogy.
 
-Imagine that each element, such as a paragraph, is a small piece of paper with the content of the element written on it. Around each piece of paper is some amount of clear plastic, which represents the margins. The first piece of paper (say an h1 piece) is laid down on the canvas. The second (a paragraph) is laid below it and then slid up until the edge of one of the piece’s plastic touches the edge of the other’s paper. If the first piece of paper has half an inch of plastic along its bottom edge, and the second has a third of an inch along its top, then when they slide together, the first piece’s plastic will touch the top edge of the second piece of paper. The two are now done being placed on the canvas, and the plastic attached to the pieces is overlapping.
+Imagine that each element, such as a paragraph, is a small piece of paper with the content of the element written on it. Around each piece of paper is some amount of clear plastic, which represents the margins. The first piece of paper (say an `h1` piece) is laid down on the canvas. The second (a paragraph) is laid below it and then slid up until the edge of one of the piece’s plastic touches the edge of the other’s paper. If the first piece of paper has half an inch of plastic along its bottom edge, and the second has a third of an inch along its top, then when they slide together, the first piece’s plastic will touch the top edge of the second piece of paper. The two are now done being placed on the canvas, and the plastic attached to the pieces is overlapping.
 
 // 7-24
 
@@ -699,11 +699,11 @@ h1 {
 }
 ```
 
-The last item in the list has a bottom margin of 20 pixels, the bottom margin of the ul is 15 pixels, and the top margin of a succeeding h1 is 28 pixels. So once the margins have been collapsed, the distance between the end of the li and the beginning of the h1 is 28 pixels, as shown in Figure 7-25.
+The last item in the list has a bottom margin of 20 pixels, the bottom margin of the `ul` is 15 pixels, and the top margin of a succeeding `h1` is 28 pixels. So once the margins have been collapsed, the distance between the end of the `li` and the beginning of the `h1` is 28 pixels, as shown in Figure 7-25.
 
 // 7-25
 
-Now, recall the examples from the previous section, where the introduction of a border or padding on a containing block would cause the margins of its child elements to be contained within it. We can see this behavior in operation by adding a border to the ul element in the previous example:
+Now, recall the examples from the previous section, where the introduction of a border or padding on a containing block would cause the margins of its child elements to be contained within it. We can see this behavior in operation by adding a border to the `ul` element in the previous example:
 
 ```css
 ul {
@@ -719,7 +719,7 @@ h1 {
 }
 ```
 
-With this change, the bottom margin of the li element is now placed inside its parent element (the ul). Therefore, the only margin collapsing that takes place is between the ul and the h1, as illustrated in Figure 7-26.
+With this change, the bottom margin of the `li` element is now placed inside its parent element (the `ul`). Therefore, the only margin collapsing that takes place is between the `ul` and the `h1`, as illustrated in Figure 7-26.
 
 // 7-26
 
@@ -753,7 +753,7 @@ p.neg {
 </div>
 ```
 
-As we see in Figure 7-28, the paragraph has been pulled upward by its negative top margin. Note that the content of the div that follows the paragraph in the markup has also been pulled upward 50 pixels. In fact, every bit of normal-flow content that follows the paragraph is also pulled upward 50 pixels.
+As we see in Figure 7-28, the paragraph has been pulled upward by its negative top margin. Note that the content of the `div` that follows the paragraph in the markup has also been pulled upward 50 pixels. In fact, every bit of normal-flow content that follows the paragraph is also pulled upward 50 pixels.
 
 // 7-28
 
@@ -782,7 +782,7 @@ p.neg {
 
 // 7-29
 
-What’s really happening in Figure 7-29 is that the elements following the div are placed according to the location of the bottom of the div. As you can see, the end of the div is actually above the visual bottom of its child paragraph. The next element after the div is the appropriate distance from the bottom of the div. This is expected, given the rules we saw.
+What’s really happening in Figure 7-29 is that the elements following the `div` are placed according to the location of the bottom of the `div`. As you can see, the end of the `div` is actually above the visual bottom of its child paragraph. The next element after the `div` is the appropriate distance from the bottom of the `div`. This is expected, given the rules we saw.
 
 Now let’s consider an example where the margins of a list item, an unordered list, and a paragraph are all collapsed. In this case, the unordered list and paragraph are assigned negative margins:
 
@@ -798,7 +798,7 @@ h1 {
 }
 ```
 
-The larger of the two negative margins (-18px) is added to the largest positive margin (20px), yielding 20px - 18px = 2px. Thus, there are only two pixels between the bottom of the list item’s content and the top of the h1’s content, as we can see in Figure 7-30.
+The larger of the two negative margins (`-18px`) is added to the largest positive margin (`20px`), yielding `20px - 18px = 2px`. Thus, there are only two pixels between the bottom of the list item’s content and the top of the `h1`’s content, as we can see in Figure 7-30.
 
 When elements overlap each other due to negative margins, it’s hard to tell which elements are on top. You may also have noticed that none of the examples in this section use background colors. If they did, the background color of a following element might overwrite their content. This is expected behavior, since browsers usually render elements in order from beginning to end, so a normal-flow element that comes later in the document can be expected to overwrite an earlier element, assuming the two end up overlapping.
 
@@ -810,9 +810,9 @@ List items have a few special rules of their own. They are typically preceded by
 
 // 7-31
 
-CSS1 said very little about the placement and effects of these markers with regard to the layout of a document. CSS2 introduced properties specifically designed to address this issue, such as marker-offset. However, a lack of implementations and changes in thinking caused this to be dropped from CSS2.1, and work is being done to reintroduce the idea (if not the specific syntax) to CSS. Accordingly, the placement of markers is largely beyond the control of authors, at least as of this writing.
+CSS1 said very little about the placement and effects of these markers with regard to the layout of a document. CSS2 introduced properties specifically designed to address this issue, such as `marker-offset`. However, a lack of implementations and changes in thinking caused this to be dropped from CSS2.1, and work is being done to reintroduce the idea (if not the specific syntax) to CSS. Accordingly, the placement of markers is largely beyond the control of authors, at least as of this writing.
 
-The marker attached to a list item element can be either outside the content of the list item or treated as an inline marker at the beginning of the content, depending on the value of the property list-style-position. If the marker is brought inside, then the list item will interact with its neighbors exactly like a block-level element, as illustrated in Figure 7-32.
+The marker attached to a list item element can be either outside the content of the list item or treated as an inline marker at the beginning of the content, depending on the value of the property `list-style-position`. If the marker is brought inside, then the list item will interact with its neighbors exactly like a block-level element, as illustrated in Figure 7-32.
 
 // 7-32
 
@@ -822,7 +822,7 @@ Remember that list-item boxes define containing blocks for their ancestor boxes,
 
 ## 7.3 Inline Elements
 
-After block-level elements, inline elements are the most common. Setting box properties for inline elements takes us into more interesting territory than we’ve been so far. Some good examples of inline elements are the em tag and the a tag, both of which are nonreplaced elements, and images, which are replaced elements.
+After block-level elements, inline elements are the most common. Setting box properties for inline elements takes us into more interesting territory than we’ve been so far. Some good examples of inline elements are the `em` tag and the `a` tag, both of which are nonreplaced elements, and images, which are replaced elements.
 
 Note that none of the behavior described in this section applies to table elements. CSS2 introduced new properties and behaviors for handling tables and table content, and these elements behave in ways fairly distinct from either block-level or inline formatting. Table styling is beyond the scope of this book, as it’s surprisingly complicated and exists rather in a world of its own.
 
@@ -830,9 +830,9 @@ Nonreplaced and replaced elements are treated somewhat differently in the inline
 
 ### 7.3.1 Line Layout
 
-First, you need to understand how inline content is laid out. It isn’t as simple as blocklevel elements, which just generate block boxes and usually don’t allow anything to coexist with them. By contrast, look inside a block-level element, such as a paragraph. You may well ask, how did all those lines of text get there? What controls their arrangement? How can I affect it?
+First, you need to understand how inline content is laid out. It isn’t as simple as blocklevel elements, which just generate block boxes and usually don’t allow anything to coexist with them. By contrast, look `inside` a block-level element, such as a paragraph. You may well ask, how did all those lines of text get there? What controls their arrangement? How can I affect it?
 
-In order to understand how lines are generated, first consider the case of an element containing one very long line of text, as shown in Figure 7-33. Note that we’ve put a border around the line by wrapping the entire line in a span element and then assigning it a border style:
+In order to understand how lines are generated, first consider the case of an element containing one very long line of text, as shown in Figure 7-33. Note that we’ve put a border around the line by wrapping the entire line in a `span` element and then assigning it a border style:
 
 ```css
 span {
@@ -842,7 +842,7 @@ span {
 
 // 7-33
 
-Figure 7-33 shows the simplest case of an inline element contained by a block-level element. It’s no different in its way than a paragraph with two words in it. The only differences are that, in Figure 7-34, we have a few dozen words, and most paragraphs don’t contain an explicit inline element such as span.
+Figure 7-33 shows the simplest case of an inline element contained by a block-level element. It’s no different in its way than a paragraph with two words in it. The only differences are that, in Figure 7-34, we have a few dozen words, and most paragraphs don’t contain an explicit inline element such as `span`.
 
 In order to get from this simplified state to something more familiar, all we have to do is determine how wide the element should be, and then break up the line so that the resulting pieces will fit into the content width of the element. Therefore, we arrive at the state shown in Figure 7-34.
 
@@ -850,13 +850,13 @@ In order to get from this simplified state to something more familiar, all we ha
 
 Nothing has really changed. All we did was take the single line and break it into pieces, and then stack those pieces on top of each other.
 
-In Figure 7-34, the borders for each line of text also happen to coincide with the top and bottom of each line. This is true only because no padding has been set for the inline text. Notice that the borders actually overlap each other slightly; for example, the bottom border of the first line is just below the top border of the second line. This is because the border is actually drawn on the next pixel (assuming you’re using a monitor) to the outside of each line. Since the lines are touching each other, their borders will overlap as shown in Figure 7-34.
+In Figure 7-34, the borders for each line of text also happen to coincide with the top and bottom of each line. This is true only because no padding has been set for the inline text. Notice that the borders actually overlap each other slightly; for example, the bottom border of the first line is just below the top border of the second line. This is because the border is actually drawn on the next pixel (assuming you’re using a monitor) to the `outside` of each line. Since the lines are touching each other, their borders will overlap as shown in Figure 7-34.
 
-If we alter the span styles to have a background color, the actual placement of the lines becomes quite clear. Consider Figure 7-35, which contains four paragraphs, each with a different value of text-align and each having the backgrounds of its lines filled in.
+If we alter the span styles to have a background color, the actual placement of the lines becomes quite clear. Consider Figure 7-35, which contains four paragraphs, each with a different value of `text-align` and each having the backgrounds of its lines filled in.
 
 As we can see, not every line reaches to the edge of its parent paragraph’s content area, which has been denoted with a dotted gray border. For the left-aligned paragraph, the lines are all pushed flush against the left content edge of the paragraph, and the end of each line happens wherever the line is broken. The reverse is true for the right-aligned paragraph. For the centered paragraph, the centers of the lines are aligned with the center of the paragraph.
 
-In the last case, where the value of text-align is justify, each line is forced to be as wide as the paragraph’s content area so that the line’s edges touch the content edges of the paragraph. The difference between the natural length of the line and the width of the paragraph is made up by altering the spacing between letters and words in each line. Therefore, the value of word-spacing can be overridden when the text is justified. (The value of letter-spacing cannot be overridden if it is a length value.)
+In the last case, where the value of `text-align` is `justify`, each line is forced to be as wide as the paragraph’s content area so that the line’s edges touch the content edges of the paragraph. The difference between the natural length of the line and the width of the paragraph is made up by altering the spacing between letters and words in each line. Therefore, the value of `word-spacing` can be overridden when the text is justified. (The value of `letter-spacing` cannot be overridden if it is a length value.)
 
 That pretty well covers how lines are generated in the simplest cases. As you’re about to see, however, the inline formatting model is far from simple.
 
@@ -866,30 +866,30 @@ That pretty well covers how lines are generated in the simplest cases. As you’
 
 Before we go any further, let’s review some basic terms of inline layout, which will be crucial in navigating the following sections:
 
-Anonymous text
+`Anonymous text`
 
 This is any string of characters that is not contained within an inline element.
-Thus, in the markup <p> I'm <em>so</em> happy!</p>, the sequences “ I’m ”
+Thus, in the markup `<p> I'm <em>so</em> happy!</p>`, the sequences “ I’m ”
 and “ happy!” are anonymous text. Note that the spaces are part of the text since
 a space is a character like any other.
 
-Em box
+`Em box`
 
-This is defined in the given font, otherwise known as the character box. Actual glyphs can be taller or shorter than their em boxes. In CSS, the value of fontsize determines the height of each em box.
+This is defined in the given font, otherwise known as the character box. Actual glyphs can be taller or shorter than their em boxes. In CSS, the value of `font-size` determines the height of each em box.
 
-Content area
+`Content area`
 
 In nonreplaced elements, the content area can be one of two things, and the CSS specification allows user agents to choose which one. The content area can be the box described by the em boxes of every character in the element, strung together; or it can be the box described by the character glyphs in the element. In this book, I use the em box definition for simplicity’s sake. In replaced elements, the content area is the intrinsic height of the element plus any margins, borders, or padding.
 
-Leading
+`Leading`
 
-Leading is the difference between the values of font-size and line-height. This difference is actually divided in half and is applied equally to the top and bottom of the content area. These additions to the content area are called, not surprisingly, half-leading. Leading is applied only to nonreplaced elements.
+Leading is the difference between the values of `font-size` and `line-height`. This difference is actually divided in half and is applied equally to the top and bottom of the content area. These additions to the content area are called, not surprisingly, `half-leading`. Leading is applied only to nonreplaced elements.
 
-Inline box
+`Inline box`
 
-This is the box described by the addition of the leading to the content area. For nonreplaced elements, the height of the inline box of an element will be exactly equal to the value for line-height. For replaced elements, the height of the inline box of an element will be exactly equal to the content area, since leading is not applied to replaced elements.
+This is the box described by the addition of the leading to the content area. For nonreplaced elements, the height of the inline box of an element will be exactly equal to the value for `line-height`. For replaced elements, the height of the inline box of an element will be exactly equal to the content area, since leading is not applied to replaced elements.
 
-Line box
+`Line box`
 
 This is the shortest box that bounds the highest and lowest points of the inline boxes that are found in the line. In other words, the top edge of the line box is placed along the top of the highest inline box top, and the bottom of the line box is placed along the bottom of the lowest inline box bottom.
 
@@ -898,36 +898,36 @@ CSS also contains a set of behaviors and useful concepts that fall outside of th
 - The content area is analogous to the content box of a block box.
 - The background of an inline element is applied to the content area plus any pad ding.
 - Any border on an inline element surrounds the content area plus any padding and border.
-- Padding, borders, and margins on nonreplaced elements have no vertical effect on inline elements or the boxes they generate; that is, they do not affect the height of an element’s inline box (and thus the line box that contains the element).
-- Margins and borders on replaced elements do affect the height of the inline box for that element and, by implication, the height of the line box for the line that contains the element.
+- Padding, borders, and margins on nonreplaced elements have no vertical effect on inline elements or the boxes they generate; that is, they do `not` affect the height of an element’s inline box (and thus the line box that contains the element).
+- Margins and borders on replaced elements `do` affect the height of the inline box for that element and, by implication, the height of the line box for the line that contains the element.
 
-One more thing to note: inline boxes are vertically aligned within the line according to their values for the property vertical-align.
+One more thing to note: inline boxes are vertically aligned within the line according to their values for the property `vertical-align`.
 
 Before moving on, let’s look at a step-by-step process for constructing a line box, which you can use to see how the various pieces of the line fit together to determine its height.
 
 Determine the height of the inline box for each element in the line by following these steps:
 
-1. Find the values of font-size and line-height for each inline nonreplaced element and text that is not part of a descendant inline element and combine them. This is done by subtracting the font-size from the line-height, which yields the leading for the box. The leading is split in half and applied to the top and bottom of each em box.
-2. Find the values of height, margin-top, margin-bottom, padding-top, paddingbottom,border-top-width, and border-bottom-width for each replaced element and add them together.
+1. Find the values of `font-size` and `line-height` for each inline nonreplaced element and text that is not part of a descendant inline element and combine them. This is done by subtracting the `font-size` from the `line-height`, which yields the leading for the box. The leading is split in half and applied to the top and bottom of each em box.
+2. Find the values of `height`, `margin-top`, `margin-bottom`, `padding-top`, `padding-bottom`,`border-top-width`, and `border-bottom-width` for each replaced element and add them together.
 3. Figure out, for each content area, how much of it is above the baseline for the overall line and how much of it is below the baseline. This is not an easy task: you must know the position of the baseline for each element and piece of anonymous text and the baseline of the line itself, and then line them all up. In addition, the bottom edge of a replaced element sits on the baseline for the overall line.
-4. Determine the vertical offset of any elements that have been given a value for vertical-align. This will tell you how far up or down that element’s inline box will be moved, and it will change how much of the element is above or below the baseline.
+4. Determine the vertical offset of any elements that have been given a value for `vertical-align`. This will tell you how far up or down that element’s inline box will be moved, and it will change how much of the element is above or below the baseline.
 5. Now that you know where all of the inline boxes have come to rest, calculate the final line box height. To do so, just add the distance between the baseline and the highest inline box top to the distance between the baseline and the lowest inline box bottom.
 
 Let’s consider the whole process in detail, which is the key to intelligently styling inline content.
 
 ### 7.3.3 Inline Formatting
 
-First, know that all elements have a line-height, whether it’s explicitly declared or not. This value greatly influences the way inline elements are displayed, so let’s give it due attention.
+First, know that all elements have a `line-height`, whether it’s explicitly declared or not. This value greatly influences the way inline elements are displayed, so let’s give it due attention.
 
-Now let’s establish how to determine the height of a line. A line’s height (or the height of the line box) is determined by the height of its constituent elements and other content, such as text. It’s important to understand that line-height actually affects inline elements and other inline content, not block-level elements—at least, not directly. We can set a line-height value for a block-level element, but the value will have a visual impact only as it’s applied to inline content within that block-level element. Consider the following empty paragraph, for example:
+Now let’s establish how to determine the height of a line. A line’s height (or the height of the line box) is determined by the height of its constituent elements and other content, such as text. It’s important to understand that `line-height` actually affects inline elements and other inline content, `not` block-level elements—at least, not directly. We can set a `line-height` value for a block-level element, but the value will have a visual impact only as it’s applied to inline content within that block-level element. Consider the following empty paragraph, for example:
 
 ```html
 <p style="line-height: 0.25em;"></p>
 ```
 
-Without content, the paragraph won’t have anything to display, so we won’t see anything. The fact that this paragraph has a line-height of any value—be it 0.25em or 25in—makes no difference without some content to create a line box.
+Without content, the paragraph won’t have anything to display, so we won’t see anything. The fact that this paragraph has a `line-height` of any value—be it `0.25em or 25in`—makes no difference without some content to create a line box.
 
-We can certainly set a line-height value for a block-level element and have that apply to all of the content within the block, whether or not the content is ontained in any inline elements. In a certain sense, then, each line of text contained within a block-level element is its own inline element, whether or not it’s surrounded by tags. If you like, picture a fictional tag sequence like this:
+We can certainly set a `line-height` value for a block-level element and have that apply to all of the content within the block, whether or not the content is ontained in any inline elements. In a certain sense, then, each line of text contained within a block-level element is its own inline element, whether or not it’s surrounded by tags. If you like, picture a fictional tag sequence like this:
 
 ```html
 <p>
@@ -937,9 +937,9 @@ We can certainly set a line-height value for a block-level element and have that
 </p>
 ```
 
-Even though the line tags don’t actually exist, the paragraph behaves as if they did—each line of text inherits styles from the paragraph. You only bother to create lineheight rules for block-level elements so you don’t have to explicitly declare a lineheight for all of their inline elements, fictional or otherwise.
+Even though the `line` tags don’t actually exist, the paragraph behaves as if they did—each line of text inherits styles from the paragraph. You only bother to create `line-height` rules for block-level elements so you don’t have to explicitly declare a `line-height` for all of their inline elements, fictional or otherwise.
 
-The fictional line element actually clarifies the behavior that results from setting line-height on a block-level element. According to the CSS specification, declaring line-height on a block-level element sets a minimum line box height for the content of that block-level element. Declaring p.spacious {line-height: 24pt;} means that the minimum heights for each line box is 24 points. Technically, content can inherit this line height only if an inline element does so. Most text isn’t contained by an inline element. If you pretend that each line is contained by the fictional line element, the model works out very nicely.
+The fictional `line` element actually clarifies the behavior that results from setting `line-height` on a block-level element. According to the CSS specification, declaring `line-height` on a block-level element sets a `minimum` line box height for the content of that block-level element. Declaring `p.spacious {line-height: 24pt;}` means that the `minimum` heights for each line box is 24 points. Technically, content can inherit this line height only if an inline element does so. Most text isn’t contained by an inline element. If you pretend that each line is contained by the fictional line element, the model works out very nicely.
 
 ### 7.3.4 Inline Nonreplaced Elements
 
@@ -947,9 +947,11 @@ Building on your formatting knowledge, let’s move on to the construction of li
 
 ### 7.3.5 Building the Boxes
 
+First, for an inline nonreplaced element or piece of anonymous text, the value of `font-size` determines the height of the content area. If an inline element has a `font-size` of `15px`, then the content area’s height is 15 pixels because all of the em boxes in the element are 15 pixels tall, as illustrated in Figure 7-36.
+
 // 7-36
 
-The next thing to consider is the value of line-height for the element, and the difference between it and the value of font-size. If an inline nonreplaced element has a font-size of 15px and a line-height of 21px, then the difference is six pixels. The user agent splits the six pixels in half and applies half to the top and half to the bottom of the content area, which yields the inline box. This process is illustrated in Figure 7-37.
+The next thing to consider is the value of `line-height` for the element, and the difference between it and the value of `font-size`. If an inline nonreplaced element has a `font-size` of `15px` and a `line-height` of `21px`, then the difference is six pixels. The user agent splits the six pixels in half and applies half to the top and half to the bottom of the content area, which yields the inline box. This process is illustrated in Figure 7-37.
 
 // 7-37
 
@@ -963,9 +965,9 @@ Let’s assume that the following is true:
 </p>
 ```
 
-In this example, most of the text has a font-size of 12px, while the text in one inline nonreplaced element has a size of 24px. However, all of the text has a line-height of 12px since line-height is an inherited property. Therefore, the strong element’s line-height is also 12px.
+In this example, most of the text has a `font-size` of `12px`, while the text in one inline nonreplaced element has a size of `24px`. However, all of the text has a `line-height` of `12px` since `line-height` is an inherited property. Therefore, the `strong` element’s `line-height` is also `12px`.
 
-Thus, for each piece of text where both the font-size and line-height are 12px, the content height does not change (since the difference between 12px and 12px is zero), so the inline box is 12 pixels high. For the strong text, however, the difference between line-height and font-size is -12px. This is divided in half to determine the half-leading (-6px), and the half-leading is added to both the top and bottom of the content height to arrive at an inline box. Since we’re adding a negative number in both cases, the inline box ends up being 12 pixels tall. The 12-pixel inline box is centered vertically within the 24-pixel content height of the element, so the inline box is actually smaller than the content area.
+Thus, for each piece of text where both the `font-size` and `line-height` are `12px`, the content height does not change (since the difference between `12px` and `12px` is zero), so the inline box is 12 pixels high. For the strong text, however, the difference between `line-height` and `font-size` is `-12px`. This is divided in half to determine the half-leading (`-6px`), and the half-leading is added to both the top and bottom of the content height to arrive at an inline box. Since we’re adding a negative number in both cases, the inline box ends up being 12 pixels tall. The 12-pixel inline box is centered vertically within the 24-pixel content height of the element, so the inline box is actually smaller than the content area.
 
 So far, it sounds like we’ve done the same thing to each bit of text, and that all the inline boxes are the same size, but that’s not quite true. The inline boxes in the second line, although they’re the same size, don’t actually line up because the text is all baseline-aligned (see Figure 7-38).
 
@@ -981,7 +983,7 @@ In just a bit, we’ll explore ways to cope with this behavior and methods for a
 
 ### 7.3.6 Vertical Alignment
 
-If we change the vertical alignment of the inline boxes, the same height determination principles apply. Suppose that we give the strong element a vertical alignment of 4px:
+If we change the vertical alignment of the inline boxes, the same height determination principles apply. Suppose that we give the `strong` element a vertical alignment of `4px`:
 
 ```html
 <p style="font-size: 12px; line-height: 12px;">
@@ -991,7 +993,7 @@ If we change the vertical alignment of the inline boxes, the same height determi
 </p>
 ```
 
-That small change raises the strong element four pixels, which pushes up both its content area and its inline box. Because the strong element’s inline box top was already the highest in the line, this change in vertical alignment also pushes the top of the line box upward by four pixels, as shown in Figure 7-40.
+That small change raises the `strong` element four pixels, which pushes up both its content area and its inline box. Because the `strong` element’s inline box top was already the highest in the line, this change in vertical alignment also pushes the top of the line box upward by four pixels, as shown in Figure 7-40.
 
 // 7-40
 
@@ -1010,7 +1012,7 @@ Now we have the same result as in our earlier example, where the middle line box
 
 // 7-41
 
-In this case, the top of the “tall” text’s inline box is aligned with the top of the line box. Since the “tall” text has equal values for font-size and line-height, the content height and inline box are the same. However, consider this:
+In this case, the top of the “tall” text’s inline box is aligned with the top of the line box. Since the “tall” text has equal values for `font-size` and `line-height`, the content height and inline box are the same. However, consider this:
 
 ```html
 <p style="font-size: 12px; line-height: 12px;">
@@ -1021,9 +1023,9 @@ In this case, the top of the “tall” text’s inline box is aligned with the 
 </p>
 ```
 
-Since the line-height for the “tall” text is less than its font-size, the inline box for that element is smaller than its content area. This tiny fact changes the placement of the text itself since the top of its inline box must be aligned with the top of the line box for its line. Thus, we get the result shown in Figure 7-42.
+Since the `line-height` for the “tall” text is less than its `font-size`, the inline box for that element is smaller than its content area. This tiny fact changes the placement of the text itself since the top of its inline box must be aligned with the top of the line box for its line. Thus, we get the result shown in Figure 7-42.
 
-On the other hand, we could set the “tall” text to have a line-height that is actually bigger than its font-size. For example:
+On the other hand, we could set the “tall” text to have a `line-height` that is actually bigger than its `font-size`. For example:
 
 ```html
 <p style="font-size: 12px; line-height: 12px;">
@@ -1036,9 +1038,9 @@ On the other hand, we could set the “tall” text to have a line-height that i
 
 // 7-42
 
-Since we’ve given the “tall” text a line-height of 18px, the difference between lineheight and font-size is six pixels. The half-leading of three pixels is added to the content area and results in an inline box that is 18 pixels tall. The top of this inline box aligns with the top of the line box. Similarly, the vertical-align value bottom will align the bottom of an inline element’s inline box with the bottom of the line box.
+Since we’ve given the “tall” text a `line-height` of `18px`, the difference between `line-height` and `font-size` is six pixels. The half-leading of three pixels is added to the content area and results in an inline box that is 18 pixels tall. The top of this inline box aligns with the top of the line box. Similarly, the `vertical-align` value `bottom` will align the bottom of an inline element’s inline box with the bottom of the line box.
 
-In relation to the terms we’ve been using in this chapter, the effects of the assorted keyword values of vertical-align are:
+In relation to the terms we’ve been using in this chapter, the effects of the assorted keyword values of `vertical-align` are:
 
 `top`
 
@@ -1058,7 +1060,7 @@ Aligns the bottom of the element’s inline box with the bottom of the parent’
 
 `middle`
 
-Aligns the vertical midpoint of the element’s inline box with 0.5ex above the baseline of the parent
+Aligns the vertical midpoint of the element’s inline box with `0.5ex` above the baseline of the parent
 
 `super`
 
@@ -1070,13 +1072,13 @@ The same as super, except the element is moved downward instead of upward
 
 `<percentage>`
 
-Shifts the element up or down the distance defined by taking the declared percentage of the element’s value for line-height
+Shifts the element up or down the distance defined by taking the declared percentage of the element’s value for `line-height`
 
 ### 7.3.7 Managing the line-height
 
-In previous sections, we saw that changing the line-height of an inline element can cause text from one line to overlap another. In each case, though, the changes were made to individual elements. So how can we affect the line-height of elements in a more general way in order to keep content from overlapping?
+In previous sections, we saw that changing the `line-height` of an inline element can cause text from one line to overlap another. In each case, though, the changes were made to individual elements. So how can we affect the `line-height` of elements in a more general way in order to keep content from overlapping?
 
-One way to do this is to use the em unit in conjunction with an element whose fontsize has changed. For example:
+One way to do this is to use the `em` unit in conjunction with an element whose `font-size` has changed. For example:
 
 ```css
 p {
@@ -1096,7 +1098,7 @@ big {
 </p>
 ```
 
-By setting a line-height for the big element, we increase the overall height of the line box, providing enough room to display the big element without overlapping any other text and without changing the line-height of all lines in the paragraph. We use a value of 1em so that the line-height for the big element will be set to the same size as big’s font-size. Remember, line-height is set in relation to the font-size of the element itself, not the parent element. The results are shown in Figure 7-43.
+By setting a `line-height` for the `big` element, we increase the overall height of the line box, providing enough room to display the big element without overlapping any other text and without changing the `line-height` of all lines in the paragraph. We use a value of `1em` so that the `line-height` for the `big` element will be set to the same size as `big`’s font-size. Remember, `line-height` is set in relation to the `font-size` of the element itself, not the parent element. The results are shown in Figure 7-43.
 
 // 7-43
 
@@ -1108,9 +1110,9 @@ a:link {
 }
 ```
 
-If we don’t set a large enough line-height to accommodate the border, it will be in danger of overwriting other lines. We could increase the size of the inline box for unvisited links using line-height, as we did for the big element in the earlier example; in this case, we’d just need to make the value of line-height 10 pixels larger than the value of font-size for those links. However, that will be difficult if we don’t actually know the size of the font in pixels.
+If we don’t set a large enough `line-height` to accommodate the border, it will be in danger of overwriting other lines. We could increase the size of the inline box for unvisited links using `line-height`, as we did for the `big` element in the earlier example; in this case, we’d just need to make the value of `line-height` 10 pixels larger than the value of font-size for those links. However, that will be difficult if we don’t actually know the size of the font in pixels.
 
-Another solution is to increase the line-height of the paragraph. This will affect every line in the entire element, not just the line in which the bordered hyperlink appears:
+Another solution is to increase the `line-height` of the paragraph. This will affect every line in the entire element, not just the line in which the bordered hyperlink appears:
 
 ```css
 p {
@@ -1139,7 +1141,7 @@ big {
 }
 ```
 
-Given these rules, the height of the inline box of a big element within a paragraph will be 31.5 pixels (14 × 1.5 × 1.5), and that will also be the height of the line box. In order to keep baseline spacing consistent, we must make the p element’s line-height equal to or greater than 32px.
+Given these rules, the height of the inline box of a `big` element within a paragraph will be 31.5 pixels (14 × 1.5 × 1.5), and that will also be the height of the line box. In order to keep baseline spacing consistent, we must make the `p` element’s `line-height` equal to or greater than 32px.
 
 // 7-44
 
@@ -1151,9 +1153,9 @@ Consistent baseline spacing tends to be more of an art than a science. If you de
 
 ### 7.3.8 Scaling Line Heights
 
-The best way to set line-height, as it turns out, is to use a raw number as the value.
+The best way to set `line-height`, as it turns out, is to use a raw number as the value.
 This method is the best because the number becomes the scaling factor, and that fac‐
-tor is an inherited, not a computed, value. Let’s say we want the line-height`s of all elements in a document to be one and a half times their`font-size.
+tor is an inherited, not a computed, value. Let’s say we want the `line-height`'s of all elements in a document to be one and a half times their `font-size`.
 We would declare:
 
 ```css
@@ -1162,7 +1164,7 @@ body {
 }
 ```
 
-This scaling factor of 1.5 is passed down from element to element, and, at each level, the factor is used as a multiplier of the font-size of each element. Therefore, the following markup would be displayed as shown in Figure 7-45:
+This scaling factor of 1.5 is passed down from element to element, and, at each level, the factor is used as a multiplier of the `font-size` of each element. Therefore, the following markup would be displayed as shown in Figure 7-45:
 
 ```css
 p {
@@ -1186,7 +1188,7 @@ big {
 </p>
 ```
 
-In this example, the line height for the small element turns out to be 15 pixels, and for the big element, it’s 45 pixels. (These numbers may seem excessive, but they’re in keeping with the overall page design.) Of course, if we don’t want our big text to generate too much extra leading, we can give it a line-height value, which will override the inherited scaling factor:
+In this example, the line height for the `small` element turns out to be 15 pixels, and for the big element, it’s 45 pixels. (These numbers may seem excessive, but they’re in keeping with the overall page design.) Of course, if we don’t want our big text to generate too much extra leading, we can give it a `line-height` value, which will override the inherited scaling factor:
 
 ```css
 p {
@@ -1204,15 +1206,15 @@ big {
 
 // 7-45
 
-Another solution—possibly the simplest of all—is to set the styles such that lines are no taller than absolutely necessary to hold their content. This is where we might use a line-height of 1.0. This value will multiply itself by every font-size to get the same value as the font-size of every element. Thus, for every element, the inline box will be the same as the content area, which will mean the absolute minimum size necessary is used to contain the content area of each element.
+Another solution—possibly the simplest of all—is to set the styles such that lines are no taller than absolutely necessary to hold their content. This is where we might use a `line-height` of `1.0`. This value will multiply itself by every `font-size` to get the same value as the `font-size` of every element. Thus, for every element, the inline box will be the same as the content area, which will mean the absolute minimum size necessary is used to contain the content area of each element.
 
-Most fonts still display a little bit of space between the lines of character glyphs because characters are usually smaller than their em boxes. The exception is script (“cursive”) fonts, where character glyphs are usually larger than their em boxes.
+Most fonts still display a little bit of space between the lines of character glyphs because characters are usually smaller than their em boxes. The exception is script (“cursive”) fonts, where character glyphs are usually `larger` than their em boxes.
 
 ### 7.3.9 Adding Box Properties
 
-As you’re aware from previous discussions, padding, margins, and borders may all be applied to inline nonreplaced elements. These aspects of the inline element do not influence the height of the line box at all. If you were to apply some borders to a span element without any margins or padding, you’d get results such as those shown in Figure 7-46.
+As you’re aware from previous discussions, padding, margins, and borders may all be applied to inline nonreplaced elements. These aspects of the inline element do not influence the height of the line box at all. If you were to apply some borders to a `span` element without any margins or padding, you’d get results such as those shown in Figure 7-46.
 
-The border edge of inline elements is controlled by the font-size, not the lineheight. In other words, if a span element has a font-size of 12px and a line-height of 36px, its content area is 12px high, and the border will surround that content area.
+The border edge of inline elements is controlled by the `font-size`, not the `line-height`. In other words, if a `span` element has a `font-size` of `12px` and a `line-height` of `36px`, its content area is `12px` high, and the border will surround that content area.
 
 Alternatively, we can assign padding to the inline element, which will push the borders away from the text itself:
 
@@ -1250,7 +1252,7 @@ p span {
 }
 ```
 
-All of the text within the span element will have a content area 15 pixels tall, and we’ve applied 10 pixels of padding to the top and bottom of each content area. The extra pixels won’t increase the height of the line box, which would be fine, except there is a background color. Thus, we get the result shown in Figure 7-49.
+All of the text within the `span` element will have a content area 15 pixels tall, and we’ve applied 10 pixels of padding to the top and bottom of each content area. The extra pixels won’t increase the height of the line box, which would be fine, except there is a background color. Thus, we get the result shown in Figure 7-49.
 
 CSS 2.1 explicitly states that the line boxes are drawn in document order: “This will cause the borders on subsequent lines to paint over the borders and text of previous lines.” The same principle applies to backgrounds as well, as Figure 7-49 shows. CSS2, on the other hand, allowed user agents “to ‘clip’ the border and padding areas (i.e., not render them).” Therefore, the results may depend greatly on which specification the user agent follows.
 
@@ -1258,20 +1260,20 @@ CSS 2.1 explicitly states that the line boxes are drawn in document order: “Th
 
 ### 7.3.10 Changing Breaking Behavior
 
-In the previous section, we saw that when an inline nonreplaced element is broken across multiple lines, it’s treated as if it were one long single-line element that’s sliced into smaller boxes, one slice per line break. That’s actually just the default behavior, and it can be changed via the property box-decoration-break.
+In the previous section, we saw that when an inline nonreplaced element is broken across multiple lines, it’s treated as if it were one long single-line element that’s sliced into smaller boxes, one slice per line break. That’s actually just the default behavior, and it can be changed via the property `box-decoration-break`.
 
 //
 
-The default value, slice, is what we saw in the previous section. The other value, clone, causes each fragement of the element to be drawn as if it were a standalone box. What does that mean? Compare the two examples in Figure 7-50, in which exactly the same markup and styles are treated as either sliced or cloned.
+The default value, `slice`, is what we saw in the previous section. The other value, `clone`, causes each fragement of the element to be drawn as if it were a standalone box. What does that mean? Compare the two examples in Figure 7-50, in which exactly the same markup and styles are treated as either sliced or cloned.
 
 Many of the differences are pretty apparent, but a few are perhaps more subtle. Among the effects are the application of padding to each element’s fragment, including at the ends where the line breaks occurred. Similarly, the border is drawn around each fragment individually, instead of being broken up.
 
 // 7-50
 
-More subtly, notice how the background-image positioning changes between the two.
+More subtly, notice how the `background-image` positioning changes between the two.
 In the sliced version, background images are sliced along with everything else, meaning that only one of the fragments contains the origin image. In the cloned version, however, each background acts as its own copy, so each has its own origin image. This means, for example, that even if we have a nonrepeated background image, it will appear once in each fragment instead of only in one fragment.
 
-The box-decoration-break property will most often be used with inline boxes, but itactually applies in any situation where there’s a break in an element—for example, when a page break interrupts an element in paged media. In such a case, each fragment is a separate slice. If we set box-decoration-break: clone, then each box fragment will be treated as a copy when it comes to borders, padding, backgrounds, and so on. The same holds true in multicolumn layout: if an element is split by a column break, the value of box-decoration-break will affect how it is rendered.
+The `box-decoration-break` property will most often be used with inline boxes, but itactually applies in any situation where there’s a break in an element—for example, when a page break interrupts an element in paged media. In such a case, each fragment is a separate slice. If we set `box-decoration-break: clone`, then each box fragment will be treated as a copy when it comes to borders, padding, backgrounds, and so on. The same holds true in multicolumn layout: if an element is split by a column break, the value of `box-decoration-break` will affect how it is rendered.
 
 ### 7.3.11 Glyphs Versus Content Area
 
@@ -1279,11 +1281,11 @@ Even in cases where you try to keep inline nonreplaced element backgrounds from 
 
 That may sound very abstract, but it has practical consequences. In CSS2.1, we find the following: “the height of the content area should be based on the font, but this specification does not specify how. A user agent may…use the em box or the maximum ascender and descender of the font. (The latter would ensure that glyphs with parts above or below the em box still fall within the content area, but leads to differently sized boxes for different fonts.)”
 
-In other words, the “painting area” of an inline nonreplaced element is left to the user agent. If a user agent takes the em box to be the height of the content area, then the background of an inline nonreplaced element will be equal to the height of the em box (which is the value of font-size). If a user agent uses the maximum ascender and descender of the font, then the background may be taller or shorter than the em box. Therefore, you could give an inline nonreplaced element a line-height of 1em and still have its background overlap the content of other lines.
+In other words, the “painting area” of an inline nonreplaced element is left to the user agent. If a user agent takes the em box to be the height of the content area, then the background of an inline nonreplaced element will be equal to the height of the em box (which is the value of `font-size`). If a user agent uses the maximum ascender and descender of the font, then the background may be taller or shorter than the em box. Therefore, you could give an inline nonreplaced element a `line-height` of `1em` and still have its background overlap the content of other lines.
 
 ### 7.3.12 Inline Replaced Elements
 
-Inline replaced elements, such as images, are assumed to have an intrinsic height and width; for example, an image will be a certain number of pixels high and wide. Therefore, a replaced element with an intrinsic height can cause a line box to become taller than normal. This does not change the value of line-height for any element in the line, including the replaced element itself. Instead, the line box is made just tall enough to accommodate the replaced element, plus any box properties. In other words, the entirety of the replaced element—content, margins, borders, and padding—is used to define the element’s inline box. The following styles lead to one such example, as shown in Figure 7-51:
+Inline replaced elements, such as images, are assumed to have an intrinsic height and width; for example, an image will be a certain number of pixels high and wide. Therefore, a replaced element with an intrinsic height can cause a line box to become taller than normal. This does `not` change the value of `line-height` for any element in the line, including the replaced element itself. Instead, the line box is made just tall enough to accommodate the replaced element, plus any box properties. In other words, the entirety of the replaced element—content, margins, borders, and padding—is used to define the element’s inline box. The following styles lead to one such example, as shown in Figure 7-51:
 
 ```css
 p {
@@ -1298,9 +1300,9 @@ img {
 }
 ```
 
-Despite all the blank space, the effective value of line-height has not changed, either for the paragraph or the image itself. line-height has no effect on the image’s inline box. Because the image in Figure 7-51 has no padding, margins, or borders, its inline box is equivalent to its content area, which is, in this case, 30 pixels tall.
+Despite all the blank space, the effective value of `line-height` has not changed, either for the paragraph or the image itself. `line-height` has no effect on the image’s inline box. Because the image in Figure 7-51 has no padding, margins, or borders, its inline box is equivalent to its content area, which is, in this case, 30 pixels tall.
 
-Nonetheless, an inline replaced element still has a value for line-height. Why? In the most common case, it needs the value in order to correctly position the element if it’s been vertically aligned. Recall that, for example, percentage values for verticalalign are calculated with respect to an element’s line-height. Thus:
+Nonetheless, an inline replaced element still has a value for `line-height`. Why? In the most common case, it needs the value in order to correctly position the element if it’s been vertically aligned. Recall that, for example, percentage values for verticalalign are calculated with respect to an element’s `line-height`. Thus:
 
 ```css
 p {
@@ -1318,9 +1320,9 @@ img {
 
 // 7-51
 
-The inherited value of line-height causes the image to be raised nine pixels instead of some other number. Without a value for line-height, it wouldn’t be possible to perform percentage-value vertical alignments. The height of the image itself has no relevance when it comes to vertical alignment; the value of line-height is all that matters.
+The inherited value of `line-height` causes the image to be raised nine pixels instead of some other number. Without a value for `line-height`, it wouldn’t be possible to perform percentage-value vertical alignments. The height of the image itself has no relevance when it comes to vertical alignment; the value of `line-height` is all that matters.
 
-However, for other replaced elements, it might be important to pass on a lineheight value to descendant elements within that replaced element. An example would be an SVG image, which uses CSS to style any text found within the image.
+However, for other replaced elements, it might be important to pass on a `line-height` value to descendant elements within that replaced element. An example would be an SVG image, which uses CSS to style any text found within the image.
 
 ### 7.3.13 Adding Box Properties
 
@@ -1363,7 +1365,7 @@ Negative margins operate the same way on block-level elements, of course. In thi
 
 ### 7.3.14 Replaced Elements and the Baseline
 
-You may have noticed by now that, by default, inline replaced elements sit on the baseline. If you add bottom padding, a margin, or a border to the replaced element, then the content area will move upward (assuming box-sizing: content-box). Replaced elements do not have baselines of their own, so the next best thing is to align the bottom of their inline boxes with the baseline. Thus, it is actually the bottom outer margin edge that is aligned with the baseline, as illustrated in Figure 7-54.
+You may have noticed by now that, by default, inline replaced elements sit on the baseline. If you add bottom padding, a margin, or a border to the replaced element, then the content area will move upward (assuming `box-sizing: content-box`). Replaced elements do not have baselines of their own, so the next best thing is to align the bottom of their inline boxes with the baseline. Thus, it is actually the bottom outer margin edge that is aligned with the baseline, as illustrated in Figure 7-54.
 
 // 7-54
 
@@ -1381,7 +1383,7 @@ td {
 
 Under the CSS inline formatting model, the table cell will be 12 pixels tall, with the image sitting on the baseline of the cell. So there might be three pixels of space below the image and eight above it, although the exact distances would depend on the font family used and the placement of its baseline.
 
-This behavior is not confined to images inside table cells; it will also happen in any situation where an inline replaced element is the sole descendant of a block-level or table-cell element. For example, an image inside a div will also sit on the baseline.
+This behavior is not confined to images inside table cells; it will also happen in any situation where an inline replaced element is the sole descendant of a block-level or table-cell element. For example, an image inside a `div` will also sit on the baseline.
 
 The most common workaround for such circumstances is to make images in table cells block-level so that they do not generate a line box. For example:
 
@@ -1398,9 +1400,9 @@ img.block {
 <td><img src="spacer.gif" height="1" width="10" class="block" /></td>
 ```
 
-Another possible fix would be to make the font-size and line-height of the enclosing table cell 1px, which would make the line box only as tall as the one-pixel image within it.
+Another possible fix would be to make the `font-size` and `line-height` of the enclosing table cell `1px`, which would make the line box only as tall as the one-pixel image within it.
 
-As of this writing, many browsers can ignore this CSS inline formatting model in this context. See the article “Images, Tables, and Mysterious Gaps” for more information.
+As of this writing, many browsers can ignore this CSS inline formatting model in this context. See the article `“Images, Tables, and Mysterious Gaps”` for more information.
 
 Here’s another interesting effect of inline replaced elements sitting on the baseline: if we apply a negative bottom margin, the element will actually get pulled downward because the bottom of its inline box will be higher than the bottom of its content area. Thus, the following rule would have the result shown in Figure 7-55:
 
@@ -1418,17 +1420,17 @@ Inline with History
 
 The CSS inline formatting model may seem needlessly complex and, in some ways, even contrary to author expectations. Unfortunately, the complexity is the result of creating a style language that is both backward-compatible with pre-CSS web browsers and leaves the door open for future expansion into more sophisticated territory—an awkward blend of past and present. It’s also the result of making some sensible decisions that avoid one undesirable effect while causing another.
 
-For example, the “spreading apart” of lines of text by image and vertically aligned text owes its roots to the way Mosaic 1.0 behaved. In that browser, any image in a paragraph would push open enough space to contain the image. That’s a good behavior, since it prevents images from overlapping text in other lines. So when CSS introduced ways to style text and inline elements, its authors endeavored to create a model that did not (by default) cause inline images to overlap other lines of text. However, the same model also meant that a superscript element (sup), for example, would likely also push apart lines of text.
+For example, the “spreading apart” of lines of text by image and vertically aligned text owes its roots to the way Mosaic 1.0 behaved. In that browser, any image in a paragraph would push open enough space to contain the image. That’s a good behavior, since it prevents images from overlapping text in other lines. So when CSS introduced ways to style text and inline elements, its authors endeavored to create a model that did not (by default) cause inline images to overlap other lines of text. However, the same model also meant that a superscript element (`sup`), for example, would likely also push apart lines of text.
 
-Such effects annoy some authors who want their baselines to be an exact distance apart and no further, but consider the alternative. If line-height forced baselines to be exactly a specified distance apart, we’d easily end up with inline replaced and vertically shifted elements that overlap other lines of text—which would also annoy authors. Fortunately, CSS offers enough power to create your desired effect in one way or another, and the future of CSS holds even more potential.
+Such effects annoy some authors who want their baselines to be an exact distance apart and no further, but consider the alternative. If `line-height` forced baselines to be exactly a specified distance apart, we’d easily end up with inline replaced and vertically shifted elements that overlap other lines of text—which would also annoy authors. Fortunately, CSS offers enough power to create your desired effect in one way or another, and the future of CSS holds even more potential.
 
 ### 7.3.15 Inline-Block Elements
 
-As befits the hybrid look of the value name inline-block, inline-block elements are indeed a hybrid of block-level and inline elements. This display value was introduced in CSS2.1.
+As befits the hybrid look of the value name `inline-block`, inline-block elements are indeed a hybrid of block-level and inline elements. This display value was introduced in CSS2.1.
 
 An inline-block element relates to other elements and content as an inline box. In other words, it’s laid out in a line of text just as an image would be, and in fact, inlineblock elements are formatted within a line as a replaced element. This means the bottom of the inline-block element will rest on the baseline of the text line by default and will not line break within itself.
 
-Inside the inline-block element, the content is formatted as though the element were block-level. The properties width and height apply to it (and thus so does boxsizing), as they do to any block-level or inline replaced element, and those properties will increase the height of the line if they are taller than the surrounding content.
+Inside the inline-block element, the content is formatted as though the element were block-level. The properties `width` and `height` apply to it (and thus so does `box-sizing`), as they do to any block-level or inline replaced element, and those properties will increase the height of the line if they are taller than the surrounding content.
 
 Let’s consider some example markup that will help make this clearer:
 
@@ -1482,9 +1484,9 @@ The result of this stylesheet is depicted in Figure 7-56.
 
 // 7-56
 
-Notice that in the second div, the inline paragraph is formatted as normal inline content, which means width and text-align get ignored (since they do not apply to inline elements). For the third div, however, the inline-block paragraph honors both properties, since it is formatted as a block-level element. That paragraph’s margins also force its line of text to be much taller, since it affects line height as though it were a replaced element.
+Notice that in the second `div`, the inline paragraph is formatted as normal inline content, which means `width` and `text-align` get ignored (since they do not apply to inline elements). For the third `div`, however, the inline-block paragraph honors both properties, since it is formatted as a block-level element. That paragraph’s margins also force its line of text to be much taller, since it affects line height as though it were a replaced element.
 
-If an inline-block element’s width is not defined or explicitly declared auto, the element box will shrink to fit the content. That is, the element box is exactly as wide as necessary to hold the content, and no wider. Inline boxes act the same way, although they can break across lines of text, whereas inline-block elements cannot. Thus, we have the following rule, when applied to the previous markup example:
+If an inline-block element’s `width` is not defined or explicitly declared `auto`, the element box will shrink to fit the content. That is, the element box is exactly as wide as necessary to hold the content, and no wider. Inline boxes act the same way, although they can break across lines of text, whereas inline-block elements cannot. Thus, we have the following rule, when applied to the previous markup example:
 
 ```css
 div#three p {
@@ -1510,7 +1512,7 @@ Flexible-box layout is another way to achieve this effect, and is probably bette
 
 ### 7.3.16 Flow Display
 
-The values flow and flow-root deserve a moment of explanation. Declaring an element to be laid out using display: flow means that it should use block-and-inline layout, the same as normal. That is, unless it’s combined with inline, in which case it generates an inline box.
+The values `flow` and `flow-root` deserve a moment of explanation. Declaring an element to be laid out using display: flow means that it should use block-and-inline layout, the same as normal. That is, unless it’s combined with inline, in which case it generates an inline box.
 
 In other words, the first two of the following rules will result in a block box, whereas the third will yield an inline box.
 
@@ -1526,21 +1528,21 @@ In other words, the first two of the following rules will result in a block box,
 }
 ```
 
-The reason for this pattern is that CSS is moving to a system where there are two kinds of display: the outer display type and the inner display type. Value keywords like block and inline represent the outer display type, which provides how the display box interacts with its surroundings. The inner display, in this case flow, describes what should happen inside the element.
+The reason for this pattern is that CSS is moving to a system where there are two kinds of display: the `outer display type` and the `inner display typ`e. Value keywords like `block` and `inline` represent the outer display type, which provides how the display box interacts with its surroundings. The inner display, in this case `flow`, describes what should happen inside the element.
 
-This approach allows for declarations like display: inline table to indicate an element should generate a table formatting context within, but relate to its surrounding content as an inline element. (The legacy value inline-table has the same effect.)
+This approach allows for declarations like display: inline table to indicate an element should generate a table formatting context within, but relate to its surrounding content as an inline element. (The legacy value `inline-table` has the same effect.)
 
-display: flow-root, on the other hand, always generates a block box, with a new block formatting context inside itself. This is the sort of thing that would be applied to the root element of a document, like html, to say “this is where the formatting root lies.”
+`display: flow-root`, on the other hand, always generates a block box, with a new block formatting context inside itself. This is the sort of thing that would be applied to the root element of a document, like `html`, to say “this is where the formatting root lies.”
 
-The old display values you may be familiar with are still available. Table 7-1 shows how the old values will be represented using the new values.
+The old `display` values you may be familiar with are still available. Table 7-1 shows how the old values will be represented using the new values.
 
 //
 
-As of late 2017, flow and flow-root were supported by Firefox and Chrome, but no other browsers.
+As of late 2017, `flow` and `flow-root` were supported by Firefox and Chrome, but no other browsers.
 
 ### 7.3.17 Contents Display
 
-There is one fascinating new addition to display, which is the value contents. When applied to an element, display: contents causes the element to be removed from page formatting, and effectively “elevates” its child elements to its level. As an example, consider the following simple CSS and HTML.
+There is one fascinating new addition to `display`, which is the value `contents`. When applied to an element, `display: contents` causes the element to be removed from page formatting, and effectively “elevates” its child elements to its level. As an example, consider the following simple CSS and HTML.
 
 ```css
 ul {
@@ -1561,29 +1563,29 @@ li {
 
 That will yield an unordered list with a red border, and three list items with silver borders.
 
-If we then apply display: contents to the ul element, the user agent will render things as if the `<ul>` and `</ul>` lines had been deleted from the document source. The difference in the regular result and the contents result is shown in Figure 7-58.
+If we then apply `display: contents` to the `ul` element, the user agent will render things as if the `<ul>` and `</ul>` lines had been deleted from the document source. The difference in the regular result and the `contents` result is shown in Figure 7-58.
 
 // 7-58
 
-The list items are still list items, and act like them, but visually, the ul is gone, as if had never been. The means not only does its border go away, but also the top and bottom margins that usually separate the list from surrounding content. This is why the second list in Figure 7-58 appears higher up than the first.
+The list items are still list items, and act like them, but visually, the `ul` is gone, as if had never been. The means not only does its border go away, but also the top and bottom margins that usually separate the list from surrounding content. This is why the second list in Figure 7-58 appears higher up than the first.
 
-As of late 2017, only Firefox browsers supported display: contents. At the time, implementation work was being done for the Chrome/Blink line of browsers.
+As of late 2017, only Firefox browsers supported `display: contents`. At the time, implementation work was being done for the Chrome/Blink line of browsers.
 
 ### 7.3.18 Other Display Values
 
 There are a great many more display values we haven’t covered in this chapter, and won’t. The various table-related values will come up in a later chapter devoted to table layout, and we’ll talk about list items again in the chapter on counters and generated content.
 
-Values we won’t really talk about are the ruby-related values, which need their own book and are poorly supported as of late 2017; and run-in, which never caught on and will either be dropped from CSS, or will return with a new definition.
+Values we won’t really talk about are the ruby-related values, which need their own book and are poorly supported as of late 2017; and `run-in`, which never caught on and will either be dropped from CSS, or will return with a new definition.
 
 ### 7.3.19 Computed Values
 
-The computed value of display can change if an element is floated or positioned. It can also change when declared for the root element. In fact, the values display, position, and float interact in interesting ways.
+The computed value of `display` can change if an element is floated or positioned. It can also change when declared for the root element. In fact, the values `display`, `position`, and `float` interact in interesting ways.
 
-If an element is absolutely positioned, the value of float is set to none. For either floated or absolutely positioned elements, the computed value of display is determined by the declared value, as shown in Table 7-2.
+If an element is absolutely positioned, the value of `float` is set to `none`. For either floated or absolutely positioned elements, the computed value of `display` is determined by the declared value, as shown in Table 7-2.
 
 //
 
-In the case of the root element, declaring either of the values inline-table or table results in a computed value of table, whereas declaring none results in the same computed value. All other display values are computed to be block.
+In the case of the root element, declaring either of the values `inline-table` or `table` results in a computed value of `table`, whereas declaring `none` results in the same computed value. All other display values are computed to be block.
 
 ## 7.4 Summary
 
