@@ -564,7 +564,7 @@ h1 {
 }
 ```
 
-In this case, the value of color for all h1 elements in the document will be blue, not red. This is because the two rules are tied with each other in terms of explicit weight and origin, and the selectors have equal specificity, so the last one declared is the winner.
+In this case, the value of `color` for all `h1` elements in the document will be `blue`, not `red`. This is because the two rules are tied with each other in terms of explicit weight and origin, and the selectors have equal specificity, so the last one declared is the winner.
 
 So what happens if rules from completely separate style sheets conflict? For example, suppose the following:
 
@@ -575,7 +575,7 @@ h1 {
 }
 ```
 
-What if h1 {color: red;} appears in basic.css? The entire contents of basic.css are treated as if they were pasted into the style sheet at the point where the @import occurs. Thus, any rule contained in the document’s style sheet occurs later than those from the @import. If they tie in terms of explicit weight and specificity, the document’s style sheet contains the winner. Consider the following:
+What if h1 {color: red;} appears in `basic.css`? The entire contents of `basic.css` are treated as if they were pasted into the style sheet at the point where the @import occurs. Thus, any rule contained in the document’s style sheet occurs later than those from the `@import`. If they tie in terms of explicit weight and specificity, the document’s style sheet contains the winner. Consider the following:
 
 ```css
 p em {
@@ -608,7 +608,7 @@ a:active {
 }
 ```
 
-Thanks to the information in this chapter, you now know that the specificity of all of these selectors is the same: 0,0,1,0. Because they all have the same explicit weight, origin, and specificity, the last one that matches an element will win out. An unvisited link that is being “clicked” or otherwise activated, such as via the keyboard, is matched by four of the rules—:link, Lfocus, :hover, and :active—so the last one of those four will win out. Given the LVFHA ordering, :active will win, which is likely what the author intended.
+Thanks to the information in this chapter, you now know that the specificity of all of these selectors is the same: `0,0,1,0`. Because they all have the same explicit weight, origin, and specificity, the last one that matches an element will win out. An unvisited link that is being “clicked” or otherwise activated, such as via the keyboard, is matched by four of the rules—`:link`, `Lfocus`, `:hover`, and `:active`—so the last one of those four will win out. Given the LVFHA ordering, `:active` will win, which is likely what the author intended.
 
 Assume for a moment that you decide to ignore the common ordering and alphabetize your link styles instead. This would yield:
 
@@ -630,7 +630,7 @@ a:visited {
 }
 ```
 
-Given this ordering, no link would ever show :hover, :focus, or :active styles because the :link and :visited rules come after the other three. Every link must be either visited or unvisited, so those styles will always override the others.
+Given this ordering, no link would ever show `:hover`, `:focus`, or `:active` styles because the `:link` and `:visited` rules come after the other three. Every link must be either visited or unvisited, so those styles will always override the others.
 
 Let’s consider a variation on the LVFHA order that an author might want to use. In this ordering, only unvisited links will get a hover style; visited links do not. Both visited and unvisited links will get an active style:
 
@@ -672,7 +672,7 @@ a:active {
 }
 ```
 
-You may also have realized that the order of the :link and :visited styles doesn’t matter. You could order the styles LVFHA or VLFHA with no ill effect.
+You may also have realized that the order of the `:link` and `:visited` styles doesn’t matter. You could order the styles LVFHA or VLFHA with no ill effect.
 
 The ability to chain pseudo-classes together eliminates all these worries. The following could be listed in any order without any overrides:
 
@@ -725,11 +725,11 @@ a:visited:hover:active {
 }
 ```
 
-This does have the effect of raising the specificity of the selectors—both have a specificity value of 0,0,3,1—but they don’t conflict because the actual selection states are mutually exclusive. A link can’t be an unvisited hovered active link and an unvisited hovered active link: only one of the two rules will match, and the styles applied accordingly.
+This does have the effect of raising the specificity of the selectors—both have a specificity value of `0,0,3,1`—but they don’t conflict because the actual selection states are mutually exclusive. A link can’t be an unvisited hovered active link `and` an unvisited hovered active link: only one of the two rules will match, and the styles applied accordingly.
 
 ### 3.3.4 Non-CSS Presentational Hints
 
-It is possible that a document will contain presentational hints that are not CSS—for example, the font element. Such presentational hints are treated as if they have a specificity of 0 and appear at the beginning of the author’s stylesheet. Such presentation hints will be overridden by any author or reader styles, but not by the user agent’s styles. In CSS3, presentational hints from outside CSS are treated as if they belong to the user agent’s stylesheet, presumably at the end (although as of this writing, the specification doesn’t say).
+It is possible that a document will contain presentational hints that are not CSS—for example, the `font` element. Such presentational hints are treated as if they have a specificity of `0` and appear at the `beginning` of the author’s stylesheet. Such presentation hints will be overridden by any author or reader styles, but not by the user agent’s styles. In CSS3, presentational hints from outside CSS are treated as if they belong to the user agent’s stylesheet, presumably at the end (although as of this writing, the specification doesn’t say).
 
 ## 3.4 Summary
 
