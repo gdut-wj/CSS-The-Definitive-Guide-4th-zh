@@ -62,6 +62,11 @@ p.signature {font-family: cursive;}
 
 Thus, most of the document will use a serif font such as Times, including all paragraphs except those that have a `class` of `signature`, which will instead be rendered in a cursive font such as Author. Heading levels 1 through 4 will use a sans-serif font like Helvetica, while the elements `code`, `pre`, `tt`, and `kbd` will use a monospace font like Courier.
 
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-1.png'/>
+</div>
+<p align="center">图 5-1：Various font families</p>
+
 // 5-1
 
 ### 5.1.2 Specifying a Font Family
@@ -78,7 +83,10 @@ h1 {
 
 This will cause the user agent displaying the document to use Georgia for all `h1`s, as shown in Figure 5-2.
 
-// 5-2
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-2.png'/>
+</div>
+<p align="center">图 5-2：An h1 element using Georgia</p>
 
 This rule assumes that the user agent has Georgia available for use. If it doesn’t, the user agent will be unable to use the rule at all. It won’t ignore the rule, but if it can’t find a font called “Georgia,” it can’t do anything but display `h1` elements using the user agent’s default font (whatever that is).
 
@@ -160,7 +168,10 @@ p {
 
 If you use double quotes in such a circumstance, they interfere with the attribute syntax, as you can see in Figure 5-3.
 
-// 5-3
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-3.png'/>
+</div>
+<p align="center">图 5-3：The perils of incorrect quotation marks</p>
 
 ## 5.2 Using @font-face
 
@@ -211,7 +222,10 @@ h1 {
 
 Note how the `font-family` descriptor value and the entry in the `font-family` property match. If they didn’t match, then the `h1` rule would ignore the first font family name listed in the `font-family` value and move on to the next. As long as the font has cleanly downloaded and is in a format the user agent can handle, then it will be used in the manner you direct, as illustrated in Figure 5-4.
 
-// 5-4
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-4.png'/>
+</div>
+<p align="center">图 5-4：Using a downloaded font</p>
 
 In a similar manner, the comma-separated `src` descriptor value provides fallbacks. That way, if (for whatever reason) the user agent is unable to download the first source, it can fall back to the second source and try to load the file there:
 
@@ -527,7 +541,10 @@ We could keep this up for quite a while, but let’s stop there. If we take all 
 }
 ```
 
-// 5-5
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-5.png'/>
+</div>
+<p align="center">图 5-5：Employing a variety of faces</p>
 
 As you can see, there are a lot of possible combinations just for those three descriptors—consider that there are 11 possible values for `font-weight`, and 10 for `font-stretch`—but you’ll likely never have to run through them all. In fact, most font families don’t have as many faces as SwitzeraADF offers (24 at last count), so there wouldn’t be much point in writing out all the possibilities. Nevertheless, the options are there, and in some cases you may find that you need to assign, say, a specific face for bold condensed text so that the user agent doesn’t try to compute them for you.
 
@@ -608,7 +625,10 @@ p.one {
 
 Then all of its children will inherit that boldness, as we see in Figure 5-6.
 
-// 5-6
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-6.png'/>
+</div>
+<p align="center">图 5-6：Inherited font-weight</p>
 
 This isn’t unusual, but the situation gets interesting when you use the last two values we have to discuss: `bolder` and `lighter`. In general terms, these keywords have the effect you’d anticipate: they make text more or less bold compared to its parent’s font weight. First, let’s consider `bolder`.
 
@@ -637,7 +657,10 @@ div strong {
 } /* results in normal text, weight '400' */
 ```
 
-// 5-7
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-7.png'/>
+</div>
+<p align="center">图 5-7：Text trying to be bolder</p>
 
 In the first example, the user agent moves up the weight ladder from `normal` to `bold`; in numeric terms, it jumps from `400` to `700`. In the second example, `h1` text is already set to `bold`. If there is no bolder face available, then the user agent sets the weight of `b` text within an `h1` to `800`, since that is the next step up from `700` (the numeric equivalent of `bold`). Since `800` is assigned to the same font face as `700`, there is no visible difference between normal `h1` text and bold `h1` text, but the weights are different nonetheless.
 
@@ -682,7 +705,10 @@ strong b {
 </p>
 ```
 
-// 5-8
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-8.png'/>
+</div>
+<p align="center">图 5-8：Moving up the weight scale</p>
 
 In the last two nested elements, the computed value of `font-weight` is increased because of the liberal use of the keyword `bolder`. If you were to replace the text in the paragraph with numbers representing the `font-weight` of each element, you would get the results shown here:
 
@@ -723,7 +749,10 @@ If there were yet another `b` element inserted into the innermost `strong` eleme
 </p>
 ```
 
-// 5-9
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-9.png'/>
+</div>
+<p align="center">图 5-9：Visual weight, with descriptors</p>
 
 ### 5.3.3 Lightening Weights
 
@@ -769,7 +798,10 @@ b {
 
 Ignoring the fact that this would be entirely counterintuitive, what you see in Figure 5-10 is that the main paragraph text has a weight of `900`. When the `strong` text is set to be `lighter`, it evaluates to the next-lighter face, which is the regular face, or `400` (the same as `normal`) on the numeric scale. The next step down is to `300`, which is the same as `normal` since no lighter faces exist. From there, the user agent can reduce the weight only one numeric step at a time until it reaches `100` (which it doesn’t do in the example). The second paragraph shows which text will be bold and which will be regular.
 
-// 5-10
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-10.png'/>
+</div>
+<p align="center">图 5-10：Making text lighter</p>
 
 ### 5.3.4 The font-weight descriptor
 
@@ -819,7 +851,10 @@ h4 {font-size: 125%; font-weight: 300;}
 .
 ```
 
-// 5-11
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-11.png'/>
+</div>
+<p align="center">图 5-11：Using declared font-weight faces</p>
 
 In any given situation, the user agent picks which face to use depending on the exact value of a `font-weight` property, using the resolution algorithm detailed in the earlier section, “How Weights Work” on page 167. Authors may use any value for the `font-weight` descriptor that is permitted for the `font-weight` property `except` the `inherit keyword`.
 
@@ -834,7 +869,10 @@ In a fashion very similar to the `font-weight` keywords `bolder` and `lighter`, 
 In fact, the actual relation of the `font-size` property to what you see rendered is determined by the font’s designer. This relationship is set as an em square (some call it an em box) within the font itself. This em square (and thus the font size) doesn’t have to refer to any boundaries established by the characters in a font. Instead, it refers to the distance between baselines when the font is set without any extra leading (`line-height` in CSS). It is quite possible for fonts to have characters that are taller than the default distance between baselines. For that matter, a font might be defined such that all of its characters are smaller than its em square, as many fonts do. Some hypotheti‐
 cal examples are shown in Figure 5-12.
 
-// 5-12
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-12.png'/>
+</div>
+<p align="center">图 5-12：Font characters and em squares</p>
 
 Thus, the effect of `font-size` is to provide a size for the em box of a given font. This does not guarantee that any of the actual displayed characters will be this size.
 
@@ -868,7 +906,10 @@ p.seven {
 
 According to the CSS1 specification, the difference (or scaling factor) between one absolute size and the next is about 1.5 going up the ladder, or 0.66 going down. Thus, if `medium` is the same as `10px`, then `large` should be the same as `15px`. This was later determined to be too large a scaling factor. In CSS2 it was suggested that it be somewhere between 1.0 and 1.2, and in CSS3 drafts a complicated series is provided (for example, `small` is listed as eight-ninths the size of `medium`, while `xx-small` is threefifths). In all case, the scaling factors are guidelines, as user agents are free to alter them for any reason.
 
-// 5-13
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-13.png'/>
+</div>
+<p align="center">图 5-13：Absolute font sizes</p>
 
 Working from the assumption that `medium` equals `16px`, for different scaling factors, we get the absolute size equivalents shown in Table 5-5. (The values shown are rounded-off integers.)
 
@@ -922,7 +963,10 @@ em {
 
 As you can see in Figure 5-14, the emphasized text in the `h1` element is slightly larger than `xx-large`. The amount of scaling is left up to the user agent, with the scaling factor of 1.2 being preferred but not required. The `em` text in the paragraph is shifted one slot up the absolute-size scale (`large`).
 
-// 5-14
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-14.png'/>
+</div>
+<p align="center">图 5-14：Relative font sizing at the edges of the absolute sizes</p>
 
 User agents are not required to increase or decrease font size beyond the limits of the absolute-size keywords.
 
@@ -961,7 +1005,10 @@ small,
 </body>
 ```
 
-// 5-15
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-15.png'/>
+</div>
+<p align="center">图 5-15：Throwing percentages into the mix</p>
 
 In this example, the exact pixel size values are shown. These are the values calculated by the browser, regardless of the actual displayed size of the characters onscreen.
 
@@ -1006,7 +1053,10 @@ strong {
 </p>
 ```
 
-// 5-16
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-16.png'/>
+</div>
+<p align="center">图 5-16：The issues of inheritance</p>
 
 The size value for the `strong` element shown in Figure 5-16 is computed as follows:
 
@@ -1032,7 +1082,10 @@ In all cases, the `O` characters increase by 0.1 pixels in size as you go from l
 
 As Figure 5-17 reveals, different browser/OS combinations yield different results. For example, Opera, Safari, and Chrome for macOS show an abrupt jump from 10 pixels to 11 pixels at the `10.5px` position. Internet Explorer and Firefox for Windows (both 7 and 8) do the same. Firefox for macOS, on the other hand, looks like it has a smooth line of same-size text. In fact, the characters are all being drawn subtly differently, thanks to their subtly different font-size values. It’s hard to see without squinting (or a ruler), but the fact that it’s hard to tell there is an increase in size from one end of the line to the other is evidence enough.
 
-// 5-17
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-17.png'/>
+</div>
+<p align="center">图 5-17：Fractional font sizes</p>
 
 Nevertheless, every browser will yield up the same subpixel `font-size` values if you use an inspector or query the value directly via DOM scripting. The third `O` from the right will show a computed value of `10.8px`, regardless of the size of the character displayed onscreen.
 
@@ -1054,7 +1107,10 @@ span {
 <p>This is a 'p' with a <span>'span'</span> inside.</p>
 ```
 
-// 5-18
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-18.png'/>
+</div>
+<p align="center">图 5-18：Monospace size oddities</p>
 
 The default value of `medium` is generally resolved to `16px`, assuming the user hasn’t changed the browser preferences (where the default text sizes are set). Indeed, if you query the paragraph text outside the `span`, inspectors will tell you that the computed `font-size` of the text is `16px` (again, assuming the user hasn’t changed the preferences).
 
@@ -1098,7 +1154,10 @@ span {
 
 See the extra `serif` in the `font-family` there? That somehow triggers a switch that makes all browsers treat `font-size: 1em` as being 100 percent of the paragraph’s computed `font-size`, not a `medium`-derived value. This is cross-browser-consistent and illustrated in Figure 5-19.
 
-// 5-19
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-19.png'/>
+</div>
+<p align="center">图 5-19：Monospace size harmony</p>
 
 ### 5.4.5 Using Length Units
 
@@ -1124,13 +1183,19 @@ p.five {
 
 The display in Figure 5-20 assumes that the user agent knows how many dots per inch are used in the display medium. Different user agents make different assumptions—some based on the operating system, some based on preferences settings, and some based on the assumptions of the programmer who wrote the user agent. Nevertheless, the five lines should always have the same font size. Thus, while the result may not exactly match reality (for example, the actual size of `p.three` may not be half an inch), the measurements should all be consistent with one another.
 
-// 5-20
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-20.png'/>
+</div>
+<p align="center">图 5-20：Various font sizes</p>
 
 There is one more value that is potentially the same as those shown in Figure 5-20, and that’s `36px`, which would be the same physical distance if the display medium is 72 pixels per inch (ppi). However, there are very few monitors with that setting anymore. Most desktop displays are much higher, in the range of 96 ppi to 120 ppi; and mobile devices go much higher, currently in the 300 ppi to 500 ppi range.
 
 Despite these variations between operating systems and devices, many authors choose to use pixel values for font sizes. This approach seems especially attractive when mixing text and raster images (GIF, JPG, PNG, etc.) on a web page, since text can (in theory) be set to the same height as graphic elements on the page by declaring `font-size: 11px;` or something similar, as illustrated by Figure 5-21.
 
-// 5-21
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-21.png'/>
+</div>
+<p align="center">图 5-21：Keeping text and graphics in scale with pixel sizes</p>
 
 Using pixel measurements for `font-size` is certainly one way to get “consistent” results with `font-size` (and, indeed, with any length at all), but there is a drawback. Not every browser makes it easy (or even possible) to resize text set in pixels, and there are situations where pixel-sized text can be badly sized in mobile devices that pretend to be full-screen devices (such as most versions of the iPhone). For these reasons alone, pixel-sizing text is generally not recommended.
 
@@ -1156,7 +1221,10 @@ p.cl2 {
 }
 ```
 
-// 5-22
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-22.png'/>
+</div>
+<p align="center">图 5-22：Comparing Verdana and Times</p>
 
 The text in Times is much harder to read than the Verdana text. This is partly due to the limitations of pixel-based display, but it is also because Times becomes harder to read at smaller font sizes.
 
@@ -1184,7 +1252,10 @@ p.cl2 {
 }
 ```
 
-// 5-23
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-23.png'/>
+</div>
+<p align="center">图 5-23：Adjusting Times</p>
 
 The catch is that to allow a user agent to intelligently make size adjustments, it first has to know the aspect value of the fonts you specify. User agents that support `@font-face` will be able to pull that information directly from the font file, assuming the files contain the information—any professionally-produced font should, but there’s no guarantee. If a font file doesn’t contain the aspect value, a user agent may try to compute it; but again, there’s no guarantee that they will or even can.
 
@@ -1214,7 +1285,10 @@ The default value of `font-style` is, as you can see, `normal`. This refers to u
 
 Basically, italic text is a separate font face, with small changes made to the structure of each letter to account for the altered appearance. This is especially true of serif fonts, where, in addition to the fact that the text characters “lean,” the serifs may be altered in an italic face. Oblique text, on the other hand, is just a slanted version of the normal, upright text. Font faces with labels like “Italic,” “Cursive,” and “Kursiv” are usually mapped to the `italic` keyword, while `oblique` is often assigned faces with labels such as “Oblique,” “Slanted,” and “Incline.”
 
-// 5-24
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-24.png'/>
+</div>
+<p align="center">图 5-24：Italic and oblique text in detail</p>
 
 If you want to make sure that a document uses italic text in familiar ways, you could write a stylesheet like this:
 
@@ -1244,13 +1318,19 @@ i {
 
 If you look closely at Figure 5-25, you’ll see there is no apparent difference between the `em` and `i` elements. In practice, not every font is so sophisticated as to have both an italic face and an oblique face, and even fewer web browsers are sophisticated enough to tell the difference when both faces do exist.
 
-// 5-25
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-25.png'/>
+</div>
+<p align="center">图 5-25：More font styles</p>
 
 If either of these is the case, then there are a few things that can happen. If there is no Italic face available, but there is an Oblique face, then the latter can be used for the former. If the situation is reversed—an Italic face exists, but there is no defined Oblique face—the user agent may `not` substitute the former for the latter, according to the specification. Finally, the user agent can simply generate the oblique face by computing a slanted version of the upright font. In fact, this is what most often happens in a digital world, where it’s fairly simple to slant a font using a simple computation.
 
 Furthermore, you may find that in some operating systems, a given font that has been declared as `italic` may switch from italic to oblique depending on the actual size of the font. The display of Times on a Macintosh running the Classic OS (Mac OS 9), for example, is shown in Figure 5-26, where the only difference is a single pixel in font size.
 
-// 5-26
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-26.png'/>
+</div>
+<p align="center">图 5-26：Same font, same style, different sizes</p>
 
 There isn’t much that can be done about this, unfortunately, except better font handling. Fortunately, modern operating systems such as macOS and Windows XP have very good font rendering technology, and `@font-face` allows authors to assign specific italic and oblique faces to the respective `font-style` properties, should they so choose.
 
@@ -1266,7 +1346,10 @@ blockquote i {
 }
 ```
 
-// 5-27
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-27.png'/>
+</div>
+<p align="center">图 5-27：Common typographical conventions through CSS</p>
 
 A related property tells the user agent whether it’s allowed to synthesize its own bold or italic faces when a family doesn’t contain them.
 
@@ -1310,7 +1393,10 @@ h3 {
 }
 ```
 
-// 5-28
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-28.png'/>
+</div>
+<p align="center">图 5-28：Using declared font-style faces</p>
 
 Ideally, if there were a SwitzeraADF face with an oblique typeface, the author could point to it instead of the italic variant. There isn’t such a face, though, so the author mapped the italic face to both the `italic` and `oblique` values. As with `font-weight`, the `font-style` descriptor can take all of the values of the `font-style` property `except` for `inherit`.
 
@@ -1352,7 +1438,10 @@ footer {
 }
 ```
 
-// 5-29
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-29.png'/>
+</div>
+<p align="center">图 5-29：Stretching font characters</p>
 
 As of late 2017, Safari for both macOS and iOS did not support `font-stretch`, nor did Opera Mini.
 
@@ -1398,7 +1487,10 @@ h3 {
 
 As before, the `font-stretch` descriptor can take all of the values of the `font-stretch` property `except` for `inherit`.
 
-// 5-30
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-30.png'/>
+</div>
+<p align="center">图 5-30：Using declared font-stretch faces</p>
 
 ## 5.6 Font Kerning
 
@@ -1435,7 +1527,10 @@ p {
 <p>The property <code>font-variant</code> is very interesting...</p>
 ```
 
-// 5-31
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-31.png'/>
+</div>
+<p align="center">图 5-31：The small-caps value in use</p>
 
 As you may notice, in the display of the `h1` element, there is a larger uppercase letter wherever an uppercase letter appears in the source and a small uppercase letter wherever there is a lowercase letter in the source. This is very similar to `text-transform: uppercase`, with the only real difference being that, here, the uppercase letters are of different sizes. However, the reason that `small-caps` is declared using a font property is that some fonts have a specific small-caps face, which a font property is used to select.
 
@@ -1585,7 +1680,10 @@ In supporting user agents, declaring font-synthesis: none blocks the user agent 
 
 As of late 2017, only Firefox supported `font-synthesis`.
 
-// 5-32
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-32.png'/>
+</div>
+<p align="center">图 5-32：Synthesized versus designed italics</p>
 
 ## 5.10 The font Property
 
@@ -1623,7 +1721,10 @@ h2 {
 }
 ```
 
-// 5-33
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-33.png'/>
+</div>
+<p align="center">图 5-33：Typical font rules</p>
 
 I say that the styles “could be” shortened in this way because there are a few other possibilities, thanks to the relatively loose way in which `font` can be written. If you look closely at the preceding example, you’ll see that the first three values don’t occur in the same order. In the `h1` rule, the first three values are the values for `font-style`, `font-weight`, and `font-variant`, in that order. In the second, they’re ordered `font-weight`, `font-variant`, and `font-style`. There is nothing wrong here because these three can be written in any order. Furthermore, if any of them has a value of `normal`, that can be left out altogether. Therefore, the following rules are equivalent to the previous example:
 
@@ -1655,7 +1756,10 @@ h4 {
 } /* INVALID--no 'font-family' provided */
 ```
 
-// 5-34
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-34.png'/>
+</div>
+<p align="center">图 5-34：The necessity of both size and family</p>
 
 ### 5.10.1 Adding the Line Height
 
@@ -1672,7 +1776,10 @@ h2 {
 
 These rules, demonstrated in Figure 5-35, set all `h2` elements to be bold and italic (using face for one of the sans-serif font families), set the `font-size` to `24px` (twice the `body`’s size), and set the `line-height` to `28.8px`.
 
-// 5-35
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-35.png'/>
+</div>
+<p align="center">图 5-35：Adding line height to the mix</p>
 
 This addition of a value for `line-height` is entirely optional, just as the first three `font` values are. If you do include a `line-height`, remember that the `font-size` always comes before `line-height`, never after, and the two are always separated by a slash.
 
@@ -1702,7 +1809,10 @@ h3 {
 <h3>This is an h3 element</h3>
 ```
 
-// 5-36
+<div style="margin: 0 auto; width: 70%;">
+  <img src='./figures/figure5-36.png'/>
+</div>
+<p align="center">图 5-36：Shorthand changes</p>
 
 Did you notice that the `h2` element is neither italicized nor small-capped, and that none of the elements are bold? This is the correct behavior. When the shorthand property `font` is used, any omitted values are reset to their defaults. Thus, the previous example could be written as follows and still be exactly equivalent:
 
